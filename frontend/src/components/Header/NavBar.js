@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import '../../css/navbar.css'
-import CartLogo from '../../icons/cart.svg'
 
 class NavBar extends Component {
     render() {
@@ -19,14 +18,14 @@ class NavBar extends Component {
                     </div>
                     <div className='logo-search-cart row'>
                         <div className='logo-shopnow col-3'>
-                            SHOP NOW
+                        <img alt='' src="https://img.icons8.com/ios/50/000000/shopping-bag.png"/>
                         </div>
                         <form className='form-inline col-7 justify-content-between'>
                             <input className="form-search mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                             <button className="btn-search my-2 my-sm-0 " type="submit">Search</button>
                         </form>
-                        <div className='cart-aws col-2'>
-                            CartLogo
+                        <div className='col-2'>
+                            <i className="fas fa-shopping-cart"></i>
                         </div>
                     </div>
                 </div>

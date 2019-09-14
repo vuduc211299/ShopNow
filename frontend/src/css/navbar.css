@@ -4,7 +4,7 @@
 .navbar{
     font-size: 15px;
     position: fixed;
-    background-color: #f53d2d;
+    background-color: #d4cbca;
     color: #fff;
     height: auto;
 }
@@ -16,14 +16,13 @@
     
 }
 .form-inline{
-    border: 1px solid #f53d2d;
+    border: 1px solid #d4cbca;
     border-radius: 2px;
     background-color: #fff;
 }
 .btn-search{
     border: none;
     border-radius: 3px;
-    background-color: #f53d2d;
     padding: 0.3rem;
     width: 60px;
     color: #fff;
