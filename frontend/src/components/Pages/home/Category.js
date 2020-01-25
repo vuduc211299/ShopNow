@@ -78,7 +78,38 @@ class Category extends Component {
                         <img src={imgURL} alt='' width='80.5px'/>
                         <div className='category-name'>Clothes</div>
                     </div>
-
+                    <div className='category-item'>
+                        <img src={imgURL} alt='' width='80.5px'/>
+                        <div className='category-name'>Clothes</div>
+                    </div>
+                    <div className='category-item'>
+                        <img src={imgURL} alt='' width='80.5px'/>
+                        <div className='category-name'>Clothes</div>
+                    </div>
+                    <div className='category-item'>
+                        <img src={imgURL} alt='' width='80.5px'/>
+                        <div className='category-name'>Clothes</div>
+                    </div>
+                    <div className='category-item'>
+                        <img src={imgURL} alt='' width='80.5px'/>
+                        <div className='category-name'>Clothes</div>
+                    </div>
+                    <div className='category-item'>
+                        <img src={imgURL} alt='' width='80.5px'/>
+                        <div className='category-name'>Clothes</div>
+                    </div>
+                    <div className='category-item'>
+                        <img src={imgURL} alt='' width='80.5px'/>
+                        <div className='category-name'>Clothes</div>
+                    </div>
+                    <div className='category-item'>
+                        <img src={imgURL} alt='' width='80.5px'/>
+                        <div className='category-name'>Clothes</div>
+                    </div>
+                    <div className='category-item'>
+                        <img src={imgURL} alt='' width='80.5px'/>
+                        <div className='category-name'>Clothes</div>
+                    </div>
                 </div>
             </div>
         )

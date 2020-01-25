@@ -3,28 +3,37 @@
 }
 .navbar{
     font-size: 15px;
-    position: fixed;
-    background-color: #d4cbca;
+    background-color: #f9502f;
     color: #fff;
     height: auto;
+    width: 100%;
+    position: fixed !important;
+    top: 0;
+    left: 0;
 }
 .form-search{
     width: 80%;
-    padding: 0.5rem;
+    padding: 0rem;
     border: none;
     outline: none
     
 }
 .form-inline{
-    border: 1px solid #d4cbca;
+    border: 1px solid #f9502f;
     border-radius: 2px;
     background-color: #fff;
 }
 .btn-search{
     border: none;
     border-radius: 3px;
-    padding: 0.3rem;
+    padding: 0.1rem;
     width: 60px;
     color: #fff;
+    background-color: #f9502f;
+}
+.logo-cart{
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 

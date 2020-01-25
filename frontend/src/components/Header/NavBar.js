@@ -18,15 +18,16 @@ class NavBar extends Component {
                     </div>
                     <div className='logo-search-cart row'>
                         <div className='logo-shopnow col-3'>
-                        <img alt='' src="https://img.icons8.com/ios/50/000000/shopping-bag.png"/>
+                            <img alt='' src="https://img.icons8.com/ios/50/000000/shopping-bag.png"/>
                         </div>
-                        <form className='form-inline col-7 justify-content-between'>
+                        <form className='form-inline col-6 justify-content-between'>
                             <input className="form-search mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                             <button className="btn-search my-2 my-sm-0 " type="submit">Search</button>
                         </form>
-                        <div className='col-2'>
-                            <i className="fas fa-shopping-cart"></i>
+                        <div className='logo-cart col-3'>
+                            <img src="https://img.icons8.com/ios-filled/32/000000/shopping-cart.png"/>
                         </div>
+                        
                     </div>
                 </div>
             </div>

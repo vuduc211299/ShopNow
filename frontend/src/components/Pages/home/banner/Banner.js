@@ -50,8 +50,7 @@ class Banner extends Component {
                 currentIndex: this.state.images.length - 1,
             })
         }
-
-        // This will not run if we met the if condition above
+        
         this.setState(prevState => ({
             currentIndex: prevState.currentIndex - 1,
         }));
@@ -60,16 +59,12 @@ class Banner extends Component {
 
 
     goToNextSlide = () => {
-        // Exiting the method early if we are at the end of the images array.
-        // We also want to reset currentIndex and translateValue, so we return
-        // to the first image in the array.
         if (this.state.currentIndex === this.state.images.length - 1) {
             return this.setState({
                 currentIndex: 0,
             })
         }
 
-        // This will not run if we met the if condition above
         this.setState(prevState => ({
             currentIndex: prevState.currentIndex + 1,
         }));
