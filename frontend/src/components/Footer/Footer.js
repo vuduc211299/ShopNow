@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../../css/footer.css'
+import '../../css/footer.css'
 const Footer = () => {
     return ( 
         <section id="footer">

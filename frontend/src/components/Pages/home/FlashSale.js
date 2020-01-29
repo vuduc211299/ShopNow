@@ -1,36 +1,44 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import ProductItem from '../../common/ProductItem'
+import { Link } from 'react-router-dom'
 
-const FlashSale = () => {
-    const imgURL = 'https://cf.shopee.vn/file/687f3967b7c2fe6a134a2c11894eea4b_tn';
-    return (
-        <div className='category-section container'>
-            <div className='category-header'>
-                FlashSale
+class FlashSale extends Component {
+    
+    render() {
+        console.log('flash sale', this.props.products)
+        const { products } = this.props;
+        return (
+            <div className='category-section container'>
+                <div className='category-header'>
+                    FlashSale
+                </div>
+                <div className='d-flex flex-wrap'>
+                    {
+                        products.length ? products.map(product => {
+                            const url = "product/" + product.id;
+                            return (
+                                <Link to={url}>
+                                    <ProductItem category={product}/>
+                                </Link>
+                            )
+                        }) : (
+                            <div>
+                                Not have sale product yet
+                            </div>
+                        )
+                    }
+                    
+                </div>
             </div>
-            <div className='d-flex flex-wrap'>
-                <div className='category-item'>
-                    <img src={imgURL} alt='' width='205px'/>
-                    <div className='category-name'>Clothes</div>
-                </div>
-                <div className='category-item'>
-                    <img src={imgURL} alt='' width='205px'/>
-                    <div className='category-name'>Clothes</div>
-                </div>
-                <div className='category-item'>
-                    <img src={imgURL} alt='' width='205px'/>
-                    <div className='category-name'>Clothes</div>
-                </div>
-                <div className='category-item'>
-                    <img src={imgURL} alt='' width='205px'/>
-                    <div className='category-name'>Clothes</div>
-                </div>
-                <div className='category-item'>
-                    <img src={imgURL} alt='' width='205px'/>
-                    <div className='category-name'>Clothes</div>
-                </div>
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
-export default FlashSale
+const mapStateToProps = (state) => {
+    return {
+        products: state.productReducer.products
+    }
+}
+
+export default connect(mapStateToProps)(FlashSale)

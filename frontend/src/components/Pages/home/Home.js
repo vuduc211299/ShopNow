@@ -1,9 +1,9 @@
 import React from 'react'
 import Banner from './banner/Banner'
-import Category from './Category'
+import Category from './category/Category'
 import '../../../css/homepage.css'
 import FlashSale from './FlashSale'
-import Footer from '../footer/Footer'
+import Footer from '../../Footer/Footer'
 
 const Home = () => {
     return (

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../../css/navbar.css'
+import { Link } from 'react-router-dom'
 
 class NavBar extends Component {
     render() {
@@ -18,14 +19,16 @@ class NavBar extends Component {
                     </div>
                     <div className='logo-search-cart row'>
                         <div className='logo-shopnow col-3'>
-                            <img alt='' src="https://img.icons8.com/ios/50/000000/shopping-bag.png"/>
+                            SHOP_NOW
                         </div>
                         <form className='form-inline col-6 justify-content-between'>
                             <input className="form-search mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                             <button className="btn-search my-2 my-sm-0 " type="submit">Search</button>
                         </form>
                         <div className='logo-cart col-3'>
-                            <img src="https://img.icons8.com/ios-filled/32/000000/shopping-cart.png"/>
+                            <Link to="/cart">
+                                <img src="https://img.icons8.com/ios-filled/32/000000/shopping-cart.png"/>
+                            </Link>
                         </div>
                         
                     </div>
