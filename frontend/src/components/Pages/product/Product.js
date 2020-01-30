@@ -3,14 +3,13 @@ import Footer from '../../Footer/Footer'
 import '../../../css/product.css'
 import '../../../css/navbar.css'
 import BackDisplayProduct from './BackDisplayProduct'
-import ButtonInDeQuantity from '../../common/ButtonInDeQuantity'
 import { connect } from 'react-redux'
+import Popup from 'reactjs-popup'
 
 class Product extends Component {
     handleAddToCart = () => {
         const product = this.getProductById();
         this.props.addToCart(product);
-        console.log(this.props.cart)
     }
 
     getProductById () {
@@ -54,19 +53,20 @@ class Product extends Component {
                                         Variation
                                     </div>
                                     <div className='col-8'>
-                                        <button>Black</button>
-                                        <button>White</button>
+                                        <button className='btn-common'>Black</button>
+                                        <button className='btn-common ml-2'>White</button>
                                     </div>
                                 </div>
-                                <div className="p-quantity row mt-4">
-                                    <div className='col-3'>
-                                        Quantity
-                                    </div>
-                                    <ButtonInDeQuantity/>
-                                </div>
-                                <div className='2-bnt row mt-4 ml-1'>
-                                    <button onClick={this.handleAddToCart}>Add to Cart</button>
-                                    <button>Shop Now</button>
+                                <div className='2-bnt row mt-5 ml-1'>
+                                    <button
+                                        className='btn-common'
+                                        onClick={this.handleAddToCart}
+                                    >
+                                        Add To Cart
+                                    </button>
+                                    <button className='btn-common ml-2'>
+                                        Shop Now
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -113,8 +113,7 @@ class Product extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.productReducer.products,
-        cart: state.cartReducer.cart
+        products: state.productReducer.products
     }
 }
 

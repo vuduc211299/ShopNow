@@ -3,52 +3,48 @@ import NavBar from '../../Header/NavBar'
 import Footer from '../../Footer/Footer'
 import BackDisplayProduct from '../product/BackDisplayProduct'
 import '../../../css/cart.css'
-import ButtonInDeQuantity from '../../common/ButtonInDeQuantity'
+import CartItem from './CartItem'
 import { connect } from 'react-redux'
 
 class Cart extends Component {
     render() {
+        const params = this.props.location.pathname;
         const { cart } = this.props;
-        console.log(cart)
+        const disableBtnBuy = cart.length > 0 ? false : true;
+        const { totalPrice } = this.props;
         return (
             <div className='p-cart'>
-                <NavBar/>
-                <div className='p-in-cart-content container'>
+                <NavBar params={params}/>
+                <div className='p-in-cart-content container'> 
                     {
-                        cart.length ? cart.map(cartItem => { 
-                            return (
-                                <div className='p-in-cart-container d-flex'>
-                                    <div className='p-in-cart-name-img col-4'>
-                                        <div>
-                                            <img src={cartItem.imgUrl} alt='p-in-cart' width='15%' height='60%'/>
-                                        </div>
-                                        <div>
-                                            <span>{cartItem.name}</span>
-                                        </div>
-                                    </div>
-                                    <div className='p-in-cart-price col-1'>
-                                        <span>{cartItem.price}</span>
-                                    </div>
-                                    <ButtonInDeQuantity/>
-                                    <div className='p-in-cart-sum-price col-1'>
-                                        595.000
-                                    </div>
-                                    <div className='p-in-cart-exe col-1'>
-                                        <button>delete</button>
-                                    </div>
-                                </div>
-                            )
-                        }) : (
-                            <div>No product in cart</div>
-                        )
+                        cart.length ? cart.map((cartItem) => 
+                        {
+                            return <CartItem cartItem={cartItem}/>
+                        }
+                        ) : (
+                            <div>
+                                No product in cart
+                            </div>
+                        ) 
                     }
                     <div className='coupon-btn-buy mt-5 mb-5'>
-                        <div>
-                            <label>Coupon code</label>
-                            <input size="10"></input>
+                        <div className='d-flex justify-content-end'>
+                            <label className='mr-2'>Coupon code</label>
+                            <input size="10"/>
                         </div>
-                        <div>
-                            <button> BUY </button>
+                        <div className='d-flex justify-content-end mt-3'>
+                            Discount 5 %
+                        </div>
+                        <div className='d-flex justify-content-end mt-3'>
+                            <div className='mr-3 d-flex align-items-center'>
+                                { totalPrice } USD
+                            </div>
+                            <button
+                                disabled={disableBtnBuy} 
+                                className='btn-common'
+                            > 
+                                BUY 
+                            </button>
                         </div>
                     </div>
                     <BackDisplayProduct/>
@@ -61,7 +57,8 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        cart: state.cartReducer.cart
+        cart: state.cartReducer.cart,
+        totalPrice: state.cartReducer.totalPrice
     }
 }
 

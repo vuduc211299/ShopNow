@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 class FlashSale extends Component {
     
     render() {
-        console.log('flash sale', this.props.products)
         const { products } = this.props;
         return (
             <div className='category-section container'>
