@@ -5,6 +5,7 @@ import BackDisplayProduct from '../product/BackDisplayProduct'
 import '../../../css/cart.css'
 import CartItem from './CartItem'
 import { connect } from 'react-redux'
+import history from '../../common/history'
 
 class Cart extends Component {
     render() {
@@ -42,8 +43,9 @@ class Cart extends Component {
                             <button
                                 disabled={disableBtnBuy} 
                                 className='btn-common'
+                                onClick={() => history.push('/checkout')}
                             > 
-                                BUY 
+                                BUY
                             </button>
                         </div>
                     </div>

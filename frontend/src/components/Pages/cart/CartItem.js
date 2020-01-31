@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import '../../../css/cart.css'
 import { connect } from 'react-redux'
 import PopUpItem from '../../common/PopUpItem'
+import TypeScreen from '../../common/enviroment.ts'
 
 class CartItem extends Component {
     constructor(props) {
@@ -14,10 +15,15 @@ class CartItem extends Component {
 
     handleChange = (e) => {
         const {cartItem} = this.props;
-        this.props.changeQuantityInCart(cartItem, e.target.value);
-        this.setState({
-            selectValue: e.target.value
-        })
+        let ptt = new RegExp('^[1-9]*$');
+        if(ptt.test(e.target.value)){
+            if(e.target.value !== ''){
+                this.props.changeQuantityInCart(cartItem, parseInt(e.target.value));
+            }
+            this.setState({
+                selectValue: e.target.value
+            })
+        }
     }
 
     handleClickDeleteBtn = () => {
@@ -27,6 +33,7 @@ class CartItem extends Component {
 
     render() {
         const {type} = this.props;
+        const {typeScreen} = this.props;
         const {cartItem} = this.props;
         const quantity = this.state.selectValue;
         let priceToPay = 0;
@@ -38,7 +45,7 @@ class CartItem extends Component {
         return (
             <div>
                 {
-                    (type !== 'Popup') ? (
+                    (type !== TypeScreen.POP_UP) ? (
                         <div className='p-in-cart-container d-flex'>
                             <div className='p-in-cart-name-img col-4'>
                                 <div>
@@ -59,12 +66,19 @@ class CartItem extends Component {
                                     size="5"
                                 />
                             </div>
-                            <div className='p-in-cart-sum-price col-1'>
-                                { priceToPay }
+                            <div className='p-in-cart-sum-price col-2'>
+                                { priceToPay } USD
                             </div>
-                            <div className='p-in-cart-exe col-1'>
-                                <button className='btn-primary' onClick={this.handleClickDeleteBtn}>delete</button>
-                            </div>
+                            {
+                                typeScreen === TypeScreen.CHECK_OUT ? (
+                                    <div></div>
+                                ) : (
+                                    <div className='p-in-cart-exe col-1'>
+                                        <button className='btn-primary' onClick={this.handleClickDeleteBtn}>delete</button>
+                                    </div>
+                                )
+                            }
+                            
                         </div>
                     ) : (
                         <div>

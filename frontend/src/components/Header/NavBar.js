@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Popup from 'reactjs-popup'
 import CartItem from '../Pages/cart/CartItem'
+import TypeScreen from '../common/enviroment.ts'
 
 class NavBar extends Component {
     render() {
@@ -63,7 +64,7 @@ class NavBar extends Component {
                                                 {
                                                     return (
                                                             <div>
-                                                                <CartItem type="Popup" cartItem={cartItem} indexItem={index}/>
+                                                                <CartItem type={TypeScreen.POP_UP} cartItem={cartItem} indexItem={index}/>
                                                             </div>
                                                         )
                                                 }) : (
