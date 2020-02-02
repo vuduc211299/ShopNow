@@ -1,17 +1,18 @@
 import React,{Component} from 'react'
 import { connect } from 'react-redux'
 import ProductItem from '../../../common/ProductItem'
+import {Link} from 'react-router-dom'
 
-class Category extends Component {
-    componentDidMount() {
-        
-    }
+class ListCategory extends Component {
     render() {
         const { categories } = this.props; 
         const listCategory = categories.length ? (
             categories.map(category => {
+                const path = "/category/" + category.id;
                 return (
-                    <ProductItem category={category}/>
+                    <Link to={path} style={{ textDecoration: 'none',color: "inherit" }}>
+                        <ProductItem item={category}/>
+                    </Link>
                 )
             })
         ) : (
@@ -38,4 +39,4 @@ const mapStatetoProps = (state) => {
     }
 }
 
-export default connect(mapStatetoProps)(Category)
+export default connect(mapStatetoProps)(ListCategory)

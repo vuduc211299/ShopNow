@@ -7,6 +7,7 @@ import Cart from './components/Pages/cart/Cart';
 import Login from './components/auth/Login';
 import CheckOut from './components/Pages/checkout/CheckOut';
 import history from './components/common/history'
+import CategoryPage from './components/Pages/home/category/categoryPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/cart' component={Cart}/>
           <Route path='/login' component={Login}/>
           <Route path='/checkout' component={CheckOut}/>
+          <Route path='/category/:id' component={CategoryPage}/>
           <Route path='/' component={Home} />
         </Switch>
       </Router>

@@ -1,0 +1,44 @@
+.ctg-page {
+    top: 0;
+    left: 0;
+    background-color: #f5f5f5;
+}
+
+.ctg-page-sort-bar{
+    background-color: #ededed;
+    align-items: center;
+}
+.btn-sort{
+    width: 10%;
+    padding: 3px;
+}
+
+select{
+    background-color: #fff;
+    padding: 3px;
+}
+.ctg-sort-item {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    margin: 5px 0px;
+    padding: 5px;
+    border-right: 2px solid #F5F5F5;
+    border-left: 2px solid #F5F5F5;
+}
+.list-search-item a {
+    text-decoration: none;
+    color: inherit;
+    flex-basis: 20%;
+}
+
+.ctg-sort-item:hover {
+    transform: scale(1.01);
+}
+.list-search-item-price{
+    color: #f9502f
+}
+.local-txt{
+    font-size: 14px;
+    color: #c2b7b7;
+}

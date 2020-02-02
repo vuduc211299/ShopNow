@@ -8,7 +8,7 @@ const PopUpItem = ({cartItem}) => {
                 <div className="pop-up-img">
                     <img src={cartItem.imgUrl} width="45%" height="70%"/>
                 </div>
-                <div className="pop-up-text pop-up-txt">
+                <div className="pop-up-txt">
                     {cartItem.name}
                 </div>
             </div>

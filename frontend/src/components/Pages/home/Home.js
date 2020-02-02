@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Banner from './banner/Banner'
-import Category from './category/Category'
+import ListCategory from './category/ListCategory'
 import '../../../css/homepage.css'
 import FlashSale from './FlashSale'
 import Footer from '../../Footer/Footer'
@@ -13,7 +13,7 @@ class Home extends Component {
             <div className='homepage'>
                 <NavBar params={params}/>
                 <Banner/>
-                <Category/>
+                <ListCategory/>
                 <FlashSale/>
                 <Footer/>
             </div>

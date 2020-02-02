@@ -1,0 +1,46 @@
+
+.popup-content{
+  border-radius: 3px;
+  width: 40%;
+}
+
+.login-container{
+  color:#000;
+  padding: 0px 30px; 
+}
+
+.ipn-login{
+  width: 100%;
+  padding: 7px 5px;
+  outline: none;
+}
+
+.btn-gg{
+  padding: 3px 5px;
+  background-color: rgb(226, 224, 224);
+  border: none;
+}
+.btn-gg:focus{
+  outline: none;
+}
+
+.btn-gg i{
+  font-size: 24px;
+  color: #000;
+}
+.btn-gg span{
+  margin-left: 30px;
+  color: #000;
+}
+#login-txt{
+  font-size: 24px;
+  color: #f9502f;
+}
+.wrong-input{
+  border-color: red;
+}
+.txt-warning {
+  margin-top: 3px;
+  color: red;
+  font-size: 14px;
+}

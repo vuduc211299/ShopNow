@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Slide from './Slide'
 import LeftArrow from './LeftArrow';
 import RightArrow from './RightArrow';
-
+import '../../../../css/banner.css'
 
 class Banner extends Component {
     constructor(props) {
@@ -37,7 +37,7 @@ class Banner extends Component {
             this.setState({
                 currentIndex: this.state.currentIndex + 1
             });
-        }, 3000);
+        }, 5000);
     };
 
     componentWillUnmount() {
@@ -74,16 +74,15 @@ class Banner extends Component {
         return (
             <div className='banner'>
                 <div className="slider-wrapper container  d-flex justify-content-center align-items-center">
-                    <LeftArrow
-                        goToPrevSlide={this.goToPrevSlide}
-                    />
                     <div className="slider container">
                         {
                             <Slide image={this.state.images[this.state.currentIndex]} />
                         }
 
                     </div>
-
+                    <LeftArrow
+                        goToPrevSlide={this.goToPrevSlide}
+                    />
                     <RightArrow
                         goToNextSlide={this.goToNextSlide}
                     />

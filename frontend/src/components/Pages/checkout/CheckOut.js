@@ -5,15 +5,12 @@ import {connect} from 'react-redux'
 import CartItem from '../cart/CartItem'
 import history from '../../common/history'
 import TypeScreen from '../../common/enviroment.ts'
+import Popup from 'reactjs-popup'
 
 class CheckOut extends Component {
     render() {
         const {cart} = this.props;
         const typeScreen = TypeScreen.CHECK_OUT;
-        // make temprory product
-        // const imgUrl = '../img/iphone.jpeg'
-        // const product = {id: 1, name: 'Iphone 8', imgUrl, price: 1000, sale: '20%', quantityInCart: 0};
-        // cart.push(product);
         const {totalPrice}= this.props;
         return (
             <div className="ck-container">
@@ -30,7 +27,14 @@ class CheckOut extends Component {
                                             Vũ Đức (+84) 981140978
                                             Hoàng Cả 3, Ân Thi, Thị Trấn Ân Thi, Huyện Ân Thi, Hưng Yên
                                         </span>
-                                        <button className='ml-4'>Change</button>
+
+                                        <Popup
+                                            trigger={<button className='ml-4'>Change</button>}
+                                            on="click"
+                                            modal
+                                        >
+                                            Change location
+                                        </Popup>
                                     </div>
                                 </div>
                                 <div className="ck-products bg-white mt-3 bl-ck">

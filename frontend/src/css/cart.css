@@ -22,6 +22,7 @@
 
 .ipn-cart{
     text-align: center;
+    width: 20%;
 }
 
 .btn-common {
@@ -34,10 +35,13 @@
     background-color: #f9502f;
 }
 
-
 button:disabled,
 button[disabled]{
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
+}
+
+.p-in-cart-sum-price {
+    text-align: end;
 }

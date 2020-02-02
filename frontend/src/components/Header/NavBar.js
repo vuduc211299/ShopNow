@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Popup from 'reactjs-popup'
 import CartItem from '../Pages/cart/CartItem'
 import TypeScreen from '../common/enviroment.ts'
+import Login from '../auth/Login'
 
 class NavBar extends Component {
     render() {
@@ -33,9 +34,14 @@ class NavBar extends Component {
                             <li className='list-inline-item ml-3'>
                                 <i className="fa">&#xf059;</i>
                             </li>
-                            <li className='list-inline-item ml-3'>
-                                Login
-                            </li>
+                            <Popup
+                                trigger={<li className='list-inline-item ml-3'>Login</li>}
+                                on="click"
+                                modal
+                            >
+                                <Login/>
+                            </Popup>
+                            
                         </ul>
                     </div>
                     <div className='logo-search-cart row'>
@@ -55,7 +61,7 @@ class NavBar extends Component {
                                 <div className='logo-cart col-3'>
                                     <div>
                                         <Popup
-                                            trigger={<i class="fa">&#xf07a;</i>}
+                                            trigger={<i className="fa">&#xf07a;</i>}
                                             position="bottom center"
                                             on="hover"
                                         >

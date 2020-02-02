@@ -3,9 +3,10 @@
     padding: 5px;
 }
 .pop-up-txt {
-    font-size: 18px;
+    font-size: 14px;
     color: #000;
+    flex: 1;
 }
-.pop-up-footer{
-    
+.pop-up-img {
+    flex: 2;
 }

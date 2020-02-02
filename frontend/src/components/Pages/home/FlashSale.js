@@ -17,8 +17,8 @@ class FlashSale extends Component {
                         products.length ? products.map(product => {
                             const url = "product/" + product.id;
                             return (
-                                <Link to={url}>
-                                    <ProductItem category={product}/>
+                                <Link to={url} style={{ textDecoration: 'none', color: "inherit"}}>
+                                    <ProductItem item={product}/>
                                 </Link>
                             )
                         }) : (

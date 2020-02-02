@@ -4,7 +4,6 @@ import '../../../css/product.css'
 import '../../../css/navbar.css'
 import BackDisplayProduct from './BackDisplayProduct'
 import { connect } from 'react-redux'
-import Popup from 'reactjs-popup'
 
 class Product extends Component {
     handleAddToCart = () => {
@@ -40,21 +39,15 @@ class Product extends Component {
                                 <div className='p-name'>
                                     <h4>{product.name}</h4>
                                 </div>
+                                <div className='mt-5'>
+                                    <span className="p-price-txt">{product.price}</span> USD
+                                </div>
                                 <div className='p-transport row mt-5'>
                                     <div className='col-3'>
                                         Transport
                                     </div>
                                     <div className='col-8'>
                                         Free ship to all customer =)))
-                                    </div>
-                                </div>
-                                <div className='p-variation row mt-5'>
-                                    <div className='col-3'>
-                                        Variation
-                                    </div>
-                                    <div className='col-8'>
-                                        <button className='btn-common'>Black</button>
-                                        <button className='btn-common ml-2'>White</button>
                                     </div>
                                 </div>
                                 <div className='2-bnt row mt-5 ml-1'>
