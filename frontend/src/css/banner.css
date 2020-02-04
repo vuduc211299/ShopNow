@@ -1,13 +1,16 @@
+.slider-wrapper, .slider{
+    position: relative;
+}
 
 .left-arrow{
     position: absolute;
-    left: 10%;
+    left: 30px;
     padding: 10px 5px;
 }
 
 .right-arrow{
     position: absolute;
-    right: 10%;
+    right: 30px;
     padding: 10px 5px;
 }
 

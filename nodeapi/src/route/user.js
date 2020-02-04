@@ -7,7 +7,6 @@ const userRouter = new express.Router()
 userRouter.post('/signUp', async (req,res)=>{
     const user = new User(req.body)
     try {
-        
         await user.save()
         const token = await user.generateAuthToken()
         res.cookie('jwt',token, {expire : Date.now() + 31536000000})
@@ -21,16 +20,14 @@ userRouter.post('/login', async (req, res) => {
     const user = await User.findByCredentials(req.body.email, req.body.password)
     if(user){
         const token = await user.generateAuthToken()
-        res.cookie('jwt',token,{expire : Date.now() + 31536000000})
         res.status(200).send({user, token})
     }
-    res.status(404).send()
+    res.status(404).send('email, password wrong')
 })
 
 userRouter.post('/logout', auth, async (req, res)=>{
     const user = req.user
     user.tokens.pop()
-    res.clearCookie('jwt')
     res.send(user)
 })
 

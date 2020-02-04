@@ -44,3 +44,10 @@
   color: red;
   font-size: 14px;
 }
+.logout{
+  color: #000;
+}
+.list-group-item:hover{
+  background-color: rgb(185, 185, 185);
+  cursor: pointer;
+}

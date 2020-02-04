@@ -32,10 +32,8 @@ class CategoryPage extends Component {
         const {listProducts} = this.props;
         const { id } = this.props.match.params;
         const {sort_by_location, sort_by_price}= this.state;
-        let sortedProduct = listProducts.filter(item => 
-            item.categoryId === parseInt(id) && 
-            sort_by_location === 'all' ?
-            true : (item.location === sort_by_location))
+        let sortedProduct = listProducts.filter(item => item.categoryId === parseInt(id));
+        sortedProduct = sortedProduct.filter(item => sort_by_location === 'all'? true : (item.location === sort_by_location) )
         if(sort_by_price === 'high_to_low') {
             sortedProduct.sort((a, b) => b.price - a.price)
         } else {

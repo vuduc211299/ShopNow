@@ -6,9 +6,11 @@ import Popup from 'reactjs-popup'
 import CartItem from '../Pages/cart/CartItem'
 import TypeScreen from '../common/enviroment.ts'
 import Login from '../auth/Login'
+import Logout from '../auth/Logout'
 
 class NavBar extends Component {
     render() {
+        const user = JSON.parse(localStorage.getItem('user'));
         const {cart} = this.props;
         const {params} = this.props;
         const {quantity} = this.props;
@@ -26,7 +28,7 @@ class NavBar extends Component {
                                         <i className='fa'>&#xf0f3;</i>
                                     }
                                     position="bottom center"
-                                    on="hover"
+                                    on="click"
                                 >
                                     No notifications
                                 </Popup>
@@ -34,13 +36,25 @@ class NavBar extends Component {
                             <li className='list-inline-item ml-3'>
                                 <i className="fa">&#xf059;</i>
                             </li>
-                            <Popup
-                                trigger={<li className='list-inline-item ml-3'>Login</li>}
-                                on="click"
-                                modal
-                            >
-                                <Login/>
-                            </Popup>
+                            {
+                                user ? (
+                                    <Popup
+                                        trigger={<li className='list-inline-item ml-3'>{user.user.name}</li>}
+                                        on="click"
+                            
+                                    >
+                                        <Logout/>
+                                    </Popup>
+                                ): (
+                                    <Popup
+                                        trigger={<li className='list-inline-item ml-3'>Login</li>}
+                                        on="click"
+                                        modal
+                                    >
+                                        <Login/>
+                                    </Popup>
+                                )
+                            }
                             
                         </ul>
                     </div>
@@ -108,7 +122,8 @@ class NavBar extends Component {
 const mapStateToProps = (state) => {
     return {
         cart: state.cartReducer.cart,
-        quantity: state.cartReducer.quantity
+        quantity: state.cartReducer.quantity,
+        user: state.authReducer.user
     }
 }
 

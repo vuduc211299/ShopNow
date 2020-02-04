@@ -1,12 +1,16 @@
 import React, {Component} from 'react'
 import '../../css/login.css'
+import {connect} from 'react-redux'
+import { LoginAction } from '../../actions/authActions'
+import {LOGIN_SUCCESS, LOGIN_FAILED} from '../../actions/authActions'
 
 class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
             password: '',
-            username: ''
+            username: '',
+            disableBtn: true
         }
     }
     handleUserChange = (e) => {
@@ -17,7 +21,8 @@ class Login extends Component {
             })
         } else{
             this.setState({
-                username: '',
+                disableBtn: false,
+                username: e.target.value,
             })
         }
     }
@@ -29,16 +34,28 @@ class Login extends Component {
             })
         }else{
             this.setState({
-                password: '',
+                disableBtn: false,
+                password: e.target.value,
             })
         }
     }
 
+    submitLoginForm = (e) => {
+        e.preventDefault();
+        const {username} = this.state;
+        const {password} = this.state;
+        if(username !== 'wrong-input' && password !== 'wrong-input'){
+            this.props.loginStatus(username, password);
+        }
+    }
+    
     render() {
         const {password} = this.state;
         const {username} = this.state;
+        
         const IpnPassclassName = "ipn-login " + password;
         const IpnUserclassName = "ipn-login " + username;
+        console.log()
         return (
             <div className="login-page">
                <div className='login-container'>
@@ -46,11 +63,18 @@ class Login extends Component {
                        <span id='login-txt'>Login</span>
                        <span>Sign Up</span>
                    </div>
+                   {
+                        this.props.status !== LOGIN_FAILED ? (
+                            <div></div>
+                        ) : (
+                            <div className='txt-warning'> wrong name or password</div>
+                        ) 
+                   }
                    <div className='mt-5'>
                        <div>
                         <input className={IpnUserclassName} placeholder="Username" onChange={this.handleUserChange}/>
                         {
-                            username !== '' ? (
+                            username === 'wrong-input' ? (
                                 <div className='txt-warning'>
                                     Please fill this field
                                 </div>
@@ -62,7 +86,7 @@ class Login extends Component {
                        <div className='mt-4'>
                         <input type="password" className={IpnPassclassName} onChange={this.handlePassChange} placeholder="password"/>
                         {
-                            password !== '' ? (
+                            password === 'wrong-input' ? (
                                 <div className='txt-warning'>
                                     Please fill this field
                                 </div>
@@ -79,6 +103,8 @@ class Login extends Component {
                    <div className='d-flex justify-content-end mt-3'>
                        <button 
                             className='btn-common'
+                            onClick={this.submitLoginForm}
+                            disabled={this.state.disableBtn}
                         >
                             Login
                         </button>
@@ -95,4 +121,16 @@ class Login extends Component {
     }
 }
 
-export default Login
+const mapStateToProps = (state) => {
+    return {
+        status: state.authReducer.status
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loginStatus: (username, password) => dispatch(LoginAction(username, password))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
