@@ -55,7 +55,6 @@ class Login extends Component {
         
         const IpnPassclassName = "ipn-login " + password;
         const IpnUserclassName = "ipn-login " + username;
-        console.log()
         return (
             <div className="login-page">
                <div className='login-container'>

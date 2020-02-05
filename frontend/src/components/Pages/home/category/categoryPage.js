@@ -5,7 +5,7 @@ import Banner from '../banner/Banner'
 import ProductItem from '../../../common/ProductItem'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import TypeScreen from '../../../common/enviroment.ts'
+import {TypeScreen} from '../../../common/enviroment.ts'
 
 class CategoryPage extends Component {
     constructor(props){

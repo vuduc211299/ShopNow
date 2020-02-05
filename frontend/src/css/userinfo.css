@@ -1,0 +1,52 @@
+.user-profile-page {
+    top: 0;
+    left: 0;
+    background-color: #f5f5f5;
+    padding-top: 120px;
+}
+
+.user-profile-left{
+    padding: 10px 0px;
+    flex: 15%;
+}
+
+.user-profile-right{
+    border-radius: 3px;
+    padding: 10px 30px 50px 30px;
+    flex: 77%;
+    background-color: #fff;
+}
+
+.icon-user{
+    font-size: 48px;
+    color: #efefef;
+}
+.img-upload{
+    flex: 30%;
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+}
+.form-user{
+    flex: 65%;
+}
+
+.txt-name{
+    font-weight: bold;
+}
+
+.list-item-form{
+    margin-top: 10px;
+}
+.icon-user-2{
+    font-size: 100px;
+    color: #efefef;
+}
+
+.txt-account{
+    border-bottom: 2px solid #efefef;
+    padding-top: 10px;
+    font-size: 20px;
+    font-weight: 600;
+}

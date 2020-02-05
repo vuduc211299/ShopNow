@@ -4,7 +4,7 @@ import '../../../css/checkout.css'
 import {connect} from 'react-redux'
 import CartItem from '../cart/CartItem'
 import history from '../../common/history'
-import TypeScreen from '../../common/enviroment.ts'
+import {TypeScreen} from '../../common/enviroment.ts'
 import Popup from 'reactjs-popup'
 
 class CheckOut extends Component {

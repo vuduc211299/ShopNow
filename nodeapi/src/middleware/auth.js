@@ -4,7 +4,7 @@ const User = require('../model/user')
 
 const auth = async (req, res, next) => {
     try {
-        const token = req.cookies.jwt
+        const token = req.header('Authorization').replace('Bearer ','')
         const decode = jwt.verify(token,"thisisnewtoken")
         const user = await User.findById(decode._id)
         if(!user){

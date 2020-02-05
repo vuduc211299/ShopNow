@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import '../../../css/cart.css'
 import { connect } from 'react-redux'
 import PopUpItem from '../../common/PopUpItem'
-import TypeScreen from '../../common/enviroment.ts'
+import {TypeScreen} from '../../common/enviroment.ts'
 
 class CartItem extends Component {
     constructor(props) {

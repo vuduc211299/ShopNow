@@ -1,8 +1,10 @@
 import {LOGIN_SUCCESS, LOGIN_FAILED, LOGIN_PENDING} from '../actions/authActions'
+let user = {}
+if(localStorage.getItem('user')) user = JSON.parse(localStorage.getItem('user'))
 
 const initState = {
     status: LOGIN_PENDING,
-    user: null
+    user:  user ? user : {} 
 }
 
 const authReducer = (state = initState, action) => {

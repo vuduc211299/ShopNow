@@ -4,13 +4,20 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Popup from 'reactjs-popup'
 import CartItem from '../Pages/cart/CartItem'
-import TypeScreen from '../common/enviroment.ts'
+import {TypeScreen} from '../common/enviroment.ts'
 import Login from '../auth/Login'
 import Logout from '../auth/Logout'
 
 class NavBar extends Component {
+
+    // componentDidMount() {
+    //     console.log('fdskjanfd')
+    //     this.props.getProfile();
+    // }
+    
+
     render() {
-        const user = JSON.parse(localStorage.getItem('user'));
+        const {user} = this.props;
         const {cart} = this.props;
         const {params} = this.props;
         const {quantity} = this.props;
@@ -37,11 +44,15 @@ class NavBar extends Component {
                                 <i className="fa">&#xf059;</i>
                             </li>
                             {
-                                user ? (
+                                user.user ? (
                                     <Popup
-                                        trigger={<li className='list-inline-item ml-3'>{user.user.name}</li>}
-                                        on="click"
-                            
+                                        trigger={<li className='list-inline-item ml-3'>
+                                                    <span className='mr-1'>
+                                                        <i className='fa'>&#xf2bd;</i>
+                                                    </span>
+                                                    {user.user.name}
+                                                </li>}
+                                        on="hover"
                                     >
                                         <Logout/>
                                     </Popup>
@@ -127,4 +138,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(NavBar)
+export default connect(mapStateToProps)(NavBar)

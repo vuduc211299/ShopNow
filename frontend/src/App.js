@@ -8,6 +8,7 @@ import Login from './components/auth/Login';
 import CheckOut from './components/Pages/checkout/CheckOut';
 import history from './components/common/history'
 import CategoryPage from './components/Pages/home/category/categoryPage';
+import UserInfo from './components/Pages/userInfo/UserInfo';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/login' component={Login}/>
           <Route path='/checkout' component={CheckOut}/>
           <Route path='/category/:id' component={CategoryPage}/>
+          <Route path='/user/profile' component={UserInfo}/>
           <Route path='/' component={Home} />
         </Switch>
       </Router>

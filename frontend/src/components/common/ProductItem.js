@@ -1,5 +1,5 @@
 import React from 'react'
-import TypeScreen from '../common/enviroment'
+import {TypeScreen} from '../common/enviroment'
 
 const ProductItem = ({item, typeScreen}) => {
     const className='ctg-sort-item';
