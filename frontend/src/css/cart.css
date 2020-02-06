@@ -35,6 +35,10 @@
     background-color: #f9502f;
 }
 
+.btn-common:focus{
+    outline: none;
+}
+
 button:disabled,
 button[disabled]{
   border: 1px solid #999999;

@@ -6,15 +6,30 @@ import Popup from 'reactjs-popup'
 import CartItem from '../Pages/cart/CartItem'
 import {TypeScreen} from '../common/enviroment.ts'
 import Login from '../auth/Login'
+import SignUp from '../auth/SignUp'
 import Logout from '../auth/Logout'
 
 class NavBar extends Component {
 
-    // componentDidMount() {
-    //     console.log('fdskjanfd')
-    //     this.props.getProfile();
-    // }
-    
+    constructor (props) {
+        super(props)
+        this.state = {
+            loginOrSignup: 'login'
+        }
+    }
+
+    changeTab = () => {
+        if(this.state.loginOrSignup === 'login'){
+            this.setState({
+                loginOrSignup: 'signup'
+            })
+        } else {
+            this.setState({
+                loginOrSignup: 'login'
+            })
+        }
+        
+    }
 
     render() {
         const {user} = this.props;
@@ -62,8 +77,14 @@ class NavBar extends Component {
                                         on="click"
                                         modal
                                     >
-                                        <Login/>
-                                    </Popup>
+                                    {
+                                        this.state.loginOrSignup === 'login' ? (
+                                                <Login changeTab={this.changeTab}/>
+                                            ) : (
+                                                <SignUp changeTab={this.changeTab}/>
+                                            )
+                                    }
+                                    </Popup>                       
                                 )
                             }
                             

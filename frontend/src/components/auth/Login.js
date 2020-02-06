@@ -56,6 +56,10 @@ class Login extends Component {
             this.props.loginStatus(username, password);
         }
     }
+
+    SignUp = () => {
+        this.props.changeTab();
+    }
     
     render() {
         const {password} = this.state;
@@ -67,8 +71,8 @@ class Login extends Component {
             <div className="login-page">
                <div className='login-container'>
                    <div className='d-flex justify-content-between mt-3'>
-                       <span id='login-txt'>Login</span>
-                       <span>Sign Up</span>
+                       <span className='login-txt'>Login</span>
+                       <span onClick={this.SignUp}>Sign Up</span>
                    </div>
 
                    {
@@ -116,10 +120,9 @@ class Login extends Component {
                             Login
                         </button>
                    </div>
-                   <div className='d-flex justify-content-center'>
-                        <button className='btn-gg'>
-                           <i className="fa">&#xf1a0;</i>
-                           <span className='mb-3'>Google</span>
+                   <div className='d-flex justify-content-center p-4'>
+                        <button className="loginBtn loginBtn--google">
+                            Login with Google
                         </button>
                    </div>
                </div>
