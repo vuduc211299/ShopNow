@@ -9,7 +9,6 @@ userRouter.post('/signUp', async (req,res)=>{
     try {
         await user.save()
         const token = await user.generateAuthToken()
-        res.cookie('jwt',token, {expire : Date.now() + 31536000000})
         res.status(201).send({ user, token })
     } catch (error) {
         res.status(400).send(error)

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import '../../../css/cart.css'
 import { connect } from 'react-redux'
 import PopUpItem from '../../common/PopUpItem'
-import {TypeScreen} from '../../common/enviroment.ts'
+import * as constant from '../../../constants/constants'
 
 class CartItem extends Component {
     constructor(props) {
@@ -45,7 +45,7 @@ class CartItem extends Component {
         return (
             <div>
                 {
-                    (type !== TypeScreen.POP_UP) ? (
+                    (type !== constant.POP_UP) ? (
                         <div className='p-in-cart-container d-flex'>
                             <div className='p-in-cart-name-img col-4'>
                                 <div>
@@ -70,7 +70,7 @@ class CartItem extends Component {
                                 { priceToPay } USD
                             </div>
                             {
-                                typeScreen === TypeScreen.CHECK_OUT ? (
+                                typeScreen === constant.CHECK_OUT ? (
                                     <div></div>
                                 ) : (
                                     <div className='p-in-cart-exe col-1'>

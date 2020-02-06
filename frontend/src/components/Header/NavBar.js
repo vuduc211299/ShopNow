@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Popup from 'reactjs-popup'
 import CartItem from '../Pages/cart/CartItem'
-import {TypeScreen} from '../common/enviroment.ts'
+import * as constant from '../../constants/constants'
 import Login from '../auth/Login'
 import SignUp from '../auth/SignUp'
 import Logout from '../auth/Logout'
@@ -116,7 +116,7 @@ class NavBar extends Component {
                                                 {
                                                     return (
                                                             <div>
-                                                                <CartItem type={TypeScreen.POP_UP} cartItem={cartItem} indexItem={index}/>
+                                                                <CartItem type={constant.POP_UP} cartItem={cartItem} indexItem={index}/>
                                                             </div>
                                                         )
                                                 }) : (

@@ -4,13 +4,13 @@ import '../../../css/checkout.css'
 import {connect} from 'react-redux'
 import CartItem from '../cart/CartItem'
 import history from '../../common/history'
-import {TypeScreen} from '../../common/enviroment.ts'
+import * as constant from '../../../constants/constants'
 import Popup from 'reactjs-popup'
 
 class CheckOut extends Component {
     render() {
         const {cart} = this.props;
-        const typeScreen = TypeScreen.CHECK_OUT;
+        const typeScreen = constant.CHECK_OUT;
         const {totalPrice}= this.props;
         return (
             <div className="ck-container">

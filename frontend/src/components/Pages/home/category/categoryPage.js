@@ -5,7 +5,7 @@ import Banner from '../banner/Banner'
 import ProductItem from '../../../common/ProductItem'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {TypeScreen} from '../../../common/enviroment.ts'
+import * as constant from '../../../../constants/constants'
 
 class CategoryPage extends Component {
     constructor(props){
@@ -64,7 +64,7 @@ class CategoryPage extends Component {
                                     const path = "/product/" + product.id
                                     return (
                                         <Link to={path} style={{ textDecoration: 'none', color: "inherit"}}>
-                                            <ProductItem item={product} typeScreen={TypeScreen.CATEGORY_PAGE}/>
+                                            <ProductItem item={product} typeScreen={constant.CATEGORY_PAGE}/>
                                         </Link>
                                     )
                                 })

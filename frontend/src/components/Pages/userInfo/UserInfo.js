@@ -5,6 +5,16 @@ import Popup from 'reactjs-popup'
 import Login from '../../auth/Login'
 import '../../../css/userinfo.css'
 import { userAction } from '../../../actions/userAction'
+import { EMPTY_VALUE,
+    WRONG_EMAIL_FORMAT,
+    WRONG_PHONE_FORMAT,
+    PASSWORD_SHORT,
+    ERROR_CONFIRM_PASSWORD,
+    checkEmailFormat,
+    checkPasswordFormat,
+    checkPhoneFormat,
+    confirmPassword
+   } from '../../../helpers/checkFormat'
 
 class UserInfo extends Component {
     constructor(props) {
@@ -23,9 +33,13 @@ class UserInfo extends Component {
             email,
             phone
         }
-        if(name === 'wrong_format' || phone === 'wrong_format' || email === 'wrong_format') {
-            console.log('wrong-format')
-        } else {
+        if (
+            name !== EMPTY_VALUE &&
+            email !== WRONG_EMAIL_FORMAT &&
+            email !== EMPTY_VALUE &&
+            phone !== EMPTY_VALUE &&
+            phone !== WRONG_PHONE_FORMAT
+        ) {
             this.props.submitForm(data)
         }
     }
@@ -37,40 +51,27 @@ class UserInfo extends Component {
             })
         } else {
             this.setState({
-                name: 'wrong_format'
+                name: EMPTY_VALUE
             })
         }
     }
 
 
     handleEmailChange =(e) => {
-        const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if(reg.test(String(e.target.value).toLowerCase()) && e.target.value !== ''){
-            this.setState({
-                email: e.target.value
-            })
-        } else{
-            this.setState({
-                email: 'wrong_format'
-            })
-        }
+        this.setState({
+            email: checkEmailFormat(e.target.value)
+        })
     }
 
     handlePhoneChange =(e) => {
-        const reg = new RegExp('^[0-9]*$');
-        if(reg.test(e.target.value) && e.target.value !== ''){
-            this.setState({
-                phone: e.target.value
-            })
-        } else {
-            this.setState({
-                phone: 'wrong_format'
-            })
-        }
+        this.setState({
+            phone: checkPhoneFormat(e.target.value)
+        })
     }
 
     render() {
         const {userProfile} = this.props;
+        const {name, phone, email} = this.state;
         return (
             userProfile.user ? (
             <div className='user-profile-page'>
@@ -87,12 +88,47 @@ class UserInfo extends Component {
                             <div className='form-user'>
                                 <div className='list-item-form'>
                                     Name: <input className='ipn-login' onChange={this.handleNameChange} defaultValue={userProfile.user.name}/>
+                                    {
+                                        name === EMPTY_VALUE ? (
+                                            <div className='txt-warning'>
+                                                {EMPTY_VALUE}
+                                            </div>
+                                        ) : (
+                                            <div></div>
+                                        )
+                                    }
                                 </div>
                                 <div className='list-item-form'>
                                     Email: <input className='ipn-login' onChange={this.handleEmailChange} defaultValue={userProfile.user.email}/>
+                                    {
+                                        email === EMPTY_VALUE || email === WRONG_EMAIL_FORMAT ? email === EMPTY_VALUE ? (
+                                            <div className='txt-warning'>
+                                                {EMPTY_VALUE}
+                                            </div>
+                                        ) : (
+                                            <div className='txt-warning'>
+                                                {WRONG_EMAIL_FORMAT}
+                                            </div>
+                                        ) : (
+                                            <div></div>
+                                        )
+                                    }
                                 </div>
                                 <div className='list-item-form'>
                                     Phone: <input className='ipn-login' onChange={this.handlePhoneChange} defaultValue={userProfile.user.phone}/>
+                                    {
+                                        phone === EMPTY_VALUE || phone === WRONG_PHONE_FORMAT ? phone === EMPTY_VALUE ? (
+                                            <div className='txt-warning'>
+                                                {EMPTY_VALUE}
+                                            </div>
+                                        ) : (
+                                            <div className='txt-warning'>
+                                                {WRONG_PHONE_FORMAT}
+                                            </div>
+                                        ) : (
+                                            <div></div>
+                                        )
+                                    }
                                 </div>
                                 <div className='list-item-form'>
                                     <button 

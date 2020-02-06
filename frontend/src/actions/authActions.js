@@ -2,43 +2,9 @@
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const LOGIN_PENDING = 'LOGIN_PENDING';
-export const GET_PROFILE = 'GET_PROFILE'
 
-export const authHeader = () => {
-    const user = JSON.parse(localStorage.getItem('user'))
-    if(user.token) {
-        return { 
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + user.token
-        };
-    }
-    else {
-        return {};
-    }
-}
-
-// export const getUserProfile = () => {
-//     const requestOptions = {
-//         method: 'GET',
-//         headers: authHeader
-//     }
-
-//     return async (dispatch, getState) => {
-//         console.log('dispatch')
-//         let user = await fetch('http://localhost:3000/user/profile', requestOptions)
-//         .then(res => {
-//             console.log(res.json())
-//             return res.json()
-//         })
-//         .catch(err => {
-//             console.error('err', err)
-//         })
-//         console.log('user',user)
-//         if(user){
-//             dispatch({type: GET_PROFILE, user})
-//         }
-//     }
-// }
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const SIGNUP_FAILED = 'SIGNUP_FAILED';
 
 export const LoginAction = (email, password) => {
     const data = {email, password}
@@ -65,6 +31,33 @@ export const LoginAction = (email, password) => {
             window.location.reload()
         } else {
             dispatch({type: LOGIN_FAILED})
+        }
+    }
+}
+
+export const SignUpAction = (user) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(user)
+    };
+
+    return async (dispatch, getState) => {
+        const data = await fetch('http://localhost:3000/signUp', requestOptions)
+        .then(res => {
+            return res.json()
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+        if(!data.errmsg){
+            dispatch({type: SIGNUP_SUCCESS, data})
+        } else{
+            dispatch({type: SIGNUP_FAILED})
         }
     }
 }
