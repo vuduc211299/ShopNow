@@ -2,15 +2,14 @@ import React, {Component} from 'react'
 import '../../css/login.css'
 import {connect} from 'react-redux'
 import { LoginAction } from '../../actions/authActions'
-import {LOGIN_SUCCESS, LOGIN_FAILED} from '../../actions/authActions'
+import { LOGIN_FAILED } from '../../actions/authActions'
 
 class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
             password: '',
-            username: '',
-            disableBtn: true
+            username: ''
         }
     }
     handleUserChange = (e) => {
@@ -21,8 +20,7 @@ class Login extends Component {
             })
         } else{
             this.setState({
-                disableBtn: false,
-                username: e.target.value,
+                username: e.target.value
             })
         }
     }
@@ -34,8 +32,7 @@ class Login extends Component {
             })
         }else{
             this.setState({
-                disableBtn: false,
-                password: e.target.value,
+                password: e.target.value
             })
         }
     }
@@ -44,7 +41,18 @@ class Login extends Component {
         e.preventDefault();
         const {username} = this.state;
         const {password} = this.state;
-        if(username !== 'wrong-input' && password !== 'wrong-input'){
+        if(username === '') {
+            this.setState({
+                username: 'wrong-input'
+            })
+        }
+
+        if(password === '') {
+            this.setState({
+                password: 'wrong-input'
+            })
+        }
+        if(username !== 'wrong-input' && password !== 'wrong-input' && username !== '' && password !== ''){
             this.props.loginStatus(username, password);
         }
     }
@@ -62,6 +70,7 @@ class Login extends Component {
                        <span id='login-txt'>Login</span>
                        <span>Sign Up</span>
                    </div>
+
                    {
                         this.props.status !== LOGIN_FAILED ? (
                             <div></div>
@@ -103,7 +112,6 @@ class Login extends Component {
                        <button 
                             className='btn-common'
                             onClick={this.submitLoginForm}
-                            disabled={this.state.disableBtn}
                         >
                             Login
                         </button>

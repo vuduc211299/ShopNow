@@ -104,7 +104,7 @@ class CheckOut extends Component {
                                 </div>
                             </div>
                         ) : (
-                        <div>
+                        <div className="check-out-empty">
                             <button onClick={()=> {history.push('/')}}>Back To Shop</button>    
                         </div>
                     )

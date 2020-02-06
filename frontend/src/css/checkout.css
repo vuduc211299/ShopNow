@@ -52,3 +52,10 @@
 .ck-price-i>span{
     flex: 1
 }
+
+.check-out-empty{
+    display: flex;
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+}
