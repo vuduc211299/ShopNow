@@ -4,7 +4,7 @@ const Product = require('../model/product')
 
 const productRouter = new express.Router()
 
-productRouter.get('/', async (req, res)=>{
+productRouter.get('/product/', async (req, res)=>{
     try {
         const products = await Product.find({})
         res.send(products)
@@ -14,15 +14,11 @@ productRouter.get('/', async (req, res)=>{
     
 })
 
-productRouter.get('/product/',(req,res)=>{
-
-})
-
 productRouter.post('/product/create', auth, async (req,res)=>{
     try {
         const product = new Product({
             ...req.body,
-            owner : req.user._id
+            owner_id : req.user._id
         })
         await product.save()
         res.status(201).send(product)

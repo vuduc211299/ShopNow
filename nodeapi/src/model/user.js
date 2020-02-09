@@ -38,6 +38,12 @@ const userSchema = mongoose.Schema({
     profile :{
         type: String
     },
+    carts: [{
+        product : {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+        }
+    }],
     tokens : [{
         token : {
             type: String, 

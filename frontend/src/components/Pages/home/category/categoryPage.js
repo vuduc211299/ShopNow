@@ -32,7 +32,7 @@ class CategoryPage extends Component {
         const {listProducts} = this.props;
         const { id } = this.props.match.params;
         const {sort_by_location, sort_by_price}= this.state;
-        let sortedProduct = listProducts.filter(item => item.categoryId === parseInt(id));
+        let sortedProduct = listProducts.filter(item => item.category_id === String(id));
         sortedProduct = sortedProduct.filter(item => sort_by_location === 'all'? true : (item.location === sort_by_location) )
         if(sort_by_price === 'high_to_low') {
             sortedProduct.sort((a, b) => b.price - a.price)
@@ -54,14 +54,14 @@ class CategoryPage extends Component {
                             <span className='ml-3'>Location</span>
                             <select className='ml-3' onChange={this.sortByLocaltion}>
                                 <option value="all">All</option>
-                                <option value="Ha Noi">Ha Noi</option>
-                                <option value="HCM City">HCM City</option>
+                                <option value="HaNoi">Ha Noi</option>
+                                <option value="HCM">HCM City</option>
                             </select>
                         </div>
                         <div className='d-flex list-search-item flex-wrap mt-5'>
                             {
                                 sortedProduct.map((product) => {
-                                    const path = "/product/" + product.id
+                                    const path = "/product/" + product._id
                                     return (
                                         <Link to={path} style={{ textDecoration: 'none', color: "inherit"}}>
                                             <ProductItem item={product} typeScreen={constant.CATEGORY_PAGE}/>

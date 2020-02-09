@@ -6,10 +6,10 @@ import authReducer from '../reducer/authReducer'
 import userReducer from '../reducer/userReducer'
 
 const rootReducer = combineReducers({
-    categoryReducer,
     cartReducer,
     productReducer,
     authReducer,
+    categoryReducer,
     userReducer
 })
 

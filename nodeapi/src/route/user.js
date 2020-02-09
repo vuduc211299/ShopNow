@@ -1,6 +1,7 @@
 const express = require('express')
 const User = require('../model/user')
 const auth = require('../middleware/auth')
+const Product = require('../model/product')
 
 const userRouter = new express.Router()
 
@@ -58,5 +59,36 @@ userRouter.patch('/user/profile/update', auth,  async (req,res)=>{
     }
 })
 
+userRouter.post('/user/addToCart', auth, async(req, res)=> {
+    const product_id = String(req.body.product_id)
+    const product = await Product.findById(product_id)
+    const user = await User.findById(req.user._id)
+    try {
+        if(user){
+            user.carts.push(product)
+            await user.save()
+            res.status(201).send(user)
+        }   
+    } catch (error) {
+        res.rend(error)
+    }
+
+})
+
+userRouter.post('/user/removeFromCart', auth, async (req, res)=> {
+    let remove_product_id = String(req.body.product_id)
+    const user = await User.findById(req.user._id)
+    try {
+        if(user){
+           user.carts = user.carts.filter(product => !product._id.equals(remove_product_id))
+           await user.save()
+           res.status(200).send(user)
+        }else {
+            res.status(404).send('cant found')
+        }
+    } catch (error) {
+        res.send(error)
+    }
+})
 module.exports = userRouter
 

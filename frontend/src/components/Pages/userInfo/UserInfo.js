@@ -5,16 +5,14 @@ import Popup from 'reactjs-popup'
 import Login from '../../auth/Login'
 import '../../../css/userinfo.css'
 import { userAction } from '../../../actions/userAction'
+import PopUpNotify from '../../common/PopUpNotify'
 import { EMPTY_VALUE,
     WRONG_EMAIL_FORMAT,
     WRONG_PHONE_FORMAT,
-    PASSWORD_SHORT,
-    ERROR_CONFIRM_PASSWORD,
-    checkEmailFormat,
-    checkPasswordFormat,
     checkPhoneFormat,
-    confirmPassword
+    checkEmailFormat
    } from '../../../helpers/checkFormat'
+import history from '../../common/history'
 
 class UserInfo extends Component {
     constructor(props) {
@@ -26,6 +24,7 @@ class UserInfo extends Component {
             phone: userProfile.user.phone
         }
     }
+
     handleSubmit = () => {
         const {name, phone, email} = this.state;
         const data = {
@@ -42,6 +41,7 @@ class UserInfo extends Component {
         ) {
             this.props.submitForm(data)
         }
+        this.forceUpdate()
     }
 
     handleNameChange = (e) => {
@@ -70,11 +70,31 @@ class UserInfo extends Component {
     }
 
     render() {
-        const {userProfile} = this.props;
+        const {userProfile, updateStatus} = this.props;
         const {name, phone, email} = this.state;
+        console.log(updateStatus)
         return (
             userProfile.user ? (
             <div className='user-profile-page'>
+                {   
+                    updateStatus === 'status_success' ? (
+                        <PopUpNotify message="Update success" status={updateStatus}/>
+                    ) : (
+                        <div>
+
+                        </div>
+                    )
+                }
+                {
+                    updateStatus === 'status_failed' ? (
+                        <PopUpNotify message="Update failed" status={updateStatus}/>
+                        
+                    ) : (
+                        <div>
+
+                        </div>
+                    )
+                }
                 <div className='user-profile-content container d-flex mb-5'>
                     <div className='user-profile-left d-flex'>
                         <i className='fa icon-user'>&#xf2bd;</i>
@@ -170,7 +190,8 @@ class UserInfo extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userProfile: state.userReducer.userInfoUpdate
+        userProfile: state.userReducer.userInfoUpdate,
+        updateStatus: state.userReducer.updateStatus
     }
 }
 

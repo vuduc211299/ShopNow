@@ -13,20 +13,29 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    discount: {
+        type: Number
+    },
     image: {
         type: String
     },
-    typeOfProduct : {
-        type: String,
+    category_id:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
         required: true
     },
     description : {
-        type: String,
-        trim: true
+        type: String
     },
-    owner : {
+    location: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    owner_id : {
         type: mongoose.Schema.Types.ObjectId,
-        ref : 'User'
+        ref : 'User',
+        required: true
     }
 })
 

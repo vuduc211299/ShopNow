@@ -10,12 +10,12 @@ class FlashSale extends Component {
         return (
             <div className='category-section container'>
                 <div className='category-header'>
-                    FlashSale
+                    Top Sale
                 </div>
                 <div className='d-flex flex-wrap'>
                     {
                         products.length ? products.map(product => {
-                            const url = "product/" + product.id;
+                            const url = "product/" + product._id;
                             return (
                                 <Link to={url} style={{ textDecoration: 'none', color: "inherit"}}>
                                     <ProductItem item={product}/>

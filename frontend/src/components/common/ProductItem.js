@@ -10,9 +10,7 @@ const ProductItem = ({item, typeScreen}) => {
             <div className={
             constant.CATEGORY_PAGE === typeScreen ? "ctg-sort-item-wrapper" : ""
         }>
-                <img src={item.imgUrl} alt='' width={
-                    constant.CATEGORY_PAGE === typeScreen ? "100%" : "80.5px"
-                }/>
+                <img src={require('../../img/iphone.jpeg')} alt='' width={constant.CATEGORY_PAGE === typeScreen ? "100%" : "80.5px"}/>
                 <div className='category-name'>{item.name}</div>
                 {
                     constant.CATEGORY_PAGE === typeScreen? (

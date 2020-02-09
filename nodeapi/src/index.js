@@ -4,7 +4,7 @@ require('./db/mongoose')
 
 const userRouter = require('./route/user')
 const productRouter = require('./route/product')
-
+const categoryRouter = require('./route/category')
 const port = process.env.PORT || 3000 
 
 const app = express()
@@ -13,6 +13,7 @@ app.use(cors())
 app.use(express.json())
 app.use(userRouter)
 app.use(productRouter)
+app.use(categoryRouter)
 
 app.listen(port, () => {
     console.log('Server is up on port ' + port)

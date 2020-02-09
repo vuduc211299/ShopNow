@@ -4,11 +4,12 @@ import ProductItem from '../../../common/ProductItem'
 import {Link} from 'react-router-dom'
 
 class ListCategory extends Component {
+
     render() {
         const { categories } = this.props; 
-        const listCategory = categories.length ? (
+        const listCategory = categories ? (
             categories.map(category => {
-                const path = "/category/" + category.id;
+                const path = "/category/" + category._id;
                 return (
                     <Link to={path} style={{ textDecoration: 'none',color: "inherit" }}>
                         <ProductItem item={category}/>
@@ -33,10 +34,10 @@ class ListCategory extends Component {
     }
 }
 
-const mapStatetoProps = (state) => {
+const mapStateToProps = (state) => {
     return {
-        categories: state.categoryReducer.categories
+        categories: state.categoryReducer.listCategories
     }
 }
 
-export default connect(mapStatetoProps)(ListCategory)
+export default connect(mapStateToProps)(ListCategory)

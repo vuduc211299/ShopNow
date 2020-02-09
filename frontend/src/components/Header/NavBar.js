@@ -8,6 +8,8 @@ import * as constant from '../../constants/constants'
 import Login from '../auth/Login'
 import SignUp from '../auth/SignUp'
 import Logout from '../auth/Logout'
+import { categoryAction } from '../../actions/categoryAction'
+import { productAction } from '../../actions/productAction'
 
 class NavBar extends Component {
 
@@ -16,6 +18,11 @@ class NavBar extends Component {
         this.state = {
             loginOrSignup: 'login'
         }
+    }
+
+    componentDidMount() {
+        this.props.loadProduct()
+        this.props.loadCategory()
     }
 
     changeTab = () => {
@@ -159,4 +166,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(NavBar)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadProduct: () => dispatch(productAction()),
+        loadCategory: () => dispatch(categoryAction())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
