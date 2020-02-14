@@ -16,6 +16,9 @@ const userReducer = (state = initState, action) => {
         case 'UPDATE_FAILED':
             state.updateStatus = 'status_failed';
             break;
+        case 'REFRESH_STATUS': 
+            state.updateStatus = 'pending'
+            break;
         default:
             break;
     }

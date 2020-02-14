@@ -19,10 +19,10 @@ function App() {
         <NavBar/>
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route path='/product/:id' component={Product} />
           <Route path='/cart' component={Cart}/>
           <Route path='/login' component={Login}/>
           <Route path='/checkout' component={CheckOut}/>
+          <Route path='/product/:id' component={Product} />
           <Route path='/category/:id' component={CategoryPage}/>
           <Route path='/user/profile' component={UserInfo}/>
           <Route path='*' exact={true} component={NotFound} />

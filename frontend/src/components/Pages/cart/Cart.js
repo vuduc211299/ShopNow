@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import NavBar from '../../Header/NavBar'
 import Footer from '../../Footer/Footer'
 import BackDisplayProduct from '../product/BackDisplayProduct'
 import '../../../css/cart.css'
@@ -8,19 +7,38 @@ import { connect } from 'react-redux'
 import history from '../../common/history'
 
 class Cart extends Component {
+    
+    getProductById = (id) => {
+        const { products } = this.props;
+        const product = products.find(product=> product._id == String(id))
+        return product;
+    }
+
     render() {
-        const params = this.props.location.pathname;
-        const { cart } = this.props;
+        const {carts} = this.props;
+        let cart = carts.map(item => {
+            return {
+                ...item,
+                product_id : this.getProductById(item.product_id) || {}
+            }  
+        })
         const disableBtnBuy = cart.length > 0 ? false : true;
-        const { totalPrice } = this.props;
+        let totalPrice = 0;
+        cart.forEach(item => {
+            totalPrice+= parseInt(item.product_id.price) * parseInt(item.quantityInCart)
+        })
         return (
             <div className='p-cart'>
-                <NavBar params={params}/>
-                <div className='p-in-cart-content container'> 
+                <div className='p-in-cart-content'>
+                    <div className='row-label d-flex txt-label mb-3'>
+                        <div id='lb-product'>Product</div>
+                        <div id='lb-quantity'>Quantity</div>
+                        <div id='lb-price'>Price</div>
+                    </div> 
                     {
-                        cart.length ? cart.map((cartItem) => 
+                        this.props.quantity !== 0 ? cart.map((cartItem, index) => 
                         {
-                            return <CartItem cartItem={cartItem}/>
+                            return <CartItem cartItem={cartItem} indexItem={index}/>
                         }
                         ) : (
                             <div>
@@ -59,8 +77,9 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        cart: state.cartReducer.cart,
-        totalPrice: state.cartReducer.totalPrice
+        carts: state.cartReducer.cart,
+        products: state.productReducer.products,
+        quantity: state.cartReducer.quantity
     }
 }
 

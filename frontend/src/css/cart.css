@@ -4,20 +4,23 @@
     left:0;
 }
 .p-in-cart-content {
-    margin-top: 150px;
+    background-color: #f5f5f5;
+    padding: 150px
 }
 .p-in-cart-container{    
     width: 100%;
     background-color: #fff;
     align-items: center;
     padding: 10px;
+    border-radius: 3px;
 }
 
 .coupon-btn-buy{ 
     width: 100%;
     justify-content: flex-end;
-    background-color: #f5f5f5;
+    background-color: #fff;
     padding: 10px 30px;
+    border-radius: 3px;
 }
 
 .ipn-cart{
@@ -47,5 +50,25 @@ button[disabled]{
 }
 
 .p-in-cart-sum-price {
+    text-align: end;
+}
+.row-label{
+    background-color: #fff;
+    padding: 10px 30px;
+    border-radius: 3px;
+}
+
+#lb-price {
+    flex: 0.7;
+}
+
+#lb-product{
+    flex: 1;
+}
+
+#lb-quantity{
+    flex: 1.2;
+}
+.price-to-pay{
     text-align: end;
 }

@@ -59,13 +59,58 @@ userRouter.patch('/user/profile/update', auth,  async (req,res)=>{
     }
 })
 
-userRouter.post('/user/addToCart', auth, async(req, res)=> {
-    const product_id = String(req.body.product_id)
-    const product = await Product.findById(product_id)
-    const user = await User.findById(req.user._id)
+
+userRouter.post('/user/changeQuantityInCart', auth, async(req, res)=> {
+    const product_id = String(req.body.product_id);
+    const newQuantity = parseInt(req.body.quantity)
+    const user = await User.findById(req.user._id);
     try {
         if(user){
-            user.carts.push(product)
+            let contain = false, index;
+            user.carts.forEach((item, key) => {
+                if(item.product_id === product_id) {contain = true, index = key }
+            })
+            if(contain){
+                user.carts[index].quantityInCart = newQuantity;
+            }
+            await user.save()
+            res.status(201).send(user)
+        }   
+    } catch (error) {
+        res.rend(error)
+    }
+
+})
+
+userRouter.post('/user/addToCart', auth, async(req, res)=> {
+    const product_id = String(req.body.product_id);
+    const quantityInCart = req.body.quantity || 1;
+    const user = await User.findById(req.user._id);
+    try {
+        if(user){
+            let contain = false, index;
+            user.carts.forEach((item, key) => {
+                if(item.product_id === product_id) {contain = true, index = key }
+            })
+            if(contain){
+                user.carts[index].quantityInCart += quantityInCart;
+            }else{
+                user.carts.push({product_id, quantityInCart})
+            }
+            await user.save()
+            res.status(201).send(user)
+        }   
+    } catch (error) {
+        res.rend(error)
+    }
+
+})
+
+userRouter.post('/user/removeAllCart', auth, async(req, res)=> {
+    const user = await User.findById(req.user._id);
+    try {
+        if(user){
+            user.carts = []
             await user.save()
             res.status(201).send(user)
         }   
@@ -80,9 +125,13 @@ userRouter.post('/user/removeFromCart', auth, async (req, res)=> {
     const user = await User.findById(req.user._id)
     try {
         if(user){
-           user.carts = user.carts.filter(product => !product._id.equals(remove_product_id))
-           await user.save()
-           res.status(200).send(user)
+            let index = -1;
+            user.carts.forEach((item, key) => {
+                if(item.product_id === remove_product_id) { index = key }
+            })
+            user.carts.splice(index, 1)
+            await user.save()
+            res.status(200).send(user)
         }else {
             res.status(404).send('cant found')
         }

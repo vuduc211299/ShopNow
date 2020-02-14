@@ -4,15 +4,75 @@ import '../../../css/product.css'
 import '../../../css/navbar.css'
 import BackDisplayProduct from './BackDisplayProduct'
 import { connect } from 'react-redux'
+import {cartAddAction} from '../../../actions/cartAction'
+import Popup from 'reactjs-popup'
+import Login from '../../auth/Login'
+import {changeQuantity} from '../../../actions/cartAction'
+import PopUpNotify from '../../common/PopUpNotify'
+import history from '../../common/history'
 
 class Product extends Component {
-
-    handleAddToCart = () => {
-        const product = this.getProductById();
-        this.props.addToCart(product);
+    constructor(props) {
+        super(props)
+        this.state = {
+            openAuthPopup : false,
+            selectValue: '1'
+        }
     }
 
-    getProductById () {
+    componentWillUnmount() {
+        this.props.refresh()
+    }
+
+    refreshStatus = () => {
+        this.props.refresh()
+    }
+
+    handleAddToCart = () => {
+        this.refreshStatus()
+        if(localStorage.getItem('user')) {
+            const product = this.getProductById();
+            const {selectValue} = this.state
+            if(selectValue === ''){
+                this.props.addToCart(product, 1);
+                this.setState({
+                    selectValue: '1'
+                })
+            }else{
+                this.props.addToCart(product, parseInt(selectValue));
+            }
+            
+        }
+        else{
+            this.setState({
+                openAuthPopup: true
+            })
+        }
+    }
+
+    handleChange = (e) => {
+        let ptt = new RegExp('^[0-9]*$');
+        const product = this.getProductById();
+        if(ptt.test(e.target.value)){
+            if(parseInt(e.target.value) <= product.quantity || e.target.value === ''){
+                this.setState({
+                    selectValue: e.target.value
+                }) 
+            }
+            if(parseInt(e.target.value) > product.quantity) {
+                this.setState({
+                    selectValue: product.quantity.toString()
+                })
+            }
+             
+        }
+    }
+
+    navigateToCheckout = () => {
+        history.push('/checkout')
+    }
+
+    getProductById = () => {
         const { id } = this.props.match.params;
         const { products } = this.props;
         const product = products.find(product=> product._id == String(id))
@@ -20,14 +80,36 @@ class Product extends Component {
     }
 
     render() {
-        const product = this.getProductById();
-        console.log(product)
+        const product = this.getProductById() || {};
+        const {openAuthPopup} = this.state;
+
         return (
             <div>
+                {   
+                    this.props.status === 'status_success' ? (
+                        <PopUpNotify message="Added to cart" status={this.props.status}/>
+                    ) : (
+                        <div>
+
+                        </div>
+                    )
+                }
+                {
+                    openAuthPopup ? (
+                        <Popup
+                            modal
+                            open={true}
+                        >
+                            <Login/>
+                        </Popup>
+                        ) : (
+                        <div></div>
+                    )
+                }
                 <div className="product">
                     <div className="container p-container">
                         <div className="p-path mt-3">
-                            
+                            ShopNow > {product.name}
                         </div>
                         <div className='p-detail row mt-3'>
                             <div className='p-img col-5'>
@@ -41,11 +123,27 @@ class Product extends Component {
                                     <span className="p-price-txt">{product.price}</span> USD
                                 </div>
                                 <div className='p-transport row mt-5'>
-                                    <div className='col-3'>
-                                        Transport
+                                    <div className='col-3 txt-label'>
+                                        Transport company
                                     </div>
                                     <div className='col-8'>
-                                        Free ship to all customer =)))
+                                        J&T Express
+                                    </div>
+                                </div>
+                                <div className='p-quantity row mt-5'>
+                                <div className='col-3 txt-label'>
+                                        Quantity
+                                    </div>
+                                    <div className='col-2'>
+                                        <input
+                                            className="ipn-quantity"
+                                            value={this.state.selectValue}
+                                            onChange={this.handleChange}
+                                            size="5"
+                                        />
+                                    </div>
+                                    <div className='col-5 txt-label'>
+                                        {product.quantity} products available
                                     </div>
                                 </div>
                                 <div className='2-bnt row mt-5 ml-1'>
@@ -55,7 +153,9 @@ class Product extends Component {
                                     >
                                         Add To Cart
                                     </button>
-                                    <button className='btn-common ml-2'>
+                                    <button
+                                        onClick={this.navigateToCheckout}
+                                        className='btn-common ml-2'>
                                         Shop Now
                                     </button>
                                 </div>
@@ -80,13 +180,16 @@ class Product extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.productReducer.products
+        products: state.productReducer.products,
+        status: state.cartReducer.status
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToCart: (product) => dispatch({type: 'ADD_TO_CART', product})
+        addToCart: (product, selectValue) => dispatch(cartAddAction(product, selectValue)),
+        changeQuantityInCart: (product_id, quantity) => dispatch(changeQuantity(product_id, quantity)),
+        refresh: () => dispatch({type: 'REFRESH_STATUS'})
     }
 }
 

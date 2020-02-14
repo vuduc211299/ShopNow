@@ -1,3 +1,4 @@
+import history from "../components/common/history";
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
@@ -27,6 +28,7 @@ export const LoginAction = (email, password) => {
         })
         if(data) {
             localStorage.setItem('user', JSON.stringify(data))
+            localStorage.setItem('cart', JSON.stringify(data.user.carts))
             dispatch({type: LOGIN_SUCCESS, data})
             window.location.reload()
         } else {

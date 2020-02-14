@@ -35,13 +35,20 @@ const userSchema = mongoose.Schema({
             }
         }
     },
+    address : {
+        type: String,
+        trim: true
+    },
     profile :{
-        type: String
+        type: String,
+        trim: true
     },
     carts: [{
-        product : {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Product'
+        product_id : {
+            type: String
+        },
+        quantityInCart: {
+            type: Number
         }
     }],
     tokens : [{

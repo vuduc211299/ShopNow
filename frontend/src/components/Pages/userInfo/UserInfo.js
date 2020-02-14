@@ -12,7 +12,6 @@ import { EMPTY_VALUE,
     checkPhoneFormat,
     checkEmailFormat
    } from '../../../helpers/checkFormat'
-import history from '../../common/history'
 
 class UserInfo extends Component {
     constructor(props) {
@@ -25,7 +24,12 @@ class UserInfo extends Component {
         }
     }
 
+    componentWillUnmount(){
+        this.props.refreshStatus()
+    }
+
     handleSubmit = () => {
+        this.props.refreshStatus()
         const {name, phone, email} = this.state;
         const data = {
             name,
@@ -41,7 +45,6 @@ class UserInfo extends Component {
         ) {
             this.props.submitForm(data)
         }
-        this.forceUpdate()
     }
 
     handleNameChange = (e) => {
@@ -72,7 +75,6 @@ class UserInfo extends Component {
     render() {
         const {userProfile, updateStatus} = this.props;
         const {name, phone, email} = this.state;
-        console.log(updateStatus)
         return (
             userProfile.user ? (
             <div className='user-profile-page'>
@@ -87,7 +89,7 @@ class UserInfo extends Component {
                 }
                 {
                     updateStatus === 'status_failed' ? (
-                        <PopUpNotify message="Update failed" status={updateStatus}/>
+                        <PopUpNotify message="Update failed, email or phone have already exist" status={updateStatus}/>
                         
                     ) : (
                         <div>
@@ -197,7 +199,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        submitForm: (user) => dispatch(userAction(user)) 
+        submitForm: (user) => dispatch(userAction(user)),
+        refreshStatus: () => dispatch({type: 'REFRESH_STATUS'})
     }
 }
 

@@ -6,6 +6,7 @@ class Logout extends Component {
 
     logOut = () => {
         localStorage.removeItem('user');
+        localStorage.removeItem('cart');
         window.location.replace('/')
     }
 

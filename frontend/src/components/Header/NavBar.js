@@ -38,11 +38,16 @@ class NavBar extends Component {
         
     }
 
+    getProductById (id) {
+        const { products } = this.props;
+        const product = products.find(product=> product._id == String(id))
+        return product;
+    }
+
     render() {
-        const {user} = this.props;
-        const {cart} = this.props;
+        const {user, carts, quantity} = this.props;
+        let cart = carts.map(item => item = this.getProductById(item.product_id))
         const {params} = this.props;
-        const {quantity} = this.props;
         return (
             <div className='navbar'>
                 <div className=' container'>
@@ -119,7 +124,7 @@ class NavBar extends Component {
                                             on="hover"
                                         >
                                             {
-                                                cart.length ? cart.map((cartItem, index) => 
+                                                quantity !== 0 ? cart.map((cartItem, index) => 
                                                 {
                                                     return (
                                                             <div>
@@ -160,9 +165,10 @@ class NavBar extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        cart: state.cartReducer.cart,
-        quantity: state.cartReducer.quantity,
-        user: state.authReducer.user
+        carts: state.cartReducer.cart,
+        user: state.authReducer.user,
+        products: state.productReducer.products,
+        quantity: state.cartReducer.quantity
     }
 }
 

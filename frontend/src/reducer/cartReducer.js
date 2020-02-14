@@ -1,43 +1,51 @@
+let cart  = [], quantity = 0;
+if(localStorage.getItem('cart')) cart = JSON.parse(localStorage.getItem('cart'));
+
+if(cart.length > 0) {
+    cart.forEach(item => {
+        quantity += item.quantityInCart
+    })
+}
+
 const initState = {
-    cart: [],
-    quantity: 0,
-    totalPrice: 0
+    cart,
+    quantity,
+    status: 'pending'
 }
 
 const cartReducer = (state = initState, action) => {
     switch (action.type) {
-        case 'CHANGE_QUANTITY': 
-            let i = state.cart.indexOf(action.cartItem);
-            state.cart[i].quantityInCart = action.newQuantity;
+        case 'REMOVE_ALL':
+        case 'REMOVE_FROM_CART':
+        case 'CHANGE_QUANTITY':
+            state.cart = action.cart
+            let quantity = 0
+            if(state.cart.length > 0) {
+                state.cart.forEach(item => {
+                    quantity += item.quantityInCart
+                })
+            }
+            state.quantity = quantity
             break;
         case 'ADD_TO_CART':
-            if(!state.cart.includes(action.product)) {
-                state.cart.push(action.product);
+            state.cart = action.cart
+            let newQuantity = 0
+            if(state.cart.length > 0) {
+                state.cart.forEach(item => {
+                    newQuantity += item.quantityInCart
+                })
             }
-            let index = state.cart.indexOf(action.product);
-            state.cart[index].quantityInCart ++;
+            state.quantity = newQuantity
+            state.status = 'status_success'
             break;
-        case 'REMOVE_FROM_CART':
-            let y = state.cart.indexOf(action.cartItem)
-            state.cart[y].quantityInCart = 0;
-            let newCart = state.cart.filter(item => state.cart.indexOf(item) !== y);
-            state.cart = newCart;
+        case 'REFRESH_STATUS':
+            state.status = 'pending'
             break;
         default:
             break;
     }
-    let quantity = 0, totalPrice = 0;
-    if(state.cart.length > 0){
-        state.cart.map(item => {
-            quantity+=item.quantityInCart;
-            totalPrice+= item.price * item.quantityInCart
-        });
-    }
-    
     return {
-        ...state,
-        quantity,
-        totalPrice
+        ...state
     };
 }
 

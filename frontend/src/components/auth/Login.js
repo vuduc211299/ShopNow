@@ -72,7 +72,7 @@ class Login extends Component {
                    }
                    <div className='mt-5'>
                        <div>
-                        <input className='ipn-login' placeholder="Email" onChange={this.handleEmailChange}/>
+                        <input type='email' className='ipn-login' placeholder="email" onChange={this.handleEmailChange}/>
                         {
                             email === EMPTY_VALUE || email === WRONG_EMAIL_FORMAT ? email === EMPTY_VALUE ? (
                                 <div className='txt-warning'>

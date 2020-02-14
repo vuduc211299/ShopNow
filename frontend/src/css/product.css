@@ -33,3 +33,16 @@
     color: #d0011b;
     font-size: 28px;
 }
+
+.ipn-quantity{
+    text-align: center;
+}
+
+.txt-label{
+    color: #757575
+}
+.txt-small{
+    margin-left: 10px;
+    font-size: 0.75rem;
+
+}
