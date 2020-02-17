@@ -9,7 +9,7 @@ import Popup from 'reactjs-popup'
 import PopUpNotify from '../../common/PopUpNotify'
 import {removeAllFromCart} from '../../../actions/cartAction'
 import CartEmptyImg from '../../../img/cart_empty.png'
-
+import {pricePipe} from '../../../components/common/pricePipe'
 class CheckOut extends Component {
 
     constructor(props) {
@@ -140,7 +140,7 @@ class CheckOut extends Component {
                                     <div className="ck-price bd-bot p-4">
                                         <div className='ck-price-i'>
                                             <span>Total Price:</span>
-                                            <span className='txt-end' id='total-price'>{totalPrice + 38}</span> $
+                                            <span className='txt-end total-price'>{pricePipe(totalPrice + 38)}</span> $
                                         </div>
                                     </div>
                                     <div className='d-flex justify-content-end p-4'>

@@ -18,13 +18,13 @@ select{
     padding: 3px;
 }
 .ctg-sort-item {
+    position:  relative;
     display: flex;
+    width: 96%;
     justify-content: center;
     background-color: #fff;
     margin: 5px 0px;
     padding: 5px;
-    border-right: 2px solid #F5F5F5;
-    border-left: 2px solid #F5F5F5;
 }
 .list-search-item a {
     text-decoration: none;
@@ -41,4 +41,21 @@ select{
 .local-txt{
     font-size: 14px;
     color: #c2b7b7;
+}
+
+.discount-bagde {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: rgba(255,212,36,.9);
+    padding: 2px 5px;
+}
+
+.txt-discount{
+    color: #fff;
+}
+
+.discount-percent {
+    color: #f9502f;
+    font-weight: 700;
 }

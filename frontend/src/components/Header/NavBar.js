@@ -10,19 +10,37 @@ import SignUp from '../auth/SignUp'
 import Logout from '../auth/Logout'
 import { categoryAction } from '../../actions/categoryAction'
 import { productAction } from '../../actions/productAction'
+import SearchPopup from '../common/searchPopup'
 
 class NavBar extends Component {
 
     constructor (props) {
         super(props)
         this.state = {
-            loginOrSignup: 'login'
+            loginOrSignup: 'login',
+            searchResult: false,
+            keyword: ''
         }
     }
 
     componentDidMount() {
         this.props.loadProduct()
         this.props.loadCategory()
+    }
+
+    openSearchPopup = (e) => {
+        const keyword = e.target.value;
+        if(keyword.length > 0){
+            this.setState({
+                searchResult: true,
+                keyword
+            })
+        }else {
+            this.setState({
+                searchResult: false
+            })
+        }
+        
     }
 
     changeTab = () => {
@@ -45,11 +63,19 @@ class NavBar extends Component {
     }
 
     render() {
-        const {user, carts, quantity} = this.props;
+        const {user, carts, quantity, params} = this.props;
+        const {keyword} = this.state;
         let cart = carts.map(item => item = this.getProductById(item.product_id))
-        const {params} = this.props;
+        const {searchResult} = this.state;
         return (
             <div className='navbar'>
+                {
+                    searchResult ? (
+                        <SearchPopup keyword={keyword}/>
+                    ) : (
+                        <div></div>
+                    )
+                }
                 <div className=' container'>
                     <div className='top-sticky row'>
                         <div className='left-top-sticky col-auto'>
@@ -111,8 +137,8 @@ class NavBar extends Component {
                             </Link>
                         </div>
                         <form className='form-inline col-6 justify-content-between'>
-                            <input className="form-search mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn-search my-2 my-sm-0 " type="submit">Search</button>
+                            <input onChange={this.openSearchPopup} className="form-search mr-sm-2" type="search" placeholder="Search by category, product" aria-label="Search" />
+                            <button className="btn-search my-2 my-sm-0" type="submit">Search</button>
                         </form>
                         {
                             (params !== '/cart') ? (
@@ -138,7 +164,7 @@ class NavBar extends Component {
                                                 )
                                             }
                                             <Link className="go-to-cart d-flex justify-content-end p-1" to="/cart">
-                                                <span>Go to Cart</span>
+                                                <span className='txt-forward-cart'>Go to cart</span>
                                             </Link>
                                         </Popup>
                                         {

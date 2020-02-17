@@ -16,8 +16,7 @@
     width: 50%;
     padding: 0.5rem;
     border: none;
-    outline: none
-    
+    outline: none;
 }
 .form-inline{
     border: 1px solid #f9502f;
@@ -82,4 +81,8 @@ background-color: #c67605;
     cursor: pointer;
     text-decoration: none;
     width: 100%;
+}
+
+.txt-forward-cart{
+    color: #f9502f;
 }

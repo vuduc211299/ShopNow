@@ -1,0 +1,52 @@
+.list-sale-wrapper{
+    overflow: hidden;
+    
+}
+.item-flash-sale {
+    display: inline-block;
+    width: 20%;
+}
+.list-flash-sale{
+    list-style: none;
+    white-space: nowrap;
+    margin-left: -45px;
+    transition: all 500ms ease 0s;
+}
+
+.icon-arrow {
+    font-size: 40px !important;
+    color: #000
+}
+
+.arrow-top-sale{
+    position: absolute;
+    padding: 5px 10px;
+    background-color: #fff;
+    cursor: pointer;
+    background-color: #e4e1e1;
+}
+
+.arrow-top-sale:hover{
+    transform: scale(1.2);
+}
+
+#left-arrow-top-sale{
+    margin-top: -17%;
+    margin-left: -2%;
+}
+
+#right-arrow-top-sale{
+    margin-left: 82%;
+    margin-top: -17%;
+}
+
+#txt-title{
+    font-size: 30px;
+    color: #f9502f;
+    font-weight: 800;
+}
+
+#icon-rocket{
+    color: #f9502f;
+    font-size: 30px;
+}

@@ -23,8 +23,8 @@ class ListCategory extends Component {
         )
         return (
             <div className='category-section container'>
-                <div className='category-header'>
-                    Category
+                <div className='category-header mb-3'>
+                    CATEGORY
                 </div>
                 <div className='d-flex flex-wrap'>
                     {listCategory}

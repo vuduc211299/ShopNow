@@ -1,25 +1,25 @@
 import React from 'react'
-import image  from '../../../img/product.jpeg'
+import * as constant from '../../../constants/constants'
+import ProductItem from '../../common/ProductItem'
+import {Link} from 'react-router-dom'
 
-const BackDisplayProduct = () => {
+const BackDisplayProduct = ({products}) => {
     return (
         <div className='p-rel-cgr mt-4'>
             <h5>Related Products</h5>
             <ul className="list-inline container">
-                <li className="list-inline-item p-l-rel">
-                    <img src={image} alt='rel-img' width="100%" height="100%"/>
-                    <div className="mt-4">airpot apple</div>
-                    <div className="mt-2">
-                        17.000$
-                    </div>
-                </li>
-                <li className="list-inline-item p-l-rel">
-                    <img src={image} alt='rel-img' width="100%" height="100%"/>
-                    <div className="mt-4">airpot apple</div>
-                    <div className="mt-2">
-                        17.000$
-                    </div>
-                </li>
+                {
+                    products ? products.map(item => {
+                        const url = '/product/' + item._id
+                        return (
+                            <li className="list-inline-item p-l-rel">
+                                <Link to={url} style={{ textDecoration: 'none', color: "inherit"}}>
+                                    <ProductItem item={item} typeScreen={constant.CATEGORY_PAGE}/>
+                                </Link>
+                            </li>
+                        )
+                    }) : (<div></div>)
+                }
             </ul>
         </div>
     )

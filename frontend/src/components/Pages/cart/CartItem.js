@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import PopUpItem from '../../common/PopUpItem'
 import * as constant from '../../../constants/constants'
 import {cartRemoveAction, changeQuantity} from '../../../actions/cartAction'
+import {pricePipe} from '../../common/pricePipe'
 
 class CartItem extends Component {
     constructor(props) {
@@ -65,12 +66,12 @@ class CartItem extends Component {
                                 }
                             </div>
                             <div className='p-in-cart-sum-price col-2'>
-                                {cartItem.product_id.price} $
+                                {pricePipe(cartItem.product_id.price)} $
                             </div>
                             {
                                 typeScreen === constant.CHECK_OUT ? (
                                     <div className='price-to-pay col-2'>
-                                        {cartItem.product_id.price * cartItem.quantityInCart} $
+                                        {pricePipe(cartItem.product_id.price * cartItem.quantityInCart)} $
                                     </div>
                                 ) : (
                                     <div className='p-in-cart-exe col-1'>

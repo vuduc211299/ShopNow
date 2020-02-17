@@ -10,6 +10,7 @@ import Login from '../../auth/Login'
 import {changeQuantity} from '../../../actions/cartAction'
 import PopUpNotify from '../../common/PopUpNotify'
 import history from '../../common/history'
+import {pricePipe} from '../../common/pricePipe'
 
 class Product extends Component {
     constructor(props) {
@@ -81,6 +82,14 @@ class Product extends Component {
 
     render() {
         const product = this.getProductById() || {};
+        const {products} = this.props;
+        const category_id = product.category_id;
+        console.log(products, category_id)
+        let related_products = products.filter(item => {
+            return item.category_id === category_id && item._id !== product._id
+        })
+        console.log(related_products)
+        related_products = related_products.slice(0, 3)
         const {openAuthPopup} = this.state;
 
         return (
@@ -120,7 +129,7 @@ class Product extends Component {
                                     <h4>{product.name}</h4>
                                 </div>
                                 <div className='mt-5'>
-                                    <span className="p-price-txt">{product.price}</span> USD
+                                    <span className="p-price-txt">{pricePipe(product.price)}</span> USD
                                 </div>
                                 <div className='p-transport row mt-5'>
                                     <div className='col-3 txt-label'>
@@ -169,7 +178,7 @@ class Product extends Component {
                                 </div>
                             </div>
                         </div>
-                        <BackDisplayProduct/>
+                        <BackDisplayProduct products={related_products}/>
                     </div>
                 </div>
                 <Footer/>

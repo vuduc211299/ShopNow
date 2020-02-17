@@ -3,21 +3,20 @@ import Slide from './Slide'
 import LeftArrow from './LeftArrow';
 import RightArrow from './RightArrow';
 import '../../../../css/banner.css'
-
+import banner1 from '../../../../img/banner1.jpg'
+import banner2 from '../../../../img/banner2.jpg'
+import banner3 from '../../../../img/banner3.jpg'
+import banner5 from '../../../../img/banner5.png'
 class Banner extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             images: [
-                "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg",
-                "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/canyon.jpg",
-                "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/city.jpg",
-                "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/desert.jpg",
-                "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/mountains.jpg",
-                "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/redsky.jpg",
-                "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/sandy-shores.jpg",
-                "https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/tree-of-life.jpg"
+                banner1,
+                banner2,
+                banner3,
+                banner5
             ],
             currentIndex: 0,
         }

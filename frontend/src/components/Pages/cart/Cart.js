@@ -5,6 +5,7 @@ import '../../../css/cart.css'
 import CartItem from './CartItem'
 import { connect } from 'react-redux'
 import history from '../../common/history'
+import {pricePipe} from '../../common/pricePipe'
 
 class Cart extends Component {
     
@@ -56,7 +57,7 @@ class Cart extends Component {
                         </div>
                         <div className='d-flex justify-content-end mt-3'>
                             <div className='mr-3 d-flex align-items-center'>
-                                { totalPrice } USD
+                                <span className='total-price'>{ pricePipe(totalPrice) }</span>$
                             </div>
                             <button
                                 disabled={disableBtnBuy} 

@@ -76,9 +76,9 @@
     font-size: 0.9rem;
     color: #757575;
 }
-#total-price {
+.total-price {
     color: #f9502f;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 2.25rem
 }
 
@@ -112,6 +112,11 @@
 .btn-payment-method:focus{
     outline: none;
 }
+
+.btn-payment-method-focus:focus{
+    outline: none;
+}
+
 .img-empty-cart{
     width: 18%;
     height: 40%;

@@ -59,7 +59,7 @@ button[disabled]{
 }
 
 #lb-price {
-    flex: 0.7;
+    flex: 0.6;
 }
 
 #lb-product{
@@ -67,7 +67,7 @@ button[disabled]{
 }
 
 #lb-quantity{
-    flex: 1.2;
+    flex: 1.3;
 }
 .price-to-pay{
     text-align: end;
