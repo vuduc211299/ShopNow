@@ -3,14 +3,15 @@
     
 }
 .item-flash-sale {
-    display: inline-block;
-    width: 20%;
+    margin-right: 10px;
 }
 .list-flash-sale{
     list-style: none;
     white-space: nowrap;
-    margin-left: -45px;
     transition: all 500ms ease 0s;
+    display: flex;
+    align-items: center;
+    margin-left: -30px
 }
 
 .icon-arrow {

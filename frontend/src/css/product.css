@@ -46,3 +46,22 @@
     font-size: 0.75rem;
 
 }
+.height_203{
+    height: 203px;
+    display: flex;
+    align-items: center;
+}
+.height_81{
+    height: 81px;
+    display: flex;
+    align-items: center;
+}
+.price-discount{
+    color: #757575;
+    margin-right: 10px;
+}
+.price-discount-product{
+    color: #757575;
+    font-size: 1rem;
+    margin-left: 20px;
+}

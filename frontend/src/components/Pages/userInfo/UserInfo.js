@@ -18,9 +18,9 @@ class UserInfo extends Component {
         super(props)
         const {userProfile} = this.props;
         this.state = {
-            name: userProfile.user.name,
-            email: userProfile.user.email,
-            phone: userProfile.user.phone
+            name: userProfile.name,
+            email: userProfile.email,
+            phone: userProfile.phone
         }
     }
 
@@ -76,7 +76,7 @@ class UserInfo extends Component {
         const {userProfile, updateStatus} = this.props;
         const {name, phone, email} = this.state;
         return (
-            userProfile.user ? (
+            userProfile ? (
             <div className='user-profile-page'>
                 {   
                     updateStatus === 'status_success' ? (
@@ -100,7 +100,7 @@ class UserInfo extends Component {
                 <div className='user-profile-content container d-flex mb-5'>
                     <div className='user-profile-left d-flex'>
                         <i className='fa icon-user'>&#xf2bd;</i>
-                        <span className='txt-name ml-3'>{userProfile.user.name}</span>
+                        <span className='txt-name ml-3'>{userProfile.name}</span>
                     </div>
                     <div className='user-profile-right'>
                         <div className='txt-account mb-3'>
@@ -109,7 +109,7 @@ class UserInfo extends Component {
                         <div className='form-fill-user-profile d-flex'>
                             <div className='form-user'>
                                 <div className='list-item-form'>
-                                    Name: <input className='ipn-login' onChange={this.handleNameChange} defaultValue={userProfile.user.name}/>
+                                    Name: <input className='ipn-login' onChange={this.handleNameChange} defaultValue={userProfile.name}/>
                                     {
                                         name === EMPTY_VALUE ? (
                                             <div className='txt-warning'>
@@ -121,7 +121,7 @@ class UserInfo extends Component {
                                     }
                                 </div>
                                 <div className='list-item-form'>
-                                    Email: <input className='ipn-login' onChange={this.handleEmailChange} defaultValue={userProfile.user.email}/>
+                                    Email: <input className='ipn-login' onChange={this.handleEmailChange} defaultValue={userProfile.email}/>
                                     {
                                         email === EMPTY_VALUE || email === WRONG_EMAIL_FORMAT ? email === EMPTY_VALUE ? (
                                             <div className='txt-warning'>
@@ -137,7 +137,7 @@ class UserInfo extends Component {
                                     }
                                 </div>
                                 <div className='list-item-form'>
-                                    Phone: <input className='ipn-login' onChange={this.handlePhoneChange} defaultValue={userProfile.user.phone}/>
+                                    Phone: <input className='ipn-login' onChange={this.handlePhoneChange} defaultValue={userProfile.phone}/>
                                     {
                                         phone === EMPTY_VALUE || phone === WRONG_PHONE_FORMAT ? phone === EMPTY_VALUE ? (
                                             <div className='txt-warning'>

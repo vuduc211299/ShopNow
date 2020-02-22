@@ -27,7 +27,8 @@ export const LoginAction = (email, password) => {
             console.error('err', err)
         })
         if(data) {
-            localStorage.setItem('user', JSON.stringify(data))
+            localStorage.setItem('user', JSON.stringify(data.user))
+            localStorage.setItem('token', JSON.stringify(data.token))
             localStorage.setItem('cart', JSON.stringify(data.user.carts))
             dispatch({type: LOGIN_SUCCESS, data})
             window.location.reload()

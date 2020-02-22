@@ -10,12 +10,14 @@ import history from './components/common/history'
 import CategoryPage from './components/Pages/home/category/categoryPage';
 import UserInfo from './components/Pages/userInfo/UserInfo';
 import NotFound from './components/Pages/NotFound'
+import ScrollToTop from './components/common/ScrollToTop'
 
 function App() {
   return (
     <div className="App">
       
       <Router history={history}>
+        <ScrollToTop/>
         <NavBar/>
         <Switch>
           <Route exact path='/' component={Home} />

@@ -5,7 +5,7 @@ if(localStorage.getItem('user')) user = JSON.parse(localStorage.getItem('user'))
 const initState = {
     status: LOGIN_PENDING,
     statusSignUp: '',
-    user:  user ? user : {} 
+    user
 }
 
 const authReducer = (state = initState, action) => {

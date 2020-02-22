@@ -34,3 +34,32 @@
     font-size: 1rem;
     font-weight: 500;
 }
+
+.welcome-package-banner{
+    background-image: url('https://cf.shopee.vn/file/7c7dfb1d4f8d373e0fe2f2c749f32dd0_xxhdpi');
+    height: 110px;
+    background-size: cover !important;
+}
+
+.recommend-bar {
+    padding: 7px 5px 0px 0px;
+    background-color: #fff;
+    position: relative;
+}
+
+.recommend-title {
+    color: #f9502f;
+    font-weight: 400;
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding-left: 19px;
+}
+
+.recommend-border{
+    bottom: 0;
+    left: 0;
+    background-color: #f9502f;
+    height: 0.25rem;
+    width: 15%;
+}

@@ -36,6 +36,8 @@ class CartItem extends Component {
         const {type} = this.props;
         const {typeScreen} = this.props;
         const {cartItem} = this.props;
+        console.log(cartItem)
+        let base64Icon = 'data:image/png/jpeg;base64,';
         return (
             <div>
                 {
@@ -43,7 +45,7 @@ class CartItem extends Component {
                         <div className='p-in-cart-container d-flex'>
                             <div className='p-in-cart-name-img col-4'>
                                 <div>
-                                    <img src={cartItem.imgUrl} alt='p-in-cart' width='15%' height='60%'/>
+                                    <img src={base64Icon + cartItem.product_id.image} alt='p-in-cart' width='15%' height='60%'/>
                                 </div>
                                 <div>
                                     <span>{cartItem.product_id.name}</span>
@@ -66,12 +68,12 @@ class CartItem extends Component {
                                 }
                             </div>
                             <div className='p-in-cart-sum-price col-2'>
-                                {pricePipe(cartItem.product_id.price)} $
+                                {pricePipe(Math.floor(parseInt(cartItem.product_id.price) * (100 - parseInt(cartItem.product_id.discount)) / 100))} $
                             </div>
                             {
                                 typeScreen === constant.CHECK_OUT ? (
                                     <div className='price-to-pay col-2'>
-                                        {pricePipe(cartItem.product_id.price * cartItem.quantityInCart)} $
+                                        {pricePipe(Math.floor(parseInt(cartItem.product_id.price) * (100 - parseInt(cartItem.product_id.discount)) / 100) * parseInt(cartItem.quantityInCart))} $
                                     </div>
                                 ) : (
                                     <div className='p-in-cart-exe col-1'>

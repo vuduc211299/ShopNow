@@ -1,11 +1,11 @@
 export const cartAddAction = (product, quantity) => {
     const data = {product_id: product._id, quantity}
-    const user = JSON.parse(localStorage.getItem('user'))
+    const token = JSON.parse(localStorage.getItem('token'))
     const requestOption = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + user.token
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     }
@@ -26,12 +26,12 @@ export const cartAddAction = (product, quantity) => {
 }
 
 export const removeAllFromCart = () => {
-    const user = JSON.parse(localStorage.getItem('user'))
+    const token = JSON.parse(localStorage.getItem('token'))
     const requestOption = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + user.token
+            'Authorization': 'Bearer ' + token
         }
     }
 
@@ -53,12 +53,12 @@ export const removeAllFromCart = () => {
 
 export const cartRemoveAction = (product) => {
     const data = {product_id: product.product_id._id}
-    const user = JSON.parse(localStorage.getItem('user'))
+    const token = JSON.parse(localStorage.getItem('token'))
     const requestOption = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + user.token
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     }

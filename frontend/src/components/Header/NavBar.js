@@ -97,19 +97,7 @@ class NavBar extends Component {
                                 <i className="fa">&#xf059;</i>
                             </li>
                             {
-                                user.user ? (
-                                    <Popup
-                                        trigger={<li className='list-inline-item ml-3'>
-                                                    <span className='mr-1'>
-                                                        <i className='fa'>&#xf2bd;</i>
-                                                    </span>
-                                                    {user.user.name}
-                                                </li>}
-                                        on="hover"
-                                    >
-                                        <Logout/>
-                                    </Popup>
-                                ): (
+                                Object.entries(user).length === 0 && user.constructor === Object ? (
                                     <Popup
                                         trigger={<li className='list-inline-item ml-3'>Login</li>}
                                         on="click"
@@ -122,7 +110,19 @@ class NavBar extends Component {
                                                 <SignUp changeTab={this.changeTab}/>
                                             )
                                     }
-                                    </Popup>                       
+                                    </Popup>  
+                                ) : (
+                                    <Popup
+                                        trigger={<li className='list-inline-item ml-3'>
+                                                    <span className='mr-1'>
+                                                        <i className='fa'>&#xf2bd;</i>
+                                                    </span>
+                                                    {user.name}
+                                                </li>}
+                                        on="hover"
+                                    >
+                                        <Logout/>
+                                    </Popup>           
                                 )
                             }
                             

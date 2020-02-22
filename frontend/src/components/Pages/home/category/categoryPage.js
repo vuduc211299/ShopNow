@@ -35,9 +35,13 @@ class CategoryPage extends Component {
         let sortedProduct = listProducts.filter(item => item.category_id === String(id));
         sortedProduct = sortedProduct.filter(item => sort_by_location === 'all'? true : (item.location === sort_by_location) )
         if(sort_by_price === 'high_to_low') {
-            sortedProduct.sort((a, b) => b.price - a.price)
+            sortedProduct.sort((a, b) => {
+                return (b.price * (100 - parseInt(b.discount)) / 100) - (a.price * (100 - parseInt(a.discount)) / 100)
+            })
         } else {
-            sortedProduct.sort((a, b) => a.price - b.price)
+            sortedProduct.sort((a, b) => {
+                return (a.price * (100 - parseInt(a.discount)) / 100) - (b.price * (100 - parseInt(b.discount)) / 100)
+            })
         }
             
         return (

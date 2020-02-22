@@ -26,7 +26,8 @@ class Cart extends Component {
         const disableBtnBuy = cart.length > 0 ? false : true;
         let totalPrice = 0;
         cart.forEach(item => {
-            totalPrice+= parseInt(item.product_id.price) * parseInt(item.quantityInCart)
+            let priceAfterDiscount = Math.floor(parseInt(item.product_id.price) * (100 - parseInt(item.product_id.discount)) / 100)
+            totalPrice+= priceAfterDiscount * parseInt(item.quantityInCart)
         })
         return (
             <div className='p-cart'>
@@ -48,13 +49,6 @@ class Cart extends Component {
                         ) 
                     }
                     <div className='coupon-btn-buy mt-5 mb-5'>
-                        <div className='d-flex justify-content-end'>
-                            <label className='mr-2'>Coupon code</label>
-                            <input size="10"/>
-                        </div>
-                        <div className='d-flex justify-content-end mt-3'>
-                            Discount 5 %
-                        </div>
                         <div className='d-flex justify-content-end mt-3'>
                             <div className='mr-3 d-flex align-items-center'>
                                 <span className='total-price'>{ pricePipe(totalPrice) }</span>$

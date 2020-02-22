@@ -5,6 +5,7 @@ import '../../../css/homepage.css'
 import FlashSale from './FlashSale'
 import Footer from '../../Footer/Footer'
 import NavBar from '../../Header/NavBar'
+import Recommend from '../home/Recommend'
 
 class Home extends Component {  
     render () {
@@ -15,6 +16,10 @@ class Home extends Component {
                 <Banner/>
                 <ListCategory/>
                 <FlashSale/>
+                <div className="welcome-package-banner container mb-5">
+
+                </div>
+                <Recommend/>
                 <Footer/>
             </div>
         ) 

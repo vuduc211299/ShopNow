@@ -70,6 +70,7 @@ class Product extends Component {
     }
 
     navigateToCheckout = () => {
+        this.handleAddToCart()
         history.push('/checkout')
     }
 
@@ -84,14 +85,13 @@ class Product extends Component {
         const product = this.getProductById() || {};
         const {products} = this.props;
         const category_id = product.category_id;
-        console.log(products, category_id)
         let related_products = products.filter(item => {
-            return item.category_id === category_id && item._id !== product._id
+            return item.category_id === category_id && item._id !== product._id && item.discount !== '0'
         })
-        console.log(related_products)
         related_products = related_products.slice(0, 3)
         const {openAuthPopup} = this.state;
-
+        let base64Icon = 'data:image/png/jpeg;base64,';
+        let priceAfterDiscount = Math.floor(product.price * (100 - parseInt(product.discount)) / 100)
         return (
             <div>
                 {   
@@ -122,14 +122,29 @@ class Product extends Component {
                         </div>
                         <div className='p-detail row mt-3'>
                             <div className='p-img col-5'>
-                                <img src='' alt='' width="100%" height="100%"/>
+                                <img src={base64Icon + product.image} alt='' width="100%" height="100%"/>
                             </div>
                             <div className='p-intro col-7'>
                                 <div className='p-name'>
                                     <h4>{product.name}</h4>
                                 </div>
                                 <div className='mt-5'>
-                                    <span className="p-price-txt">{pricePipe(product.price)}</span> USD
+                                    <span className="p-price-txt">
+                                        {
+                                            product.discount !== '0' ? (
+                                                <span>
+                                                    <span>
+                                                        {priceAfterDiscount} $
+                                                    </span>
+                                                    <strike className='price-discount-product'>
+                                                        {product.price} $
+                                                    </strike>
+                                                </span>
+                                            ) : (
+                                                <span>{product.price} $</span>
+                                            )
+                                        }
+                                    </span>
                                 </div>
                                 <div className='p-transport row mt-5'>
                                     <div className='col-3 txt-label'>

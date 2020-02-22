@@ -52,7 +52,8 @@ class CheckOut extends Component {
         })
         let totalPrice = 0;
         cart.forEach(item => {
-            totalPrice+= parseInt(item.product_id.price) * item.quantityInCart
+            let priceAfterDiscount = Math.floor(parseInt(item.product_id.price) * (100 - parseInt(item.product_id.discount)) / 100) * parseInt(item.quantityInCart)
+            totalPrice+= priceAfterDiscount
         })
         const typeScreen = constant.CHECK_OUT;
         return (
