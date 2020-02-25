@@ -21,14 +21,12 @@ const userSchema = mongoose.Schema({
     },
     phone : {
         type: String,
-        required : true,
         trim : true,
         unique : true
     },
     password : {
         type: String,
         trim: true,
-        required: true,
         validate(value){
             if(value.length < 6){
                 throw new Error('Password is too short')

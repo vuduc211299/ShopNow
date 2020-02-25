@@ -36,7 +36,6 @@ class CartItem extends Component {
         const {type} = this.props;
         const {typeScreen} = this.props;
         const {cartItem} = this.props;
-        console.log(cartItem)
         let base64Icon = 'data:image/png/jpeg;base64,';
         return (
             <div>

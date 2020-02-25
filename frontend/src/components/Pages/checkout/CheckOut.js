@@ -28,10 +28,17 @@ class CheckOut extends Component {
     }
 
     handleOrder = () => {
-        this.setState({
-            orderStatus: 'status_success'
-        })
-        this.props.clearCart()
+        const {userProfile} = this.props
+        if(userProfile.address && userProfile.phone) {
+            this.setState({
+                orderStatus: 'status_success'
+            })
+            this.props.clearCart()
+        }else {
+            this.setState({
+                orderStatus: 'status_failed'
+            })
+        }
     }
 
     selectPaymentMethod = () => {
@@ -39,6 +46,10 @@ class CheckOut extends Component {
             disabledOrder: false,
             btnStatus: 'btn-payment-method-focus'
         })
+    }
+
+    changeInfo = () => {
+        history.push('/user/profile');
     }
 
     render() {
@@ -65,6 +76,21 @@ class CheckOut extends Component {
                         <div>
 
                         </div>
+                    )
+                }
+                {
+                    orderStatus === 'status_failed' ? (
+                        <Popup
+                            modal
+                            open={true}
+                        >
+                            <div id='warning-pop-up'>
+                                <div>Your information is missing, please fill out</div>
+                                <button onClick={this.changeInfo} className='btn-common mt-5'>Change</button>
+                            </div>
+                        </Popup>
+                    ) : (
+                        <div></div>
                     )
                 }
                 {

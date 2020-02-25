@@ -1,7 +1,6 @@
 const express = require('express')
 const User = require('../model/user')
 const auth = require('../middleware/auth')
-const Product = require('../model/product')
 
 const userRouter = new express.Router()
 
@@ -21,6 +20,20 @@ userRouter.post('/login', async (req, res) => {
     if(user){
         const token = await user.generateAuthToken()
         res.status(200).send({user, token})
+    }
+    res.status(404).send('email, password wrong')
+})
+
+userRouter.post('/loginWithGoogle', async (req, res) => {
+    const user = await User.findOne({email : req.body.email})
+    if(user){
+        const token = await user.generateAuthToken()
+        res.status(200).send({user, token})
+    }else{
+        const user = new User(req.body)
+        await user.save()
+        const token = await user.generateAuthToken()
+        res.status(201).send({ user, token })
     }
     res.status(404).send('email, password wrong')
 })

@@ -85,7 +85,7 @@ class FlashSale extends Component {
                     {
                         translateX === 0 ? (
                             <div className='arrow-top-sale' id='right-arrow-top-sale' onClick={this.goToNextSlide}>
-                                <i class="fa icon-arrow">&#xf105;</i>
+                                <i className="fa icon-arrow">&#xf105;</i>
                             </div>
                         ) : (
                             <div></div>

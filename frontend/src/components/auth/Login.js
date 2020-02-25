@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import '../../css/login.css'
 import {connect} from 'react-redux'
-import { LoginAction } from '../../actions/authActions'
+import { LoginAction, loginWithGoogleAction } from '../../actions/authActions'
 import { LOGIN_FAILED } from '../../actions/authActions'
 import {EMPTY_VALUE,
         WRONG_EMAIL_FORMAT,
@@ -9,6 +9,8 @@ import {EMPTY_VALUE,
         checkEmailFormat,
         checkPasswordFormat
     } from '../../helpers/checkFormat'
+import {GOOGLE_ID} from '../../constants/constants'
+import GoogleLogin from 'react-google-login';
 
 class Login extends Component {
     constructor(props) {
@@ -52,6 +54,13 @@ class Login extends Component {
 
     SignUp = () => {
         this.props.changeTab();
+    }
+
+    responseGoogle = (res) => {
+        console.log(res)
+        const email = res.profileObj.email;
+        const name = res.profileObj.name;
+        this.props.loginWithGoogle(email, name)
     }
     
     render() {
@@ -116,9 +125,12 @@ class Login extends Component {
                         </button>
                    </div>
                    <div className='d-flex justify-content-center p-4'>
-                        <button className="loginBtn loginBtn--google">
-                            Login with Google
-                        </button>
+                        <GoogleLogin
+                            clientId={GOOGLE_ID}
+                            buttonText="LOGIN WITH GOOGLE"
+                            onSuccess={this.responseGoogle}
+                            onFailure={this.responseGoogle}
+                        />
                    </div>
                </div>
             </div>
@@ -134,7 +146,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginStatus: (username, password) => dispatch(LoginAction(username, password))
+        loginStatus: (username, password) => dispatch(LoginAction(username, password)),
+        loginWithGoogle: (email, name) => dispatch(loginWithGoogleAction(email, name))
     }
 }
 

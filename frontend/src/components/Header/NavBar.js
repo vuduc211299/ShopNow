@@ -169,7 +169,7 @@ class NavBar extends Component {
                                         </Popup>
                                         {
                                             quantity ? (
-                                                <span class='badge badge-warning' id='lblCartCount'>
+                                                <span className='badge badge-warning' id='lblCartCount'>
                                                     { quantity }
                                                 </span>
                                             ) : (
