@@ -20,7 +20,8 @@ class UserInfo extends Component {
         this.state = {
             name: userProfile.name,
             email: userProfile.email,
-            phone: userProfile.phone
+            phone: userProfile.phone,
+            address: userProfile.address
         }
     }
 
@@ -30,18 +31,20 @@ class UserInfo extends Component {
 
     handleSubmit = () => {
         this.props.refreshStatus()
-        const {name, phone, email} = this.state;
+        const {name, phone, email, address} = this.state;
         const data = {
             name,
             email,
-            phone
+            phone,
+            address
         }
         if (
             name !== EMPTY_VALUE &&
             email !== WRONG_EMAIL_FORMAT &&
             email !== EMPTY_VALUE &&
             phone !== EMPTY_VALUE &&
-            phone !== WRONG_PHONE_FORMAT
+            phone !== WRONG_PHONE_FORMAT &&
+            address !== EMPTY_VALUE
         ) {
             this.props.submitForm(data)
         }
@@ -72,9 +75,21 @@ class UserInfo extends Component {
         })
     }
 
+    handleAddressChange = (e) => {
+        if(e.target.value !== ''){
+            this.setState({
+                address: e.target.value
+            })
+        } else {
+            this.setState({
+                address: EMPTY_VALUE
+            })
+        }
+    }
+
     render() {
         const {userProfile, updateStatus} = this.props;
-        const {name, phone, email} = this.state;
+        const {name, phone, email, address} = this.state;
         return (
             userProfile ? (
             <div className='user-profile-page'>
@@ -153,6 +168,18 @@ class UserInfo extends Component {
                                     }
                                 </div>
                                 <div className='list-item-form'>
+                                    Address: <input className='ipn-login' onChange={this.handleAddressChange} defaultValue={userProfile.address}/>
+                                    {
+                                        address === EMPTY_VALUE  ? (
+                                            <div className='txt-warning'>
+                                                {EMPTY_VALUE}
+                                            </div>
+                                        ) : (
+                                            <div></div>
+                                        )
+                                    }
+                                </div>
+                                <div className='list-item-form'>
                                     <button 
                                         className='btn-common'
                                         onClick={this.handleSubmit}
@@ -166,10 +193,7 @@ class UserInfo extends Component {
                                 <div>
                                     <div>
                                         <i className='fa icon-user-2'>&#xf2bd;</i>
-                                    </div>
-                                    <div className='ml-3 mt-3'>
-                                        <button>Upload</button>
-                                    </div>  
+                                    </div> 
                                 </div>
                             </div>
                         </div>

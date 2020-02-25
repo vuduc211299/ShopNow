@@ -31,7 +31,7 @@ class SearchPopup extends Component {
                     <div>
                         <div className='result-search'>
                             {
-                                category.map(ctg => {
+                                category.slice(0,3).map(ctg => {
                                     return (
                                         <Link to={'/category/' + ctg._id} className='list-result-search'>
                                             {ctg.name}
@@ -41,7 +41,7 @@ class SearchPopup extends Component {
                                 })
                             }
                             {
-                                product.map(p => {
+                                product.slice(0,3).map(p => {
                                     return (
                                         <Link to={'/product/' + p._id} className='list-result-search'>
                                             {p.name}

@@ -36,8 +36,7 @@ const userSchema = mongoose.Schema({
         }
     },
     address : {
-        type: String,
-        trim: true
+        type: String
     },
     profile :{
         type: String,

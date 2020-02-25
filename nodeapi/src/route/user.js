@@ -38,7 +38,7 @@ userRouter.get('/user/profile',auth, async (req, res)=>{
 
 userRouter.patch('/user/profile/update', auth,  async (req,res)=>{
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['name','email','phone']
+    const allowedUpdates = ['name','email','phone', 'address']
     const isValidOperation = updates.every((update)=> allowedUpdates.includes(update))
     if(!isValidOperation){
         return res.status(400).send({error: 'Invalid updates!'})

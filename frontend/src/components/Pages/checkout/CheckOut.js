@@ -42,7 +42,7 @@ class CheckOut extends Component {
     }
 
     render() {
-        const { carts } = this.props;
+        const { carts, userProfile } = this.props;
         const { orderStatus } = this.state;
         let cart = carts.map(item => {
             return {
@@ -77,17 +77,9 @@ class CheckOut extends Component {
                                     </div>
                                     <div className='mt-3'>
                                         <span>  
-                                            Vũ Đức (+84) 981140978
-                                            Hoàng Cả 3, Ân Thi, Thị Trấn Ân Thi, Huyện Ân Thi, Hưng Yên
+                                            <span className='name-phone'>{userProfile.name} {userProfile.phone}</span>
+                                            <span className='ml-3'>{userProfile.address}</span>
                                         </span>
-
-                                        <Popup
-                                            trigger={<button className='ml-4'>Change</button>}
-                                            on="click"
-                                            modal
-                                        >
-                                            Change location
-                                        </Popup>
                                     </div>
                                 </div>
                                 <div className="ck-products bg-white mt-3 bl-ck">
@@ -180,7 +172,8 @@ class CheckOut extends Component {
 const mapStateToProps = (state) => {
     return {
         carts: state.cartReducer.cart,
-        products: state.productReducer.products
+        products: state.productReducer.products,
+        userProfile: state.userReducer.userInfoUpdate
     }
 }
 
