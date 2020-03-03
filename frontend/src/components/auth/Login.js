@@ -70,7 +70,7 @@ class Login extends Component {
                <div className='login-container'>
                    <div className='d-flex justify-content-between mt-3'>
                        <span className='login-txt'>Login</span>
-                       <span onClick={this.SignUp}>Sign Up</span>
+                       <span className='txt-pointer' onClick={this.SignUp}>Sign Up</span>
                    </div>
                    {
                         this.props.status !== LOGIN_FAILED ? (
@@ -112,9 +112,6 @@ class Login extends Component {
                             )
                         }
                        </div>
-                   </div>
-                   <div className='d-flex justify-content-end mt-3'>
-                       <span>Forgot password</span>
                    </div>
                    <div className='d-flex justify-content-end mt-3'>
                        <button 

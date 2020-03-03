@@ -145,7 +145,7 @@ class NavBar extends Component {
                                 <div className='logo-cart col-3'>
                                     <div>
                                         <Popup
-                                            trigger={<i className="fa">&#xf07a;</i>}
+                                            trigger={<i className="fa" id='cart-icon'>&#xf07a;</i>}
                                             position="bottom center"
                                             on="hover"
                                         >

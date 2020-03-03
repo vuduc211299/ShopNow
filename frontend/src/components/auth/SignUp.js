@@ -119,7 +119,7 @@ class SignUp extends Component {
                 <div className='sign-up-container'>
                     <div className='sign-up-container-header d-flex justify-content-between'>
                         <div className='login-txt'>Sign Up</div>
-                        <div onClick={this.LogIn}>Log in</div>
+                        <div className='txt-pointer' onClick={this.LogIn}>Log in</div>
                     </div>
                     {
                         status === SIGNUP_FAILED ? (

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Footer from '../../Footer/Footer'
-import BackDisplayProduct from '../product/BackDisplayProduct'
 import '../../../css/cart.css'
 import CartItem from './CartItem'
 import { connect } from 'react-redux'
@@ -62,7 +61,6 @@ class Cart extends Component {
                             </button>
                         </div>
                     </div>
-                    <BackDisplayProduct/>
                 </div>
                 <Footer/>
             </div> 

@@ -86,3 +86,10 @@ background-color: #c67605;
 .txt-forward-cart{
     color: #f9502f;
 }
+
+.list-inline-item {
+    cursor: pointer;
+}
+#cart-icon{
+    cursor: pointer;
+}
