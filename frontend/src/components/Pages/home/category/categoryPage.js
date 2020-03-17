@@ -6,6 +6,7 @@ import ProductItem from '../../../common/ProductItem'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import * as constant from '../../../../constants/constants'
+import NavBar from '../../../Header/NavBar'
 
 class CategoryPage extends Component {
     constructor(props){
@@ -46,6 +47,7 @@ class CategoryPage extends Component {
             
         return (
             <div>
+                <NavBar/>
                 <Banner/>
                 <div className="ctg-page">
                     <div className="ctg-page-container container">

@@ -5,6 +5,7 @@ import CartItem from './CartItem'
 import { connect } from 'react-redux'
 import history from '../../common/history'
 import {pricePipe} from '../../common/pricePipe'
+import NavBar from '../../Header/NavBar'
 
 class Cart extends Component {
     
@@ -29,7 +30,9 @@ class Cart extends Component {
             totalPrice+= priceAfterDiscount * parseInt(item.quantityInCart)
         })
         return (
-            <div className='p-cart'>
+            <div>
+                <NavBar/>
+                <div className='p-cart'>
                 <div className='p-in-cart-content'>
                     <div className='row-label d-flex txt-label mb-3'>
                         <div id='lb-product'>Product</div>
@@ -63,7 +66,9 @@ class Cart extends Component {
                     </div>
                 </div>
                 <Footer/>
-            </div> 
+                </div> 
+            </div>
+           
         )
     }
 }

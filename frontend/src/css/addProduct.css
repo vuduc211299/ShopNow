@@ -1,0 +1,127 @@
+.add-product-page{
+    top: 0;
+    left: 0;
+    min-height: 1000px;
+    width: 100%;
+    padding: 15px 25px;
+}
+
+.add-product-container{
+    background-color: #fff;
+    width: 100%;
+    padding: 25px 45px;
+    box-shadow: 0 1px 4px 0 rgba(74,74,78,.12);
+}
+.btn-function{
+    margin-top: 30px;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+.ipn-common-seller{
+    display: flex;
+}
+.ipn-product-container{
+    flex: 1;
+    width: 100%;
+    padding: 3px 5px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+.ipn-product-name{
+    width: 100%;
+    border: 0;
+    outline: none;
+}
+.ctg-select-ul{
+    list-style: none;
+    height: 133px;
+    overflow-y: scroll;
+    width: 50%;
+}
+#add-product-header-txt{
+    font-size: 22px;
+    color: #333;
+}
+.ctg-select{
+    background-color: #fafafa;
+    padding: 15px 10px;
+}
+.ctg-select-list{
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    line-height: 32px;
+    color: #666;
+    padding:0px 16px;
+}
+.add-product-des{
+    display: flex;
+}
+.des-txt-area-div{
+    flex: 1;
+    width: 100%;
+    padding: 3px 5px;
+    height: 196px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+}
+.des-txt-area{
+    width: 100%;
+    border: 0;
+    outline: none;
+    resize: none;
+}
+.ipn-label{
+    flex: 0.2
+}
+.hidden{
+    display: none;
+}
+.upload-img-div{
+    height: 115px;
+    width: 115px;
+    border: 1px dashed #1791f2;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.upload-img-div:hover{
+    background-color: #b9d7f0;
+}
+.fa-plus-img{
+    color: #1791f2;
+    font-size: 24px;
+}
+
+.section-name{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.btn-a {
+    border:1px solid #e5e5e5;
+    border-radius: 5px;
+    padding: 10px 15px;
+    color: #fff;
+}
+
+.btn-a:focus{
+    outline: none;
+}
+
+.btn-cancel {
+    background-color: #fff;
+    color: #000
+}
+
+.btn-confirm {
+    background-color: #f9502f;
+}
+
+.txt-title{
+    font-weight: 400;
+    color: #666;
+}

@@ -1,0 +1,43 @@
+.app-seller{
+    margin-top: 56px;
+    display: flex;
+    background-color: #f6f6f6;
+}
+.back-menu{
+    flex-basis: 20%;
+    padding: 16px 32px 0 16px;
+    background-color: #fff;
+    box-shadow: 0 1px 4px 0 rgba(74,74,78,.12);
+}
+
+.back-menu-ul {
+    list-style: none;
+    left:0;
+    top: 0;
+    position: sticky;
+    top: 65px;
+}
+
+.back-menu-ul>li {
+    margin-bottom: 20px;
+}
+
+.back-menu-item {
+    margin-left: -20px;
+}
+.nav-item-txt{
+    color: #999;
+    font-weight: 600;
+}
+.nav-item-i{
+    color: #999
+}
+
+.nav-sub-item{
+    color: #333 !important;
+    cursor: pointer;
+    font-size: 13px;
+}
+.nav-sub-item:hover{
+    color: #EE4D2D !important;
+}

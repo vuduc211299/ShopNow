@@ -11,6 +11,7 @@ import {changeQuantity} from '../../../actions/cartAction'
 import PopUpNotify from '../../common/PopUpNotify'
 import history from '../../common/history'
 import {pricePipe} from '../../common/pricePipe'
+import NavBar from '../../Header/NavBar'
 
 class Product extends Component {
     constructor(props) {
@@ -94,6 +95,8 @@ class Product extends Component {
         let priceAfterDiscount = Math.floor(product.price * (100 - parseInt(product.discount)) / 100)
         return (
             <div>
+                <NavBar/>
+                <div>
                 {   
                     this.props.status === 'status_success' ? (
                         <PopUpNotify message="Added to cart" status={this.props.status}/>
@@ -196,7 +199,8 @@ class Product extends Component {
                         <BackDisplayProduct products={related_products}/>
                     </div>
                 </div>
-                <Footer/>
+                    <Footer/>
+                </div>
             </div>
         )
     }

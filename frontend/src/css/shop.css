@@ -1,0 +1,40 @@
+.shop-home-page{
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 800px;
+    padding: 15px 25px;
+}
+
+.shop-home-container{
+    background-color: #fff
+}
+.shop-detail-content{
+    display: flex;
+}
+.shop-detail {
+    padding: 10px 15px;
+}
+.w-100{
+    width: 100%;
+}
+.shop-profile-header{
+    padding: 15px 25px;
+    display: flex;
+
+}
+.txt-600{
+    font-weight: 600;
+    color: #ee4d2d;
+    cursor: pointer;
+}
+.txt-22{
+    font-size: 22px;
+    font-weight: 600;
+}
+.fs-24{
+    font-size: 24px;
+}
+.caption{
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}

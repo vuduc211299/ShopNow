@@ -34,7 +34,7 @@ const productSchema = mongoose.Schema({
     },
     owner_id : {
         type: mongoose.Schema.Types.ObjectId,
-        ref : 'User',
+        ref : 'Shop',
         required: true
     }
 })

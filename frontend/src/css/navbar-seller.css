@@ -1,0 +1,37 @@
+.navbar-seller{
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 1px 4px 0 rgba(74,74,78,.12);
+}
+.navbar-container-seller{
+    display: flex;
+    padding: 15px;
+    background-color: #fff;
+}
+.i-seller {
+    color: rgb(173, 166, 166);
+    height: 100%;
+    font-size: 24px;
+}
+#txt-seller{
+    flex-basis: 60%;
+    font-size: 18px;
+    color: #999;
+    font-weight: 700;
+}
+#logo{
+    flex-basis: 3%;
+    cursor: pointer;
+}
+
+#user-seller{
+    display: flex;
+    flex-basis: 20%;
+}
+
+#notify-seller{
+    flex-basis: 20%;
+}

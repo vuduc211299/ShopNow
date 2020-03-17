@@ -11,6 +11,7 @@ import Logout from '../auth/Logout'
 import { categoryAction } from '../../actions/categoryAction'
 import { productAction } from '../../actions/productAction'
 import SearchPopup from '../common/searchPopup'
+import Shop from '../Shop/Shop'
 
 class NavBar extends Component {
 
@@ -79,13 +80,13 @@ class NavBar extends Component {
                 <div className=' container'>
                     <div className='top-sticky row'>
                         <div className='left-top-sticky col-auto'>
-                            Your Shop
+                            <Link to='/shop'><span className='link-to-shop'>Your Shop</span></Link>
                         </div>
                         <ul className='list-inline col-auto ml-auto'>
                             <li className='list-inline-item txt'>
                                 <Popup
                                     trigger={
-                                        <i className='fa'>&#xf0f3;</i>
+                                        <i className='fa i-shop'>&#xf0f3;</i>
                                     }
                                     position="bottom center"
                                     on="click"
@@ -94,7 +95,7 @@ class NavBar extends Component {
                                 </Popup>
                             </li>
                             <li className='list-inline-item ml-3'>
-                                <i className="fa">&#xf059;</i>
+                                <i className="fa i-shop">&#xf059;</i>
                             </li>
                             {
                                 Object.entries(user).length === 0 && user.constructor === Object ? (
@@ -115,7 +116,7 @@ class NavBar extends Component {
                                     <Popup
                                         trigger={<li className='list-inline-item ml-3'>
                                                     <span className='mr-1'>
-                                                        <i className='fa'>&#xf2bd;</i>
+                                                        <i className='fa i-shop'>&#xf2bd;</i>
                                                     </span>
                                                     {user.name}
                                                 </li>}
@@ -131,7 +132,7 @@ class NavBar extends Component {
                     <div className='logo-search-cart row'>
                         <div className='logo col-3'>
                             <Link to="/">
-                                <i className="fa">
+                                <i className="fa i-shop">
                                     &#xf270;
                                 </i>
                             </Link>
@@ -145,7 +146,7 @@ class NavBar extends Component {
                                 <div className='logo-cart col-3'>
                                     <div>
                                         <Popup
-                                            trigger={<i className="fa" id='cart-icon'>&#xf07a;</i>}
+                                            trigger={<i className="fa i-shop" id='cart-icon'>&#xf07a;</i>}
                                             position="bottom center"
                                             on="hover"
                                         >

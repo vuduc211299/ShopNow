@@ -10,6 +10,7 @@ import PopUpNotify from '../../common/PopUpNotify'
 import {removeAllFromCart} from '../../../actions/cartAction'
 import CartEmptyImg from '../../../img/cart_empty.png'
 import {pricePipe} from '../../../components/common/pricePipe'
+import NavBar from '../../Header/NavBar'
 class CheckOut extends Component {
 
     constructor(props) {
@@ -68,7 +69,9 @@ class CheckOut extends Component {
         })
         const typeScreen = constant.CHECK_OUT;
         return (
-            <div className="ck-container">
+            <div>
+                <NavBar/>
+                <div className="ck-container">
                 {
                     orderStatus === 'status_success' ? (
                         <PopUpNotify message="Order successfull, please keep your phone on !!!" status={orderStatus}/>
@@ -190,7 +193,9 @@ class CheckOut extends Component {
                 }
                
                 <Footer/>
+                </div>
             </div>
+            
         )
     }
 }
