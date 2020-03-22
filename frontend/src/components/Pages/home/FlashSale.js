@@ -4,6 +4,7 @@ import ProductItem from '../../common/ProductItem'
 import { Link } from 'react-router-dom'
 import * as constant from '../../../constants/constants'
 import '../../../css/flashSale.css'
+import {productAction} from '../../../actions/productAction'
 
 class FlashSale extends Component {
 
@@ -12,6 +13,10 @@ class FlashSale extends Component {
         this.state = {
             translateX: 0
         }
+    }
+
+    componentDidMount() {
+        this.props.loadProduct()
     }
     
     goToNextSlide = () => {
@@ -103,4 +108,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(FlashSale)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadProduct: () => dispatch(productAction())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FlashSale)

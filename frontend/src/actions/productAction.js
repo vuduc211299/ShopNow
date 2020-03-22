@@ -18,3 +18,23 @@ export const productAction = () => {
     }
 }
 
+export const productByIdAction = (id) => {
+    const requestOption = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    return async (dispatch, getState) => {
+        const product = await fetch('http://localhost:3000/product/' + id, requestOption)
+        .then(res => res.json())
+        console.log('product', product)
+        if(product){
+            dispatch({type: 'GET_PRODUCT_BY_ID', product})
+        }else {
+            dispatch({type: 'GET_PRODUCT_BY_ID_FAILED'})
+        }
+
+    }
+} 

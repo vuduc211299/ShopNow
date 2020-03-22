@@ -10,8 +10,8 @@ import Login from '../../auth/Login'
 import {changeQuantity} from '../../../actions/cartAction'
 import PopUpNotify from '../../common/PopUpNotify'
 import history from '../../common/history'
-import {pricePipe} from '../../common/pricePipe'
 import NavBar from '../../Header/NavBar'
+import {productByIdAction, productAction} from '../../../actions/productAction'
 
 class Product extends Component {
     constructor(props) {
@@ -20,6 +20,12 @@ class Product extends Component {
             openAuthPopup : false,
             selectValue: '1'
         }
+    }
+
+    componentDidMount() {
+        const { id } = this.props.match.params;
+        this.props.loadProduct(id)
+        this.props.loadAllProduct()
     }
 
     componentWillUnmount() {
@@ -33,7 +39,7 @@ class Product extends Component {
     handleAddToCart = () => {
         this.refreshStatus()
         if(localStorage.getItem('user')) {
-            const product = this.getProductById();
+            const {product} = this.props;
             const {selectValue} = this.state
             if(selectValue === ''){
                 this.props.addToCart(product, 1);
@@ -54,7 +60,7 @@ class Product extends Component {
 
     handleChange = (e) => {
         let ptt = new RegExp('^[0-9]*$');
-        const product = this.getProductById();
+        const {product} = this.props;
         if(ptt.test(e.target.value)){
             if(parseInt(e.target.value) <= product.quantity || e.target.value === ''){
                 this.setState({
@@ -75,15 +81,8 @@ class Product extends Component {
         history.push('/checkout')
     }
 
-    getProductById = () => {
-        const { id } = this.props.match.params;
-        const { products } = this.props;
-        const product = products.find(product=> product._id == String(id))
-        return product;
-    }
-
     render() {
-        const product = this.getProductById() || {};
+        const {product} = this.props;
         const {products} = this.props;
         const category_id = product.category_id;
         let related_products = products.filter(item => {
@@ -208,6 +207,7 @@ class Product extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        product: state.productReducer.product,
         products: state.productReducer.products,
         status: state.cartReducer.status
     }
@@ -215,6 +215,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        loadProduct: (id) => dispatch(productByIdAction(id)),
+        loadAllProduct: () => dispatch(productAction()),
         addToCart: (product, selectValue) => dispatch(cartAddAction(product, selectValue)),
         changeQuantityInCart: (product_id, quantity) => dispatch(changeQuantity(product_id, quantity)),
         refresh: () => dispatch({type: 'REFRESH_STATUS'})

@@ -7,6 +7,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import * as constant from '../../../../constants/constants'
 import NavBar from '../../../Header/NavBar'
+import { productAction } from '../../../../actions/productAction'
 
 class CategoryPage extends Component {
     constructor(props){
@@ -15,6 +16,10 @@ class CategoryPage extends Component {
             sort_by_price: "low_to_high",
             sort_by_location: "all"
         }
+    }
+
+    componentDidMount() {
+        this.props.loadProduct()
     }
 
     sortByPrice = (e) => {
@@ -90,4 +95,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(CategoryPage)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadProduct: () => dispatch(productAction())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryPage)

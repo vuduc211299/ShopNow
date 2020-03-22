@@ -2,8 +2,12 @@ import React,{Component} from 'react'
 import { connect } from 'react-redux'
 import ProductItem from '../../../common/ProductItem'
 import {Link} from 'react-router-dom'
+import {categoryAction} from '../../../../actions/categoryAction'
 
 class ListCategory extends Component {
+    componentDidMount() {
+        this.props.loadCategory()
+    }
 
     render() {
         const { categories } = this.props; 
@@ -40,4 +44,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(ListCategory)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadCategory: () => dispatch(categoryAction())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListCategory)

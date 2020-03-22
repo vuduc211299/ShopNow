@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import history from '../../common/history'
 import {pricePipe} from '../../common/pricePipe'
 import NavBar from '../../Header/NavBar'
+import {productAction} from '../../../actions/productAction'
 
 class Cart extends Component {
     
@@ -13,6 +14,10 @@ class Cart extends Component {
         const { products } = this.props;
         const product = products.find(product=> product._id == String(id))
         return product;
+    }
+
+    componentDidMount(){
+        this.props.loadAllProduct()
     }
 
     render() {
@@ -81,4 +86,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Cart)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadAllProduct: () => dispatch(productAction())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)

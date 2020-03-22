@@ -8,10 +8,7 @@ import * as constant from '../../constants/constants'
 import Login from '../auth/Login'
 import SignUp from '../auth/SignUp'
 import Logout from '../auth/Logout'
-import { categoryAction } from '../../actions/categoryAction'
-import { productAction } from '../../actions/productAction'
 import SearchPopup from '../common/searchPopup'
-import Shop from '../Shop/Shop'
 
 class NavBar extends Component {
 
@@ -22,11 +19,6 @@ class NavBar extends Component {
             searchResult: false,
             keyword: ''
         }
-    }
-
-    componentDidMount() {
-        this.props.loadProduct()
-        this.props.loadCategory()
     }
 
     openSearchPopup = (e) => {
@@ -199,11 +191,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        loadProduct: () => dispatch(productAction()),
-        loadCategory: () => dispatch(categoryAction())
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+export default connect(mapStateToProps)(NavBar)

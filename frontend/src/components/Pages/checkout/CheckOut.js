@@ -11,6 +11,7 @@ import {removeAllFromCart} from '../../../actions/cartAction'
 import CartEmptyImg from '../../../img/cart_empty.png'
 import {pricePipe} from '../../../components/common/pricePipe'
 import NavBar from '../../Header/NavBar'
+import { productAction } from '../../../actions/productAction'
 class CheckOut extends Component {
 
     constructor(props) {
@@ -20,6 +21,10 @@ class CheckOut extends Component {
             btnStatus: 'btn-payment-method',
             orderStatus: 'pending'
         }
+    }
+
+    componentDidMount() {
+        this.props.loadProduct()
     }
 
     getProductById (id) {
@@ -210,7 +215,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        clearCart: () => dispatch(removeAllFromCart())
+        clearCart: () => dispatch(removeAllFromCart()),
+        loadProduct: () => dispatch(productAction())
     }
 }
 

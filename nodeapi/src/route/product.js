@@ -14,6 +14,29 @@ productRouter.get('/product/', async (req, res)=>{
     
 })
 
+// get product by id
+
+productRouter.get('/product/:id', async (req, res) => {
+    try {
+        const product = await Product.findOne({_id: req.params.id})
+        if(product) {
+            res.status(200).send(product)
+        } else {
+            res.status(404)
+        }
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+// get product by category
+
+
+
+
+
+
+
 productRouter.post('/product/create', auth, async (req,res)=>{
     try {
         const shop = await Shop.findOne({owner_id: req.user._id})
