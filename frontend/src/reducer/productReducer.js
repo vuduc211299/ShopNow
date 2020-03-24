@@ -1,7 +1,7 @@
-
 const initState = {
     products : [],
-    product : {}
+    product : {},
+    status_save: 'pending'
 }
 const productReducer = (state = initState, action) => {
 
@@ -11,6 +11,9 @@ const productReducer = (state = initState, action) => {
             break;
         case 'GET_PRODUCT_BY_ID':
             state.product = action.product
+            break;
+        case 'SAVE_PRODUCT_SUCESS':
+            state.status_save = 'success'
             break;
         case 'GET_ALL_PRODUCT_FAILED': 
             break;

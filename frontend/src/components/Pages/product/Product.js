@@ -72,7 +72,6 @@ class Product extends Component {
                     selectValue: product.quantity.toString()
                 })
             }
-             
         }
     }
 
@@ -90,7 +89,6 @@ class Product extends Component {
         })
         related_products = related_products.slice(0, 3)
         const {openAuthPopup} = this.state;
-        let base64Icon = 'data:image/png/jpeg;base64,';
         let priceAfterDiscount = Math.floor(product.price * (100 - parseInt(product.discount)) / 100)
         return (
             <div>
@@ -124,7 +122,7 @@ class Product extends Component {
                         </div>
                         <div className='p-detail row mt-3'>
                             <div className='p-img col-5'>
-                                <img src={base64Icon + product.image} alt='' width="100%" height="100%"/>
+                                <img src={product.image} alt='' width="100%" height="100%"/>
                             </div>
                             <div className='p-intro col-7'>
                                 <div className='p-name'>

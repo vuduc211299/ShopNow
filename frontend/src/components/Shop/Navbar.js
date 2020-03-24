@@ -1,9 +1,22 @@
 import React, {Component} from 'react'
 import '../../css/navbar-seller.css'
 import {Link} from 'react-router-dom'
+import history from '../common/history'
+import {connect} from 'react-redux'
+import {shopProfileAction} from '../../actions/shop/shopAction'
 
 class Navbar extends Component {
+    componentDidMount() {
+        const token = localStorage.getItem('token')
+        if(!token){
+            history.push('/')
+        }else {
+            this.props.loadProfile()
+        }
+    }
+
     render() {
+        const user = JSON.parse(localStorage.getItem('user'))
         return (
             <div className='navbar-seller'>
                 <div className='navbar-container-seller'>
@@ -19,7 +32,7 @@ class Navbar extends Component {
                     </div>
                     <div id='user-seller'>
                         <i className='fa i-seller'>&#xf2bd;</i>
-                        <span className='ml-2'>Duc vu</span>
+                        <span className='ml-2'>{user.name}</span>
                     </div>
                     <div id='notify-seller'>
                         <i className='fa i-seller'>&#xf0f3;</i>
@@ -30,4 +43,10 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadProfile: () => dispatch(shopProfileAction()) 
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Navbar)

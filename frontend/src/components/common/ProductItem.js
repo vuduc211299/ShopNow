@@ -4,7 +4,6 @@ import {pricePipe} from './pricePipe'
 
 const ProductItem = ({item, typeScreen}) => {
     const className='ctg-sort-item';
-    let base64Icon = 'data:image/png/jpeg;base64,';
     let priceAfterDiscount = Math.floor(item.price * (100 - parseInt(item.discount)) / 100)
     return (
         <div className={
@@ -24,7 +23,7 @@ const ProductItem = ({item, typeScreen}) => {
                 constant.CATEGORY_PAGE === typeScreen ? "ctg-sort-item-wrapper" : ""
             }>
                 <div className={constant.CATEGORY_PAGE === typeScreen ? "height_203" : "height_81"}>
-                    <img src={base64Icon + item.image} alt='' width={constant.CATEGORY_PAGE === typeScreen ? "203px" : "80.5px"}/>
+                    <img src={item.image} alt='' width={constant.CATEGORY_PAGE === typeScreen ? "203px" : "80.5px"} height={constant.CATEGORY_PAGE === typeScreen ? "auto" : "81px"}/>
                 </div>
                 <div className='category-name'>{item.name}</div>
                 {

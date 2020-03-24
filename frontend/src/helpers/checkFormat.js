@@ -3,6 +3,8 @@ export const PASSWORD_SHORT = 'password must be more 6 characters';
 export const ERROR_CONFIRM_PASSWORD = 'password is not match';
 export const WRONG_PHONE_FORMAT = 'only numbers on this field';
 export const EMPTY_VALUE = 'please fill out this field'
+export const MAX_PRICE = 10000000
+export const MAX_DISCOUNT = 100
 
 export const regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export const regNumber = /^[0-9]*$/;

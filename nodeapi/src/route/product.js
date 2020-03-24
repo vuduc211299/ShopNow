@@ -29,14 +29,6 @@ productRouter.get('/product/:id', async (req, res) => {
     }
 })
 
-// get product by category
-
-
-
-
-
-
-
 productRouter.post('/product/create', auth, async (req,res)=>{
     try {
         const shop = await Shop.findOne({owner_id: req.user._id})

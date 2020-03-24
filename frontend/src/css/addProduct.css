@@ -22,16 +22,55 @@
     display: flex;
 }
 .ipn-product-container{
+    display: flex;
+    align-items: center;
     flex: 1;
     width: 100%;
     padding: 3px 5px;
     border: 1px solid #e5e5e5;
     border-radius: 4px;
 }
+.ipn-product-container-error{
+    display: flex;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+    padding: 3px 5px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    border-color: #ee4d2d !important;
+    background-color: #FFF1F0;
+}
+.ipn-prefix {
+    display: flex;
+    align-items: center;
+    color: #b7b7b7;
+    height: 100%;
+    font-size: 14px;
+}
 .ipn-product-name{
     width: 100%;
     border: 0;
     outline: none;
+    font-size: 14px;
+    padding: 5px;
+    color: #666;
+}
+.ipn-product-name-error{
+    width: 100%;
+    border: 0;
+    outline: none;
+    font-size: 14px;
+    padding: 5px;
+    color: #666;
+    background-color: #FFF1F0;
+}
+.txt-area-ipn{
+    resize: none;
+    height: 40px !important;
+    color: #666;
+    padding: 5px;
+    overflow-y: scroll;
 }
 .ctg-select-ul{
     list-style: none;
@@ -54,6 +93,14 @@
     line-height: 32px;
     color: #666;
     padding:0px 16px;
+    align-items: center;
+    cursor: pointer;
+}
+.ctg-select-list:hover{
+    background-color: rgb(221, 216, 216);
+}
+.ctg-selected-list{
+    color: #ee4d2d !important;
 }
 .add-product-des{
     display: flex;
@@ -66,11 +113,34 @@
     border: 1px solid #e5e5e5;
     border-radius: 4px;
 }
+.des-txt-area-div-error{
+    flex: 1;
+    width: 100%;
+    padding: 3px 5px;
+    height: 196px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    background-color: #FFF1F0 !important;
+    border-color: #ee4d2d !important;
+}
 .des-txt-area{
+    color: #666;
+    font-size: 14px;
+    width: 100%;
+    border: 0;
+    height: 190px;
+    outline: none;
+    resize: none;
+}
+.des-txt-area-error{
+    height: 190px;
+    color: #666;
+    font-size: 14px;
     width: 100%;
     border: 0;
     outline: none;
     resize: none;
+    background-color: #FFF1F0;
 }
 .ipn-label{
     flex: 0.2

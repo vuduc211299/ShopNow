@@ -9,6 +9,7 @@ import Login from '../auth/Login'
 import SignUp from '../auth/SignUp'
 import Logout from '../auth/Logout'
 import SearchPopup from '../common/searchPopup'
+import history from '../common/history'
 
 class NavBar extends Component {
 
@@ -48,6 +49,14 @@ class NavBar extends Component {
         }
         
     }
+    toYourShop() {
+        const token = localStorage.getItem('token')
+        if(!token){
+            alert('Please login or sign up first')
+        } else {
+            history.push('/shop')
+        }
+    }
 
     getProductById (id) {
         const { products } = this.props;
@@ -72,7 +81,7 @@ class NavBar extends Component {
                 <div className=' container'>
                     <div className='top-sticky row'>
                         <div className='left-top-sticky col-auto'>
-                            <Link to='/shop'><span className='link-to-shop'>Your Shop</span></Link>
+                            <span onClick={this.toYourShop} className='link-to-shop'>Your Shop</span>
                         </div>
                         <ul className='list-inline col-auto ml-auto'>
                             <li className='list-inline-item txt'>

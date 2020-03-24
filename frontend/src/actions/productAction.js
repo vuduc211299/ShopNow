@@ -27,7 +27,7 @@ export const productByIdAction = (id) => {
     }
 
     return async (dispatch, getState) => {
-        const product = await fetch('http://localhost:3000/product/' + id, requestOption)
+        const product = await fetch('http://localhost:3000/product/create' + id, requestOption)
         .then(res => res.json())
         console.log('product', product)
         if(product){
@@ -37,4 +37,27 @@ export const productByIdAction = (id) => {
         }
 
     }
-} 
+}
+
+export const saveProductAction = (data) => {
+    const token = JSON.parse(localStorage.getItem('token'))
+    const requestOption = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(data)
+    }
+
+    return async (dispatch, getState) => {
+        const product = await fetch('http://localhost:3000/product/create', requestOption)
+        .then(res => res.json())
+        if(product){
+            dispatch({type: 'SAVE_PRODUCT_SUCESS'})
+        }else {
+            dispatch({type: 'SAVE_PRODUCT_FAILED'})
+        }
+
+    }
+}
