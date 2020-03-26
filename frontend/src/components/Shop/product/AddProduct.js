@@ -12,6 +12,8 @@ import {
     MAX_DISCOUNT,
     checkPhoneFormat
 } from '../../../helpers/checkFormat'
+import PopUpNotify from '../../common/PopUpNotify'
+import history from '../../common/history'
 
 class AddProduct extends Component {
 
@@ -31,7 +33,16 @@ class AddProduct extends Component {
     }
 
     componentDidMount() {
-        this.props.loadCategory()
+        const {shopProfile} = this.props;
+        if(Object.keys(shopProfile).length === 0 && shopProfile.constructor === Object) {
+            history.push('/shop');
+        }else {
+            this.props.loadCategory()
+        }
+    }
+
+    componentWillUnmount() {
+        this.props.refreshStatus()
     }
 
     componentDidUpdate(prevState) {
@@ -183,12 +194,21 @@ class AddProduct extends Component {
     }
 
     render() {
-        const { listCategory } = this.props
+        const { listCategory, status } = this.props
         const { name, des, price, discount, checkValidPrice, checkDiscount, image, category_id } = this.state
         return (
             <div>
                 <NavBar />
                 <div className="app-seller">
+                    {
+                        status === "status_success" ? (
+                            <PopUpNotify message="Added new product success" status={status}/>
+                        ) : (
+                            <div>
+
+                            </div>
+                        )
+                    }
                     <BackMenu />
                     <div className='add-product-page'>
                         <div className='add-product-container'>
@@ -316,13 +336,16 @@ class AddProduct extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        listCategory: state.categoryReducer.listCategories
+        shopProfile: state.shopReducer.shop,
+        listCategory: state.categoryReducer.listCategories,
+        status: state.productReducer.status_save
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         loadCategory: () => dispatch(categoryAction()),
+        refreshStatus: () => dispatch({type: 'REFRESH_ACTION_ADD_PRODUCT'}),
         saveDate: (data) => dispatch(saveProductAction(data))
     }
 }

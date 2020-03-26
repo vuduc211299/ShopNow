@@ -23,9 +23,9 @@ const ProductItem = ({item, typeScreen}) => {
                 constant.CATEGORY_PAGE === typeScreen ? "ctg-sort-item-wrapper" : ""
             }>
                 <div className={constant.CATEGORY_PAGE === typeScreen ? "height_203" : "height_81"}>
-                    <img src={item.image} alt='' width={constant.CATEGORY_PAGE === typeScreen ? "203px" : "80.5px"} height={constant.CATEGORY_PAGE === typeScreen ? "auto" : "81px"}/>
+                    <img src={item.image} alt='' width={constant.CATEGORY_PAGE === typeScreen ? "203px" : "80.5px"} height={constant.CATEGORY_PAGE === typeScreen ? "200px" : "81px"}/>
                 </div>
-                <div className='category-name'>{item.name}</div>
+                <div className={constant.CATEGORY_PAGE === typeScreen ? 'category-name h-42' : "category-name"}>{item.name}</div>
                 {
                     constant.CATEGORY_PAGE === typeScreen? (
                         <div>

@@ -1,6 +1,7 @@
 const initState = {
     products : [],
     product : {},
+    productByShop: [],
     status_save: 'pending'
 }
 const productReducer = (state = initState, action) => {
@@ -13,7 +14,13 @@ const productReducer = (state = initState, action) => {
             state.product = action.product
             break;
         case 'SAVE_PRODUCT_SUCESS':
-            state.status_save = 'success'
+            state.status_save = 'status_success'
+            break;
+        case 'REFRESH_ACTION_ADD_PRODUCT':
+            state.status_save = 'pending'
+            break;
+        case 'GET_PRODUCT_BY_SHOP_SUCCESS':
+            state.productByShop = action.products
             break;
         case 'GET_ALL_PRODUCT_FAILED': 
             break;

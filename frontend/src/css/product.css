@@ -19,6 +19,7 @@
 .p-des {
     background-color: #fff;
     padding: 13px;
+    width: 100%;
 }
 
 .p-l-rel {
@@ -64,4 +65,11 @@
     color: #757575;
     font-size: 1rem;
     margin-left: 20px;
+}
+.category-name{
+    font-size: 14px;
+    color: #666;
+}
+.h-42{
+    height: 42px;
 }

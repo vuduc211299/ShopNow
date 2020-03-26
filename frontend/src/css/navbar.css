@@ -94,4 +94,5 @@ background-color: #c67605;
 }
 .link-to-shop{
     color: #fff !important;
+    cursor: pointer;
 }

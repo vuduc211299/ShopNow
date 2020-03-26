@@ -36,7 +36,6 @@ class CartItem extends Component {
         const {type} = this.props;
         const {typeScreen} = this.props;
         const {cartItem} = this.props;
-        let base64Icon = 'data:image/png/jpeg;base64,';
         return (
             <div>
                 {
@@ -44,7 +43,7 @@ class CartItem extends Component {
                         <div className='p-in-cart-container d-flex'>
                             <div className='p-in-cart-name-img col-4'>
                                 <div>
-                                    <img src={base64Icon + cartItem.product_id.image} alt='p-in-cart' width='15%' height='60%'/>
+                                    <img src={cartItem.product_id.image} alt='p-in-cart' width='15%' height='60%'/>
                                 </div>
                                 <div>
                                     <span>{cartItem.product_id.name}</span>

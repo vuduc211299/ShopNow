@@ -2,9 +2,20 @@ import React, {Component} from 'react'
 import '../../css/orderPage.css'
 import img from '../../img/shoes.jpg'
 import Navbar from './Navbar'
+import {connect} from 'react-redux'
 import BackMenu from './BackMenu'
+import history from '../common/history'
 
 class Orders extends Component {
+    componentDidMount() {
+        const {shopProfile} = this.props;
+        if(Object.keys(shopProfile).length === 0 && shopProfile.constructor === Object) {
+            history.push('/shop');
+        } else {
+            
+        }
+    }
+
     render() {
         return (
             <div>
@@ -103,4 +114,10 @@ class Orders extends Component {
     }
 }
 
-export default Orders
+const mapStateToProps = (state) => {
+    return {
+        shopProfile: state.shopReducer.shop
+    }
+}
+
+export default connect(mapStateToProps)(Orders)

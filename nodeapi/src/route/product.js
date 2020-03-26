@@ -29,6 +29,22 @@ productRouter.get('/product/:id', async (req, res) => {
     }
 })
 
+// get product by shop
+
+productRouter.get('/shop/product/', auth, async (req, res) => {
+    try {
+        const shop = await Shop.findOne({owner_id: req.user._id})
+        if(shop) {
+            const products = await Product.find({owner_id: shop._id})
+            res.status(200).send(products)
+        } else{
+            res.status(404).send('Dont have any shop yet')
+        }
+    } catch (error) {
+        res.send(error)
+    }
+})
+
 productRouter.post('/product/create', auth, async (req,res)=>{
     try {
         const shop = await Shop.findOne({owner_id: req.user._id})

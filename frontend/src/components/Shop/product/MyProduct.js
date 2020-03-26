@@ -1,11 +1,24 @@
 import React, {Component} from 'react'
 import NavBar from '../Navbar'
 import BackMenu from '../BackMenu'
-import img from '../../../img/shoes.jpg'
+import {connect} from 'react-redux'
 import '../../../css/myProduct.css'
+import { getProductByShopAction } from '../../../actions/productAction'
+import history from '../../common/history'
 
 class MyProduct extends Component {
+
+    componentDidMount() {
+        const {shopProfile} = this.props;
+        if(Object.keys(shopProfile).length === 0 && shopProfile.constructor === Object) {
+            history.push('/shop');
+        } else {
+            this.props.loadProduct()
+        }
+    }
+
     render () {
+        const { products } = this.props
         return  (
             <div>
                 <NavBar/>
@@ -19,7 +32,7 @@ class MyProduct extends Component {
                             </div>
                         </div>
                         <div className='order-list-pannel-container'>
-                            0 Products
+                            {products.length} Products
                         </div>
                         <div className='order-list-header'>
                             <div className='order-list-tab'>
@@ -29,51 +42,29 @@ class MyProduct extends Component {
                                 <span className='sixth-p'></span>
                             </div>
                         </div>
-                        <div className='order-list-products'>
-                            <div className='order-product first'>
-                                <img src={img} width='20%' height='60%'/>
-                                <span className='ml-3'>Nike 2020</span>
-                            </div>
-                            <div className='second center'>
-                                <span>1</span>
-                            </div>
-                            <div className='fourth-p center'>
-                                <i className='fa mr-2 fs-20'>&#xf044;</i>
-                            </div>
-                            <div className='fifth'>
-                                <i className="fa fa-trash i-trash"></i>
-                            </div>
-                        </div>
-                        <div className='order-list-products'>
-                            <div className='order-product first'>
-                                <img src={img} width='20%' height='60%'/>
-                                <span className='ml-3'>Nike 2020</span>
-                            </div>
-                            <div className='second center'>
-                                <span>1</span>
-                            </div>
-                            <div className='fourth-p center'>
-                                <i className='fa mr-2 fs-20'>&#xf044;</i>
-                            </div>
-                            <div className='fifth'>
-                                <i className="fa fa-trash i-trash"></i>
-                            </div>
-                        </div>
-                        <div className='order-list-products'>
-                            <div className='order-product first'>
-                                <img src={img} width='20%' height='60%'/>
-                                <span className='ml-3'>Nike 2020</span>
-                            </div>
-                            <div className='second center'>
-                                <span>1</span>
-                            </div>
-                            <div className='fourth-p center'>
-                                <i className='fa mr-2 fs-20'>&#xf044;</i>
-                            </div>
-                            <div className='fifth-p'>
-                                <i className="fa fa-trash i-trash"></i>
-                            </div>
-                        </div>
+                        {
+                            products.length > 0 ? products.map(product => {
+                                return (
+                                    <div className='order-list-products'>
+                                        <div className='order-product first'>
+                                            <img src={product.image} width='20%' height='60%'/>
+                                            <span className='ml-3'>{product.name}</span>
+                                        </div>
+                                        <div className='second center'>
+                                            <span>{product.quantity}</span>
+                                        </div>
+                                        <div className='fourth-p center'>
+                                            <i className='fa mr-2 fs-20'>&#xf044;</i>
+                                        </div>
+                                        <div className='fifth'>
+                                            <i className="fa fa-trash i-trash"></i>
+                                        </div>
+                                    </div>
+                                )
+                            }) : (
+                                <div></div>
+                            )
+                        }
                     </div>
                 </div>
             </div>
@@ -81,4 +72,17 @@ class MyProduct extends Component {
     }
 }
 
-export default MyProduct
+const mapStateToProps = (state) => {
+    return {
+        shopProfile: state.shopReducer.shop,
+        products: state.productReducer.productByShop
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadProduct: () => dispatch(getProductByShopAction())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyProduct)
