@@ -81,3 +81,49 @@ export const getProductByShopAction = () => {
 
     }
 }
+
+export const deleteProductById = (data) => {
+    const token = JSON.parse(localStorage.getItem('token'))
+    const requestOption = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(data)
+    }
+
+    return async (dispatch, getState) => {
+        const product = await fetch('http://localhost:3000/product/delete', requestOption)
+        .then(res => res.json())
+        if(product){
+            dispatch({type: 'DELETE_PRODUCT_SUCCESS'})
+        }else {
+            dispatch({type: 'DELETE_PRODUCT_FAILED'})
+        }
+
+    }
+}
+
+export const editProductById = (data) => {
+    const token = JSON.parse(localStorage.getItem('token'))
+    const requestOption = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(data)
+    }
+
+    return async (dispatch, getState) => {
+        const product = await fetch('http://localhost:3000/product/update', requestOption)
+        .then(res => res.json())
+        if(product){
+            dispatch({type: 'UPDATE_PRODUCT_SUCCESS'})
+        }else {
+            dispatch({type: 'UPDATE_PRODUCT_FAILED'})
+        }
+
+    }
+}

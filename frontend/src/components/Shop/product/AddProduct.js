@@ -114,12 +114,16 @@ class AddProduct extends Component {
             e.target.files[0].type === 'image/jpg' ||
             e.target.files[0].type === 'image/jpeg') {
             let file = e.target.files[0];
-            let reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                this.setState({
-                    image: reader.result
-                });
+            if(file.size > 4000000) { // 4mb
+                alert('this file is too large')
+            } else {
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = () => {
+                    this.setState({
+                        image: reader.result
+                    });
+                }
             }
         } else {
             alert('this file is only supported jpg, png, jpeg file')

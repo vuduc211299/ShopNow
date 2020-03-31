@@ -25,10 +25,11 @@ class Orders extends Component {
                     <div className='order-page'>
                         <div className='order-header'>
                             <div className='order-tab'>
-                                <div className='mr-3'>All</div>
-                                <div className='mr-3'>Shipping</div>
-                                <div>Completed</div>
+                                <div className='mr-3 label-txt-underlined'>All</div>
+                                <div className='mr-3 label-txt-underlined'>Shipping</div>
+                                <div className='label-txt-underlined'>Completed</div>
                             </div>
+                            <div className='mt-3 underline-bar'></div>
                         </div>
                         <div className='order-list-pannel-container'>
                             0 Orders

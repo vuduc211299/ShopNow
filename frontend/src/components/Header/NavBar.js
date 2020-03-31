@@ -9,7 +9,6 @@ import Login from '../auth/Login'
 import SignUp from '../auth/SignUp'
 import Logout from '../auth/Logout'
 import SearchPopup from '../common/searchPopup'
-import history from '../common/history'
 
 class NavBar extends Component {
 
@@ -49,14 +48,6 @@ class NavBar extends Component {
         }
         
     }
-    toYourShop() {
-        const token = localStorage.getItem('token')
-        if(!token){
-            alert('Please login or sign up first')
-        } else {
-            history.push('/shop')
-        }
-    }
 
     getProductById (id) {
         const { products } = this.props;
@@ -65,7 +56,7 @@ class NavBar extends Component {
     }
 
     render() {
-        const {user, carts, quantity, params} = this.props;
+        const {user, carts, quantity, params} = this.props
         const {keyword} = this.state;
         let cart = carts.map(item => item = this.getProductById(item.product_id))
         const {searchResult} = this.state;
@@ -81,7 +72,13 @@ class NavBar extends Component {
                 <div className=' container'>
                     <div className='top-sticky row'>
                         <div className='left-top-sticky col-auto'>
-                            <span onClick={this.toYourShop} className='link-to-shop'>Your Shop</span>
+                        {
+                            Object.entries(user).length === 0 && user.constructor === Object ? (
+                                <div></div>
+                            ) : (
+                                <Link to="/shop" target="blank" className='link-to-shop'>Your Shop</Link>
+                            )
+                        }
                         </div>
                         <ul className='list-inline col-auto ml-auto'>
                             <li className='list-inline-item txt'>

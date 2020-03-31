@@ -11,3 +11,21 @@
 .sixth-p{
     flex: 0.5
 }
+
+.fa{
+    cursor: pointer;
+}
+.underline-bar{
+    bottom: 0;
+    left: 0;
+    background-color: #f9502f;
+    height: 0.25rem;
+    width: 80px;
+    transition: all 500ms ease 0s;
+}
+.ml-80px {
+    margin-left: 80px;
+}
+.label-color{
+    color: #f9502f
+}

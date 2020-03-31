@@ -14,6 +14,7 @@ import Shop from './components/Shop/Shop'
 import Orders from './components/Shop/Orders';
 import AddProduct from './components/Shop/product/AddProduct'
 import MyProduct from './components/Shop/product/MyProduct';
+import { PrivateRoute } from './components/common/PrivateRoute';
 
 function App() {
   return (
@@ -22,16 +23,16 @@ function App() {
         <ScrollToTop/>
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route path='/cart' component={Cart}/>
+          <PrivateRoute path='/cart' component={Cart}/>
           <Route path='/login' component={Login}/>
-          <Route path='/checkout' component={CheckOut}/>
+          <PrivateRoute path='/checkout' component={CheckOut}/>
           <Route path='/product/:id' component={Product} />
           <Route path='/category/:id' component={CategoryPage}/>
-          <Route path='/user/profile' component={UserInfo}/>
-          <Route exact path='/shop' component={Shop}/>
-          <Route path='/shop/order' component={Orders}/>
-          <Route path='/shop/product/add' component={AddProduct}/>
-          <Route path='/shop/product' component={MyProduct}/>
+          <PrivateRoute path='/user/profile' component={UserInfo}/>
+          <PrivateRoute exact path='/shop' component={Shop}/>
+          <PrivateRoute path='/shop/order' component={Orders}/>
+          <PrivateRoute path='/shop/product/add' component={AddProduct}/>
+          <PrivateRoute path='/shop/product' component={MyProduct}/>
           <Route path='*' exact={true} component={NotFound} />
         </Switch>
       </Router>

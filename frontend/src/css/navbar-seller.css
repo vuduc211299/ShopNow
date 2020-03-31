@@ -35,3 +35,15 @@
 #notify-seller{
     flex-basis: 20%;
 }
+
+#user-hover{
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#user-hover:hover{
+    background-color: rgb(207, 203, 203);
+    border-radius: 14px;
+}

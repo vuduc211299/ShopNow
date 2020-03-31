@@ -60,4 +60,44 @@ productRouter.post('/product/create', auth, async (req,res)=>{
     
 })
 
+// delete product by id
+
+productRouter.delete('/product/delete', auth, async (req, res) => {
+    const _id = req.body.id
+    try {
+        const product = await Product.findByIdAndDelete({_id})
+        if(product) {
+            res.status(200).send(product)
+        } else {
+            res.status(404)
+        }
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+// update product by id
+
+productRouter.patch('/product/update', auth, async (req, res) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['id','name','quantity','discount', 'price', 'description']
+    const isValidOperation = updates.every((update)=> allowedUpdates.includes(update))
+    if(!isValidOperation){
+        return res.status(400).send({error: 'Invalid updates!'})
+    }
+    try {
+        const _id = req.body.id
+        const product = await Product.findById({_id})
+        if(product) {
+            updates.forEach((update) => product[update] = req.body[update])
+            await product.save()
+            res.status(200).send(product)
+        } else {
+            res.status(404)
+        }
+    } catch (error) {
+        res.send(error)
+    }
+})
+
 module.exports = productRouter

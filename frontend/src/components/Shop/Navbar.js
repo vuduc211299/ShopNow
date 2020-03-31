@@ -31,8 +31,10 @@ class Navbar extends Component {
                         Seller Center
                     </div>
                     <div id='user-seller'>
-                        <i className='fa i-seller'>&#xf2bd;</i>
-                        <span className='ml-2'>{user.name}</span>
+                        <div id='user-hover'>
+                            <i className='fa i-seller'>&#xf2bd;</i>
+                            <span className='ml-2'>{user.name}</span>
+                        </div>
                     </div>
                     <div id='notify-seller'>
                         <i className='fa i-seller'>&#xf0f3;</i>
