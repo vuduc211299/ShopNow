@@ -4,11 +4,21 @@ const Shop = require('../model/shop')
 const Order = require('../model/order')
 const orderRouter = new express.Router()
 
-orderRouter.get('/order/', auth , async (req, res)=>{
+orderRouter.get('/shop/order', auth , async (req, res)=>{
     try {
         const shop_id = (await Shop.findOne({owner_id: req.user._id}))._id
-        const orders = await Order.find({order_to: shop_id})
-        res.send(orders)
+        if(shop_id) {
+            await Order.find({order_to: shop_id})
+            .populate('product_id')
+            .populate('order_from')
+            .exec((err, order) => {
+                if(err) {
+                    console.log(err)
+                } else {
+                    res.status(200).send(order)
+                }
+            })
+        }
     } catch (error) {
         res.status(500).send(error)
     }
@@ -18,10 +28,11 @@ orderRouter.get('/order/', auth , async (req, res)=>{
 orderRouter.post('/order/create', auth, async (req, res)=>{
     try {
         const order = new Order({
+            order_date: new Date(),
             ...req.body
         })
         await order.save()
-        res.status(201).send(product)
+        res.status(201).send(order)
     } catch (error) {
         res.send(error)
     }

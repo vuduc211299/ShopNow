@@ -3,16 +3,24 @@ const mongoose = require('mongoose')
 const shopSchema = mongoose.Schema({
     name : {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     address: {
-        type: String
+        type: String,
+        required: true,
+        trim: true
     },
     image: {
         type: String
     },
     description : {
         type: String
+    },
+    phone: {
+        type: String,
+        required: true,
+        trim: true
     },
     owner_id : {
         type: mongoose.Schema.Types.ObjectId,

@@ -4,7 +4,7 @@ import BackMenu from './BackMenu'
 import '../../css/backMenu.css'
 import '../../css/shop.css'
 import { connect } from 'react-redux'
-import { EMPTY_VALUE } from '../../helpers/checkFormat'
+import { EMPTY_VALUE, checkPhoneFormat, WRONG_PHONE_FORMAT } from '../../helpers/checkFormat'
 import { updateShopProfileAction } from '../../actions/shop/shopAction'
 import PopUpNotify from '../common/PopUpNotify'
 
@@ -16,7 +16,10 @@ class Shop extends Component {
         this.state = {
             name: shopProfile.name,
             des: shopProfile.description,
-            file: shopProfile.image
+            file: shopProfile.image,
+            address: shopProfile.address,
+            phone: shopProfile.phone,
+            checkValidPhone: ''
         }
     }
 
@@ -48,6 +51,38 @@ class Shop extends Component {
         }
     }
 
+    handlePhoneChange = (e) => {
+        if(checkPhoneFormat(e.target.value) !== WRONG_PHONE_FORMAT) {
+            if(e.target.value === '') {
+                this.setState({
+                    phone: '',
+                    checkValidPhone: EMPTY_VALUE
+                })
+            } else {
+                this.setState({
+                    phone: e.target.value,
+                    checkValidPhone: ''
+                })
+            }     
+        }else {
+            this.setState({
+                checkValidPhone: WRONG_PHONE_FORMAT
+            })
+        }
+    }
+
+    handleAddressChange = (e) => {
+        if(e.target.value !== ''){
+            this.setState({
+                address: e.target.value
+            })
+        } else {
+            this.setState({
+                address: EMPTY_VALUE
+            })
+        }
+    }
+
     handleUploadImg = () => {
         document.getElementById("ipn-upload-img").click()
     }
@@ -75,20 +110,27 @@ class Shop extends Component {
 
     handleSubmit = () => {
         this.props.refreshStatus()
-        const { name, file, des } = this.state;
+        const { name, file, des, address, phone, checkValidPhone } = this.state;
         const data = {
             name,
             image: file,
-            description: des
+            description: des,
+            phone,
+            address
         }
-        if (name !== EMPTY_VALUE) {
+            if (name !== EMPTY_VALUE 
+                && phone !== ''
+                && address !== EMPTY_VALUE
+                && checkValidPhone !== WRONG_PHONE_FORMAT
+            ) {
             this.props.updateProfile(data)
         }
     }
 
     render() {
-        const { name, file } = this.state
+        const { name, file, phone, address, checkValidPhone } = this.state
         const { shopProfile, updateStatus } = this.props
+        console.log(shopProfile)
         return (
             <div>
                 {
@@ -148,6 +190,45 @@ class Shop extends Component {
                                                 </div>
                                                 {
                                                     name === EMPTY_VALUE ? (
+                                                        <div className='txt-warning'>
+                                                            {EMPTY_VALUE}
+                                                        </div>
+                                                    ) : (
+                                                            <div></div>
+                                                        )
+                                                }
+                                            </div>
+                                            <div>
+                                                <div className='ipn-label txt-title'>Phone</div>
+                                                <div className={checkValidPhone === '' ? 'ipn-product-container' : 'ipn-product-container-error'}>
+                                                    <input
+                                                        onChange={this.handlePhoneChange}
+                                                        defaultValue={shopProfile.phone}
+                                                        className={checkValidPhone === '' ? 'ipn-product-name' : 'ipn-product-name-error'}
+                                                    />
+                                                </div>
+                                                {
+                                                    checkValidPhone !== '' ? (
+                                                        <div className='txt-warning'>
+                                                            {checkValidPhone}
+                                                        </div>
+                                                    ) : (
+                                                            <div></div>
+                                                        )
+                                                }
+                                            </div>
+                                            <div>
+                                                <div className='ipn-label txt-title'>Address</div>
+                                                <div className={address !== EMPTY_VALUE ? 'ipn-product-container' : 'ipn-product-container-error'}>
+                                                    <input
+                                                        onChange={this.handleAddressChange}
+                                                        defaultValue={shopProfile.address}
+                                                        maxLength="50"
+                                                        className={address !== EMPTY_VALUE ? 'ipn-product-name' : 'ipn-product-name-error'}
+                                                    />
+                                                </div>
+                                                {
+                                                    address === EMPTY_VALUE ? (
                                                         <div className='txt-warning'>
                                                             {EMPTY_VALUE}
                                                         </div>

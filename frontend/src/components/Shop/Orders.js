@@ -38,6 +38,7 @@ class Orders extends Component {
                             <div className='order-list-tab'>
                                 <span className='first txt-color'>Product(s)</span>
                                 <span className='second center txt-color'>Order total</span>
+                                <span className='second center txt-color'>Order from</span>
                                 <span className='third txt-color'>Status</span>
                                 <span className='sixth txt-color'>Transport</span>
                             </div>
@@ -50,6 +51,9 @@ class Orders extends Component {
                             <div className='second center'>
                                 <span>1</span>
                             </div>
+                            <div className='second center'>
+                                <span>Duc Vu</span>
+                            </div>
                             <div className='third'>
                                 <select>
                                     <option>Pending</option>
@@ -72,6 +76,9 @@ class Orders extends Component {
                             <div className='second center'>
                                 <span>1</span>
                             </div>
+                            <div className='second center'>
+                                <span>Duc Vu</span>
+                            </div>
                             <div className='third'>
                                 <select>
                                     <option>Pending</option>
@@ -93,6 +100,9 @@ class Orders extends Component {
                             </div>
                             <div className='second center'>
                                 <span>1</span>
+                            </div>
+                            <div className='second center'>
+                                <span>Duc Vu</span>
                             </div>
                             <div className='third'>
                                 <select>

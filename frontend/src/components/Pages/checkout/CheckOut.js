@@ -12,14 +12,14 @@ import CartEmptyImg from '../../../img/cart_empty.png'
 import {pricePipe} from '../../../components/common/pricePipe'
 import NavBar from '../../Header/NavBar'
 import { productAction } from '../../../actions/productAction'
+import { createOrderAction } from '../../../actions/orderAction'
 class CheckOut extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
             disabledOrder: true,
-            btnStatus: 'btn-payment-method',
-            orderStatus: 'pending'
+            btnStatus: 'btn-payment-method'
         }
     }
 
@@ -34,16 +34,21 @@ class CheckOut extends Component {
     }
 
     handleOrder = () => {
-        const {userProfile} = this.props
+        const {userProfile, carts} = this.props
         if(userProfile.address && userProfile.phone) {
-            this.setState({
-                orderStatus: 'status_success'
+            // create order request
+            carts.forEach(item => {
+                const product = this.getProductById(item.product_id)
+                const data = {
+                    order_from: userProfile._id,
+                    order_to: product.owner_id,
+                    status: 'pending',
+                    product_id: item.product_id,
+                    quantity: item.quantityInCart
+                }
+                this.props.createOrder(data)
             })
             this.props.clearCart()
-        }else {
-            this.setState({
-                orderStatus: 'status_failed'
-            })
         }
     }
 
@@ -59,8 +64,7 @@ class CheckOut extends Component {
     }
 
     render() {
-        const { carts, userProfile } = this.props;
-        const { orderStatus } = this.state;
+        const { carts, userProfile, orderStatus } = this.props;
         let cart = carts.map(item => {
             return {
                 ...item,
@@ -207,6 +211,7 @@ class CheckOut extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        orderStatus: state.orderReducer.order_status,
         carts: state.cartReducer.cart,
         products: state.productReducer.products,
         userProfile: state.userReducer.userInfoUpdate
@@ -215,6 +220,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        createOrder: (data) => dispatch(createOrderAction(data)),
         clearCart: () => dispatch(removeAllFromCart()),
         loadProduct: () => dispatch(productAction())
     }

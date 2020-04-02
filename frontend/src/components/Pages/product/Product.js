@@ -12,6 +12,7 @@ import PopUpNotify from '../../common/PopUpNotify'
 import history from '../../common/history'
 import NavBar from '../../Header/NavBar'
 import {productByIdAction, productAction} from '../../../actions/productAction'
+import { shopProfileAction } from '../../../actions/shop/shopAction'
 
 class Product extends Component {
     constructor(props) {
@@ -26,6 +27,7 @@ class Product extends Component {
         const { id } = this.props.match.params;
         this.props.loadProduct(id)
         this.props.loadAllProduct()
+        this.props.loadShopProfile()
     }
 
     componentWillUnmount() {
@@ -81,8 +83,7 @@ class Product extends Component {
     }
 
     render() {
-        const {product} = this.props;
-        const {products} = this.props;
+        const {product, products, shop} = this.props;
         const category_id = product.category_id;
         let related_products = products.filter(item => {
             return item.category_id === category_id && item._id !== product._id && item.discount !== '0'
@@ -186,6 +187,27 @@ class Product extends Component {
                             </div>
                         </div>
                         <div className='p-des-rel-cgr row mt-3'>
+                            <div className='p-des shop-info'>
+                                <div className='shop-profile'>
+                                    <img src={shop.image} width='80px' height='80px'/>
+                                    <div className='ml-3'>
+                                        <div>{shop.name}</div>
+                                        <div className='txt-adabab'>Response in less 1 hour</div>
+                                    </div>
+                                </div>
+                                <div className='shop-address ml-5'>
+                                    <div>
+                                        <span className='txt-adabab'>Phone</span>
+                                        <span className='txt-value'>{shop.phone}</span>
+                                    </div>
+                                    <div>
+                                        <span className='txt-adabab'>Address</span>
+                                        <span className='txt-value'>{shop.address}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='p-des-rel-cgr row mt-3'>
                             <div className='p-des'>
                                 <h3>Product Detail</h3>
                                 <div className="p-des-cnt">
@@ -207,12 +229,14 @@ const mapStateToProps = (state) => {
     return {
         product: state.productReducer.product,
         products: state.productReducer.products,
-        status: state.cartReducer.status
+        status: state.cartReducer.status,
+        shop: state.shopReducer.shop
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        loadShopProfile: () => dispatch(shopProfileAction()),
         loadProduct: (id) => dispatch(productByIdAction(id)),
         loadAllProduct: () => dispatch(productAction()),
         addToCart: (product, selectValue) => dispatch(cartAddAction(product, selectValue)),

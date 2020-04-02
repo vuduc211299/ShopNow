@@ -73,3 +73,27 @@
 .h-42{
     height: 42px;
 }
+.shop-info{
+    display: flex;
+}
+
+.shop-profile{
+    display: flex;
+    align-items: center;
+    line-height: 2rem;
+    border-right: 1px solid #F5F5F5;
+    flex-grow: 1;
+}
+.shop-address{
+    padding-top: 3px;
+    line-height: 2.3rem;
+    flex-grow: 3;
+}
+.txt-adabab{
+    color: #adabab;
+    margin-right: 0.625rem;
+}
+
+.txt-value{
+    color: #ee4d2d;
+}

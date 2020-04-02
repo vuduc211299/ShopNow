@@ -15,14 +15,16 @@ const orderSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    order_info: [{
-        product_id : {
-            type: String
-        },
-        quantity: {
-            type: Number
-        }
-    }]
+    product_id : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product'
+    },
+    quantity: {
+        type: Number
+    },
+    order_date: {
+        type: Date
+    }
 })
 
 const Order = mongoose.model('Order',orderSchema)
