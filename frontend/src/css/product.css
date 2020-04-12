@@ -71,7 +71,15 @@
     color: #666;
 }
 .h-42{
+    width: 200px;
     height: 42px;
+    display: block;
+    text-align: center;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 .shop-info{
     display: flex;

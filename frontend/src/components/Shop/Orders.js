@@ -1,27 +1,60 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import '../../css/orderPage.css'
-import img from '../../img/shoes.jpg'
 import Navbar from './Navbar'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import BackMenu from './BackMenu'
 import history from '../common/history'
+import { getAllOrderAction, deleteOrderByIdAction } from '../../actions/orderAction'
+import Popup from 'reactjs-popup'
+import PopupNotify from '../common/PopUpNotify'
 
 class Orders extends Component {
     componentDidMount() {
-        const {shopProfile} = this.props;
-        if(Object.keys(shopProfile).length === 0 && shopProfile.constructor === Object) {
+        const { shopProfile } = this.props;
+        if (Object.keys(shopProfile).length === 0 && shopProfile.constructor === Object) {
             history.push('/shop');
         } else {
-            
+            this.props.loadOrder()
+        }
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.status_delete !== this.props.status_delete){
+            this.props.loadOrder()
+        }
+    }
+
+    componentWillUnmount() {
+        this.props.resetStatus()
+    }
+
+    handleStatusChange = (id) => {
+        console.log(document.getElementById(id).value, id)
+    }
+
+    deleteOrder = (id) => {
+        if(window.confirm('Do you want to delete this order ?')) {
+            this.props.deleteOrder({_id: id})
         }
     }
 
     render() {
+        const { order, status_delete } = this.props
         return (
             <div>
-                <Navbar/>
+                {
+                    status_delete === 'status_success' ? (
+                        <PopupNotify
+                            message="Delete success"
+                            status={status_delete}
+                        />
+                    ) : (
+                            <div></div>
+                        )
+                }
+                <Navbar />
                 <div className='app-seller'>
-                    <BackMenu/>
+                    <BackMenu />
                     <div className='order-page'>
                         <div className='order-header'>
                             <div className='order-tab'>
@@ -32,7 +65,7 @@ class Orders extends Component {
                             <div className='mt-3 underline-bar'></div>
                         </div>
                         <div className='order-list-pannel-container'>
-                            0 Orders
+                            {order.length} Orders
                         </div>
                         <div className='order-list-header'>
                             <div className='order-list-tab'>
@@ -43,81 +76,64 @@ class Orders extends Component {
                                 <span className='sixth txt-color'>Transport</span>
                             </div>
                         </div>
-                        <div className='order-list-products'>
-                            <div className='order-product first'>
-                                <img src={img} width='20%' height='60%'/>
-                                <span className='ml-3'>Nike 2020</span>
-                            </div>
-                            <div className='second center'>
-                                <span>1</span>
-                            </div>
-                            <div className='second center'>
-                                <span>Duc Vu</span>
-                            </div>
-                            <div className='third'>
-                                <select>
-                                    <option>Pending</option>
-                                    <option>Shipping</option>
-                                    <option>Completed</option>
-                                </select>
-                            </div>
-                            <div className='fourth'>
-                                J&T Express
-                            </div>
-                            <div className='fifth'>
-                                <i className="fa fa-trash i-trash"></i>
-                            </div>
-                        </div>
-                        <div className='order-list-products'>
-                            <div className='order-product first'>
-                                <img src={img} width='20%' height='60%'/>
-                                <span className='ml-3'>Nike 2020</span>
-                            </div>
-                            <div className='second center'>
-                                <span>1</span>
-                            </div>
-                            <div className='second center'>
-                                <span>Duc Vu</span>
-                            </div>
-                            <div className='third'>
-                                <select>
-                                    <option>Pending</option>
-                                    <option>Shipping</option>
-                                    <option>Completed</option>
-                                </select>
-                            </div>
-                            <div className='fourth'>
-                                J&T Express
-                            </div>
-                            <div className='fifth'>
-                                <i className="fa fa-trash i-trash"></i>
-                            </div>
-                        </div>
-                        <div className='order-list-products'>
-                            <div className='order-product first'>
-                                <img src={img} width='20%' height='60%'/>
-                                <span className='ml-3'>Nike 2020</span>
-                            </div>
-                            <div className='second center'>
-                                <span>1</span>
-                            </div>
-                            <div className='second center'>
-                                <span>Duc Vu</span>
-                            </div>
-                            <div className='third'>
-                                <select>
-                                    <option>Pending</option>
-                                    <option>Shipping</option>
-                                    <option>Completed</option>
-                                </select>
-                            </div>
-                            <div className='fourth'>
-                                J&T Express
-                            </div>
-                            <div className='fifth'>
-                                <i className="fa fa-trash i-trash"></i>
-                            </div>
-                        </div>
+                        {
+                            order.length > 0 ? order.map(od => {
+                                return (
+                                    <div className='order-list-products'>
+                                        <div className='order-product first'>
+                                            <img src={od.product_id.image} width='20%' height='60%' />
+                                            <span className='ml-3'>{od.product_id.name}</span>
+                                        </div>
+                                        <div className='second center'>
+                                            <span>{od.quantity}</span>
+                                        </div>
+                                        <div className='second center'>
+                                            <Popup
+                                                trigger={
+                                                    <span className='hover'>{od.order_from.name}</span>
+                                                }
+                                                on='click'
+                                                position='bottom center'
+                                            >
+                                            <div>
+                                                <div>
+                                                    <label className='txt-color'>Name: </label>
+                                                    <span className='label-color'>{od.order_from.name}</span>
+                                                </div>
+                                                <div>
+                                                    <label className='txt-color'>Address: </label>
+                                                    <span className='label-color'>{od.order_from.address}</span>
+                                                </div>
+                                                <div>
+                                                    <label className='txt-color'>Phone: </label>
+                                                    <span className='label-color'>{od.order_from.phone}</span>
+                                                </div>
+                                            </div>
+                                            </Popup>
+                                        </div>
+                                        <div className='third'>
+                                            <select
+                                                id={od._id}
+                                                defaultValue={order.status}
+                                                onChange={this.handleStatusChange.bind(this, od._id)}
+                                            >
+                                                <option value="pending">Pending</option>
+                                                <option value ="shipping">Shipping</option>
+                                                <option value="completed">Completed</option>
+                                            </select>
+                                        </div>
+                                        <div className='fourth'>
+                                            J&T Express
+                                        </div>
+                                        <div className='fifth'>
+                                            <i onClick={this.deleteOrder.bind(this, od._id)} className="fa fa-trash i-trash"></i>
+                                        </div>
+                                    </div>
+                                )
+                            }) : (
+                                <div></div>
+                            )
+                        }
                     </div>
                 </div>
             </div>
@@ -127,8 +143,18 @@ class Orders extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        shopProfile: state.shopReducer.shop
+        shopProfile: state.shopReducer.shop,
+        order: state.orderReducer.order,
+        status_delete: state.orderReducer.delete_status
     }
 }
 
-export default connect(mapStateToProps)(Orders)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadOrder: () => dispatch(getAllOrderAction()),
+        resetStatus: () => dispatch({type: 'REFRESH_ORDER_STATUS'}),
+        deleteOrder: (id) => dispatch(deleteOrderByIdAction(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Orders)

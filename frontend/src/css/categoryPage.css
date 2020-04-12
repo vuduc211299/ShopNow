@@ -20,7 +20,6 @@ select{
 .ctg-sort-item {
     position:  relative;
     display: flex;
-    width: 96%;
     justify-content: center;
     background-color: #fff;
     margin: 5px 0px;

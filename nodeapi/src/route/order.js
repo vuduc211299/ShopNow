@@ -4,13 +4,15 @@ const Shop = require('../model/shop')
 const Order = require('../model/order')
 const orderRouter = new express.Router()
 
+
+// get order all
 orderRouter.get('/shop/order', auth , async (req, res)=>{
     try {
         const shop_id = (await Shop.findOne({owner_id: req.user._id}))._id
         if(shop_id) {
             await Order.find({order_to: shop_id})
-            .populate('product_id')
-            .populate('order_from')
+            .populate('product_id', 'name image')
+            .populate('order_from', 'name phone address')
             .exec((err, order) => {
                 if(err) {
                     console.log(err)

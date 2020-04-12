@@ -75,7 +75,7 @@ class MyProduct extends Component {
                     status_delete === 'status_success' ? (
                         <PopupNotify
                             message="Delete success"
-                            status
+                            status={status_delete}
                         />
                     ) : (
                             <div></div>

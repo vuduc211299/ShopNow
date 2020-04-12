@@ -128,18 +128,10 @@ class Shop extends Component {
     }
 
     render() {
-        const { name, file, phone, address, checkValidPhone } = this.state
-        const { shopProfile, updateStatus } = this.props
-        console.log(shopProfile)
+        const { name, file, address, checkValidPhone } = this.state
+        const { updateStatus, shopProfile } = this.props
         return (
             <div>
-                {
-                    Object.keys(shopProfile).length === 0 && shopProfile.constructor === Object ? (
-                        <PopUpNotify message="Hmm, it's seem like you haven't had your own shop yet, Let's create one to bring your product to potential customers" status="status_failed"/> 
-                    ) : (
-                        <div></div>
-                    )
-                }
                 {
                     updateStatus === 'status_success' ? (
                         <PopUpNotify message="Update success" status={updateStatus} />

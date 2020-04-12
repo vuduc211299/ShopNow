@@ -18,7 +18,7 @@ const PopUpNotify = ({message, status}) => {
                         )
                     }
                 </div>
-                <div className='pt-3'>{message}</div>
+                <div className='pt-3 txt-center'>{message}</div>
             </div>
         </Popup>
     )
