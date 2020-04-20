@@ -9,6 +9,9 @@ const initState = {
 const productReducer = (state = initState, action) => {
 
     switch (action.type) {
+        case 'UPDATE_PRODUCT_SUCCESS':
+            state.status_edit = 'status_success'
+            break;
         case 'GET_ALL_PRODUCT':
             state.products = action.listProducts
             break;

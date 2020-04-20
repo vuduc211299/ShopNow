@@ -28,12 +28,9 @@ class Orders extends Component {
         this.props.resetStatus()
     }
 
-    handleStatusChange = (id) => {
-        console.log(document.getElementById(id).value, id)
-    }
-
     deleteOrder = (id) => {
         if(window.confirm('Do you want to delete this order ?')) {
+            this.props.resetStatus()
             this.props.deleteOrder({_id: id})
         }
     }
@@ -58,9 +55,7 @@ class Orders extends Component {
                     <div className='order-page'>
                         <div className='order-header'>
                             <div className='order-tab'>
-                                <div className='mr-3 label-txt-underlined'>All</div>
-                                <div className='mr-3 label-txt-underlined'>Shipping</div>
-                                <div className='label-txt-underlined'>Completed</div>
+                                <div className='mr-3 label-txt-underlined label-color'>All</div>
                             </div>
                             <div className='mt-3 underline-bar'></div>
                         </div>
@@ -72,7 +67,6 @@ class Orders extends Component {
                                 <span className='first txt-color'>Product(s)</span>
                                 <span className='second center txt-color'>Order total</span>
                                 <span className='second center txt-color'>Order from</span>
-                                <span className='third txt-color'>Status</span>
                                 <span className='sixth txt-color'>Transport</span>
                             </div>
                         </div>
@@ -111,17 +105,6 @@ class Orders extends Component {
                                             </div>
                                             </Popup>
                                         </div>
-                                        <div className='third'>
-                                            <select
-                                                id={od._id}
-                                                defaultValue={order.status}
-                                                onChange={this.handleStatusChange.bind(this, od._id)}
-                                            >
-                                                <option value="pending">Pending</option>
-                                                <option value ="shipping">Shipping</option>
-                                                <option value="completed">Completed</option>
-                                            </select>
-                                        </div>
                                         <div className='fourth'>
                                             J&T Express
                                         </div>
@@ -152,7 +135,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         loadOrder: () => dispatch(getAllOrderAction()),
-        resetStatus: () => dispatch({type: 'REFRESH_ORDER_STATUS'}),
+        resetStatus: () => dispatch({type: 'REFRESH_DELETE_ORDER_STATUS'}),
         deleteOrder: (id) => dispatch(deleteOrderByIdAction(id))
     }
 }

@@ -80,8 +80,8 @@ class NavBar extends Component {
                             )
                         }
                         </div>
-                        <ul className='list-inline col-auto ml-auto'>
-                            <li className='list-inline-item txt'>
+                        <ul className='navbar-list col-auto ml-auto'>
+                            <li className='txt'>
                                 <Popup
                                     trigger={
                                         <i className='fa i-shop'>&#xf0f3;</i>
@@ -92,13 +92,13 @@ class NavBar extends Component {
                                     No notifications
                                 </Popup>
                             </li>
-                            <li className='list-inline-item ml-3'>
+                            <li className='ml-3'>
                                 <i className="fa i-shop">&#xf059;</i>
                             </li>
                             {
                                 Object.entries(user).length === 0 && user.constructor === Object ? (
                                     <Popup
-                                        trigger={<li className='list-inline-item ml-3'>Login</li>}
+                                        trigger={<li className='ml-3'>Login</li>}
                                         on="click"
                                         modal
                                     >
@@ -112,11 +112,13 @@ class NavBar extends Component {
                                     </Popup>  
                                 ) : (
                                     <Popup
-                                        trigger={<li className='list-inline-item ml-3'>
+                                        trigger={<li className='ml-3'>
                                                     <span className='mr-1'>
                                                         <i className='fa i-shop'>&#xf2bd;</i>
                                                     </span>
-                                                    {user.name}
+                                                    <span className='fa'>
+                                                        {user.name}
+                                                    </span>    
                                                 </li>}
                                         on="hover"
                                     >
@@ -137,7 +139,9 @@ class NavBar extends Component {
                         </div>
                         <form className='form-inline col-6 justify-content-between'>
                             <input onChange={this.openSearchPopup} className="form-search mr-sm-2" type="search" placeholder="Search by category, product" aria-label="Search" />
-                            <button className="btn-search my-2 my-sm-0" type="submit">Search</button>
+                            <button className="btn-search my-2 my-sm-0" type="submit">
+                                <i className='fa fa-search'></i>
+                            </button>
                         </form>
                         {
                             (params !== '/cart') ? (

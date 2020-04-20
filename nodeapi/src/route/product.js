@@ -18,12 +18,15 @@ productRouter.get('/product/', async (req, res)=>{
 
 productRouter.get('/product/:id', async (req, res) => {
     try {
-        const product = await Product.findOne({_id: req.params.id})
-        if(product) {
-            res.status(200).send(product)
-        } else {
-            res.status(404)
-        }
+        await Product.findOne({_id: req.params.id})
+        .populate('owner_id','name phone address image')
+        .exec((err, product) => {
+            if(product) {
+                res.status(200).send(product)
+            } else {
+                res.status(404)
+            }
+        })
     } catch (error) {
         res.send(error)
     }

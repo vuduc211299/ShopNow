@@ -3,7 +3,9 @@ import '../../css/navbar-seller.css'
 import {Link} from 'react-router-dom'
 import history from '../common/history'
 import {connect} from 'react-redux'
+import Logout from '../../components/auth/Logout'
 import {shopProfileAction} from '../../actions/shop/shopAction'
+import Popup from 'reactjs-popup'
 
 class Navbar extends Component {
     componentDidMount() {
@@ -31,10 +33,17 @@ class Navbar extends Component {
                         Seller Center
                     </div>
                     <div id='user-seller'>
-                        <div id='user-hover'>
-                            <i className='fa i-seller'>&#xf2bd;</i>
-                            <span className='ml-2'>{user.name}</span>
-                        </div>
+                        <Popup
+                            trigger={
+                                <div id='user-hover'>
+                                    <i className='fa i-seller'>&#xf2bd;</i>
+                                    <span className='ml-2'>{user.name}</span>
+                                </div>
+                            }
+                            on='hover'
+                        >
+                            <Logout/>
+                        </Popup>
                     </div>
                     <div id='notify-seller'>
                         <i className='fa i-seller'>&#xf0f3;</i>

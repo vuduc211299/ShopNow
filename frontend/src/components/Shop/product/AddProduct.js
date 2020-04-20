@@ -10,6 +10,7 @@ import {
     WRONG_PHONE_FORMAT,
     MAX_PRICE,
     MAX_DISCOUNT,
+    MAX_QUANTITY,
     checkPhoneFormat
 } from '../../../helpers/checkFormat'
 import PopUpNotify from '../../common/PopUpNotify'
@@ -23,6 +24,9 @@ class AddProduct extends Component {
             name: '',
             des: '',
             price: '',
+            quantity: '',
+            location: '',
+            checkValidQuantity: '',
             checkValidPrice: '',
             discount: '',
             checkDiscount: '',
@@ -33,10 +37,10 @@ class AddProduct extends Component {
     }
 
     componentDidMount() {
-        const {shopProfile} = this.props;
-        if(Object.keys(shopProfile).length === 0 && shopProfile.constructor === Object) {
+        const { shopProfile } = this.props;
+        if (Object.keys(shopProfile).length === 0 && shopProfile.constructor === Object) {
             history.push('/shop');
-        }else {
+        } else {
             this.props.loadCategory()
         }
     }
@@ -46,9 +50,9 @@ class AddProduct extends Component {
     }
 
     componentDidUpdate(prevState) {
-        if(this.state !== prevState) {
-            const {name, image, des, price, discount, category_id, disableBtn} = this.state
-            if(
+        if (this.state !== prevState) {
+            const { name, image, des, price, discount, category_id, disableBtn } = this.state
+            if (
                 name !== '' &&
                 name !== EMPTY_VALUE &&
                 image !== '' &&
@@ -57,14 +61,14 @@ class AddProduct extends Component {
                 discount !== '' &&
                 category_id !== '' &&
                 price !== '' &&
-                disableBtn 
+                disableBtn
             ) {
                 this.setState({
                     disableBtn: false
                 })
             }
 
-            if((name === '' ||
+            if ((name === '' ||
                 name === EMPTY_VALUE ||
                 image === '' ||
                 des === '' ||
@@ -114,7 +118,7 @@ class AddProduct extends Component {
             e.target.files[0].type === 'image/jpg' ||
             e.target.files[0].type === 'image/jpeg') {
             let file = e.target.files[0];
-            if(file.size > 4000000) { // 4mb
+            if (file.size > 4000000) { // 4mb
                 alert('this file is too large')
             } else {
                 let reader = new FileReader();
@@ -128,6 +132,11 @@ class AddProduct extends Component {
         } else {
             alert('this file is only supported jpg, png, jpeg file')
         }
+    }
+    handleLocationChange = (e) => {
+        this.setState({
+            location: e.target.value
+        })
     }
 
     handleDiscountChange = (e) => {
@@ -181,37 +190,59 @@ class AddProduct extends Component {
             category_id: id
         })
     }
+    handleQuantityChange = (e) => {
+        if (checkPhoneFormat(e.target.value) !== WRONG_PHONE_FORMAT) {
+            if (parseInt(e.target.value) <= MAX_QUANTITY) {
+                this.setState({
+                    quantity: e.target.value,
+                    checkValidQuantity: ''
+                })
+            }
+            if (parseInt(e.target.value) > MAX_QUANTITY) {
+                this.setState({
+                    quantity: MAX_QUANTITY.toString(),
+                    checkValidQuantity: ''
+                })
+            }
+            if (e.target.value === '') {
+                this.setState({
+                    quantity: '',
+                    checkValidQuantity: EMPTY_VALUE
+                })
+            }
+        }
+    }
 
     handleSave = () => {
-        const { name, des, price, discount, image, category_id } = this.state
+        const { name, des, price, quantity, discount, image, category_id, location } = this.state
         const data = {
             name,
+            quantity,
             description: des,
             price,
             discount,
             image,
             category_id,
-            location: 'HaNoi',
-            quantity: '100'
+            location
         }
         this.props.saveDate(data)
     }
 
     render() {
         const { listCategory, status } = this.props
-        const { name, des, price, discount, checkValidPrice, checkDiscount, image, category_id } = this.state
+        const { name, des, price, discount, quantity, checkValidQuantity, checkValidPrice, checkDiscount, image, category_id } = this.state
         return (
             <div>
                 <NavBar />
                 <div className="app-seller">
                     {
                         status === "status_success" ? (
-                            <PopUpNotify message="Added new product success" status={status}/>
+                            <PopUpNotify message="Added new product success" status={status} />
                         ) : (
-                            <div>
+                                <div>
 
-                            </div>
-                        )
+                                </div>
+                            )
                     }
                     <BackMenu />
                     <div className='add-product-page'>
@@ -241,7 +272,7 @@ class AddProduct extends Component {
                                     {
                                         listCategory.map(ctg => {
                                             return (
-                                                <li onClick={this.selectCategory.bind(this, ctg._id)}  
+                                                <li onClick={this.selectCategory.bind(this, ctg._id)}
                                                     className={category_id === ctg._id ? 'ctg-select-list ctg-selected-list' : 'ctg-select-list'}>
                                                     <span>{ctg.name}</span>
                                                     <i className="fa">&#xf105;</i>
@@ -266,11 +297,31 @@ class AddProduct extends Component {
                                     des !== EMPTY_VALUE ? des.length + '/3000' : '0/3000'
                                 }
                             </div>
+                            <div className='add-product-des mt-3'>
+                                <span className='ipn-label txt-title'>Location</span>
+                                <div className=''>
+                                    <select onChange={this.handleLocationChange}>
+                                        <option value="HaNoi">Ha Noi</option>
+                                        <option value="HCM">HCM City</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div className='sale-info'>
                                 <div className='mb-5 mt-5'>
                                     <h2 className='section-name'>Sale Informations</h2>
                                 </div>
                                 <div>
+                                    <div className='ipn-common-seller mt-3'>
+                                        <span className='ipn-label txt-title'>Quantity:</span>
+                                        <div className={checkValidQuantity !== EMPTY_VALUE ? 'ipn-product-container' : 'ipn-product-container-error'}>
+                                            <input
+                                                className={checkValidQuantity !== EMPTY_VALUE ? 'ipn-product-name' : 'ipn-product-name-error'}
+                                                onChange={this.handleQuantityChange}
+                                                defaultValue={quantity}
+                                                value={quantity}
+                                            />
+                                        </div>
+                                    </div>
                                     <div className='ipn-common-seller mt-3'>
                                         <span className='ipn-label txt-title'>Price:</span>
                                         <div className={checkValidPrice !== EMPTY_VALUE ? 'ipn-product-container' : 'ipn-product-container-error'}>
@@ -309,13 +360,13 @@ class AddProduct extends Component {
                                         {
                                             image !== '' ? (
                                                 <div>
-                                                    <img height='115px' width='115px' src={image}/>
+                                                    <img height='115px' width='115px' src={image} />
                                                 </div>
                                             ) : (
-                                                <div>
-                                                    
-                                                </div>
-                                            )
+                                                    <div>
+
+                                                    </div>
+                                                )
                                         }
                                         <div onClick={this.triggUploadImg} className='upload-img-div'>
                                             <div>
@@ -349,7 +400,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         loadCategory: () => dispatch(categoryAction()),
-        refreshStatus: () => dispatch({type: 'REFRESH_ACTION_ADD_PRODUCT'}),
+        refreshStatus: () => dispatch({ type: 'REFRESH_ACTION_ADD_PRODUCT' }),
         saveDate: (data) => dispatch(saveProductAction(data))
     }
 }

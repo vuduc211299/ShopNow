@@ -96,3 +96,10 @@ background-color: #c67605;
     color: #fff !important;
     cursor: pointer;
 }
+.navbar-list{
+    display: inline-flex;
+}
+
+li{
+    list-style: none;
+}

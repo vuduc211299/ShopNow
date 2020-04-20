@@ -48,7 +48,7 @@
   color: #000;
 }
 .list-group-item:hover{
-  background-color: rgb(185, 185, 185);
+  background-color: rgb(229, 226, 226) !important;
   cursor: pointer;
 }
 

@@ -15,6 +15,9 @@ const initState = {
 
 const cartReducer = (state = initState, action) => {
     switch (action.type) {
+        case 'REFRESH_STATUS':
+            state.status = 'pending'
+            break;
         case 'REMOVE_ALL':
         case 'REMOVE_FROM_CART':
         case 'CHANGE_QUANTITY':
@@ -37,9 +40,6 @@ const cartReducer = (state = initState, action) => {
             }
             state.quantity = newQuantity
             state.status = 'status_success'
-            break;
-        case 'REFRESH_STATUS':
-            state.status = 'pending'
             break;
         default:
             break;

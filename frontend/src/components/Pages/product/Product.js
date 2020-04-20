@@ -7,12 +7,10 @@ import { connect } from 'react-redux'
 import {cartAddAction} from '../../../actions/cartAction'
 import Popup from 'reactjs-popup'
 import Login from '../../auth/Login'
-import {changeQuantity} from '../../../actions/cartAction'
 import PopUpNotify from '../../common/PopUpNotify'
 import history from '../../common/history'
 import NavBar from '../../Header/NavBar'
 import {productByIdAction, productAction} from '../../../actions/productAction'
-import { shopProfileAction } from '../../../actions/shop/shopAction'
 
 class Product extends Component {
     constructor(props) {
@@ -27,7 +25,6 @@ class Product extends Component {
         const { id } = this.props.match.params;
         this.props.loadProduct(id)
         this.props.loadAllProduct()
-        this.props.loadShopProfile()
     }
 
     componentWillUnmount() {
@@ -40,23 +37,27 @@ class Product extends Component {
 
     handleAddToCart = () => {
         this.refreshStatus()
-        if(localStorage.getItem('user')) {
-            const {product} = this.props;
-            const {selectValue} = this.state
-            if(selectValue === ''){
-                this.props.addToCart(product, 1);
-                this.setState({
-                    selectValue: '1'
-                })
-            }else{
-                this.props.addToCart(product, parseInt(selectValue));
+        const {product} = this.props;
+        if(parseInt(product.quantity) <= 0) {
+            alert('This product is not available')
+        } else {
+            if(localStorage.getItem('user')) {
+                const {selectValue} = this.state
+                if(selectValue === ''){
+                    this.props.addToCart(product, 1);
+                    this.setState({
+                        selectValue: '1'
+                    })
+                }else{
+                    this.props.addToCart(product, parseInt(selectValue));
+                }
+                
             }
-            
-        }
-        else{
-            this.setState({
-                openAuthPopup: true
-            })
+            else{
+                this.setState({
+                    openAuthPopup: true
+                })
+            }
         }
     }
 
@@ -83,7 +84,7 @@ class Product extends Component {
     }
 
     render() {
-        const {product, products, shop} = this.props;
+        const {product, products} = this.props;
         const category_id = product.category_id;
         let related_products = products.filter(item => {
             return item.category_id === category_id && item._id !== product._id && item.discount !== '0'
@@ -159,50 +160,65 @@ class Product extends Component {
                                 <div className='col-3 txt-label'>
                                         Quantity
                                     </div>
-                                    <div className='col-2'>
-                                        <input
-                                            className="ipn-quantity"
-                                            value={this.state.selectValue}
-                                            onChange={this.handleChange}
-                                            size="5"
-                                        />
-                                    </div>
-                                    <div className='col-5 txt-label'>
-                                        {product.quantity} products available
-                                    </div>
+                                    {
+                                        product.quantity === '0' ? (
+                                            <div className='label-color'>This product is temporary not available</div>
+                                        ) : (
+                                            <div className='d-flex align-items-center'>
+                                                <div className=''>
+                                                    <input
+                                                        className="ipn-quantity"
+                                                        value={this.state.selectValue}
+                                                        onChange={this.handleChange}
+                                                        size="5"
+                                                    />
+                                                </div>
+                                                <div className='txt-label ml-3'>
+                                                    {product.quantity} products available
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                    
                                 </div>
-                                <div className='2-bnt row mt-5 ml-1'>
-                                    <button
-                                        className='btn-common'
-                                        onClick={this.handleAddToCart}
-                                    >
-                                        Add To Cart
-                                    </button>
-                                    <button
-                                        onClick={this.navigateToCheckout}
-                                        className='btn-common ml-2'>
-                                        Shop Now
-                                    </button>
-                                </div>
+                                {
+                                    product.quantity === '0' ? (
+                                        <div></div>
+                                    ) : (
+                                        <div className='2-bnt row mt-5 ml-1'>
+                                            <button
+                                                className='btn-common'
+                                                onClick={this.handleAddToCart}
+                                            >
+                                                Add To Cart
+                                            </button>
+                                            <button
+                                                onClick={this.navigateToCheckout}
+                                                className='btn-common ml-2'>
+                                                Shop Now
+                                            </button>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
                         <div className='p-des-rel-cgr row mt-3'>
                             <div className='p-des shop-info'>
                                 <div className='shop-profile'>
-                                    <img src={shop.image} width='80px' height='80px'/>
+                                    <img src={product.owner_id ? product.owner_id.image : ''} width='80px' height='80px'/>
                                     <div className='ml-3'>
-                                        <div>{shop.name}</div>
+                                        <div>{product.owner_id ? product.owner_id.name : ''}</div>
                                         <div className='txt-adabab'>Response in less 1 hour</div>
                                     </div>
                                 </div>
                                 <div className='shop-address ml-5'>
                                     <div>
                                         <span className='txt-adabab'>Phone</span>
-                                        <span className='txt-value'>{shop.phone}</span>
+                                        <span className='txt-value'>{product.owner_id ? product.owner_id.phone: ''}</span>
                                     </div>
                                     <div>
                                         <span className='txt-adabab'>Address</span>
-                                        <span className='txt-value'>{shop.address}</span>
+                                        <span className='txt-value'>{product.owner_id ? product.owner_id.address: ''}</span>
                                     </div>
                                 </div>
                             </div>
@@ -229,18 +245,15 @@ const mapStateToProps = (state) => {
     return {
         product: state.productReducer.product,
         products: state.productReducer.products,
-        status: state.cartReducer.status,
-        shop: state.shopReducer.shop
+        status: state.cartReducer.status
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadShopProfile: () => dispatch(shopProfileAction()),
         loadProduct: (id) => dispatch(productByIdAction(id)),
         loadAllProduct: () => dispatch(productAction()),
         addToCart: (product, selectValue) => dispatch(cartAddAction(product, selectValue)),
-        changeQuantityInCart: (product_id, quantity) => dispatch(changeQuantity(product_id, quantity)),
         refresh: () => dispatch({type: 'REFRESH_STATUS'})
     }
 }

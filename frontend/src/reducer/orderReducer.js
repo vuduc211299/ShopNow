@@ -7,6 +7,9 @@ const initState = {
 const orderReducer = (state = initState, action) => {
 
     switch (action.type) {
+        case 'REFRESH_ORDER_STATUS':
+            state.order_status = 'pending'
+            break;
         case 'ORDER_SUCCESS':
             state.order_status = 'status_success'
             break;
@@ -17,7 +20,7 @@ const orderReducer = (state = initState, action) => {
         case 'DELETE_ORDER_SUCCESS':
             state.delete_status = 'status_success'
             break;
-        case 'REFRESH_ORDER_STATUS':
+        case 'REFRESH_DELETE_ORDER_STATUS':
             state.delete_status = 'pending'
             break;
         case 'ORDER_FAILED':

@@ -15,18 +15,18 @@ class CartItem extends Component {
         }
     }
 
-    handleChange = (e) => {
-        const {cartItem} = this.props;
-        let ptt = new RegExp('^[0-9]*$');
-        if(ptt.test(e.target.value)){
-            if(parseInt(e.target.value) > 0){
-                this.props.changeQuantityInCart(cartItem.product_id._id, parseInt(e.target.value));
-            }
-            this.setState({
-                selectValue: e.target.value
-            })
-        }
-    }
+    // handleChange = (e) => {
+    //     const {cartItem} = this.props;
+    //     let ptt = new RegExp('^[0-9]*$');
+    //     if(ptt.test(e.target.value)){
+    //         if(parseInt(e.target.value) > 0){
+    //             this.props.changeQuantityInCart(cartItem.product_id._id, parseInt(e.target.value));
+    //         }
+    //         this.setState({
+    //             selectValue: e.target.value
+    //         })
+    //     }
+    // }
     handleClickDeleteBtn = () => {
         const {cartItem} = this.props;
         this.props.deleteCartItem(cartItem)
@@ -49,21 +49,10 @@ class CartItem extends Component {
                                     <span>{cartItem.product_id.name}</span>
                                 </div>
                             </div>
-                            <div className='p-in-cart-quantity col-4'>
-                                {
-                                    typeScreen === constant.CHECK_OUT ? (
-                                        <div className='price-to-pay col-2'>
-                                            {cartItem.quantityInCart}
-                                        </div>
-                                ) : (
-                                        <input
-                                        className="ipn-cart"
-                                        value={this.state.selectValue}
-                                        onChange={this.handleChange}
-                                        size="5"
-                                        />
-                                )
-                                }
+                            <div className='p-in-cart-quantity col-4'> 
+                                <div className='price-to-pay col-2'>
+                                    {cartItem.quantityInCart}
+                                </div>   
                             </div>
                             <div className='p-in-cart-sum-price col-2'>
                                 {pricePipe(Math.floor(parseInt(cartItem.product_id.price) * (100 - parseInt(cartItem.product_id.discount)) / 100))} $
@@ -94,8 +83,7 @@ class CartItem extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteCartItem: (cartItem) => dispatch(cartRemoveAction(cartItem)),
-        changeQuantityInCart: (product_id, quantity) => dispatch(changeQuantity(product_id, quantity))
+        deleteCartItem: (cartItem) => dispatch(cartRemoveAction(cartItem))
     }
 }
 

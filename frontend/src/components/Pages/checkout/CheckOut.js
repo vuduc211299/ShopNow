@@ -27,6 +27,10 @@ class CheckOut extends Component {
         this.props.loadProduct()
     }
 
+    componentWillUnmount(){
+        this.props.refreshStatus()
+    }
+
     getProductById (id) {
         const { products } = this.props;
         const product = products.find(product=> product._id == String(id))
@@ -34,13 +38,17 @@ class CheckOut extends Component {
     }
 
     handleOrder = () => {
-        const {userProfile, carts} = this.props
-        if(userProfile.address && userProfile.phone) {
+        let userInfo = {}
+        if(localStorage.getItem('user')){
+            userInfo = JSON.parse(localStorage.getItem('user'))
+        }
+        const {carts} = this.props
+        if(userInfo.address && userInfo.phone) {
             // create order request
             carts.forEach(item => {
                 const product = this.getProductById(item.product_id)
                 const data = {
-                    order_from: userProfile._id,
+                    order_from: userInfo._id,
                     order_to: product.owner_id,
                     status: 'pending',
                     product_id: item.product_id,
@@ -49,6 +57,8 @@ class CheckOut extends Component {
                 this.props.createOrder(data)
             })
             this.props.clearCart()
+        } else {
+            this.props.missingInfo()
         }
     }
 
@@ -64,7 +74,11 @@ class CheckOut extends Component {
     }
 
     render() {
-        const { carts, userProfile, orderStatus } = this.props;
+        const { carts, orderStatus } = this.props;
+        let userInfo = {}
+        if(localStorage.getItem('user')){
+            userInfo = JSON.parse(localStorage.getItem('user'))
+        }
         let cart = carts.map(item => {
             return {
                 ...item,
@@ -115,8 +129,8 @@ class CheckOut extends Component {
                                     </div>
                                     <div className='mt-3'>
                                         <span>  
-                                            <span className='name-phone'>{userProfile.name} {userProfile.phone}</span>
-                                            <span className='ml-3'>{userProfile.address}</span>
+                                            <span className='name-phone'>{userInfo.name} {userInfo.phone}</span>
+                                            <span className='ml-3'>{userInfo.address}</span>
                                         </span>
                                     </div>
                                 </div>
@@ -213,8 +227,7 @@ const mapStateToProps = (state) => {
     return {
         orderStatus: state.orderReducer.order_status,
         carts: state.cartReducer.cart,
-        products: state.productReducer.products,
-        userProfile: state.userReducer.userInfoUpdate
+        products: state.productReducer.products
     }
 }
 
@@ -222,7 +235,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         createOrder: (data) => dispatch(createOrderAction(data)),
         clearCart: () => dispatch(removeAllFromCart()),
-        loadProduct: () => dispatch(productAction())
+        loadProduct: () => dispatch(productAction()),
+        refreshStatus: () => dispatch({type: 'REFRESH_ORDER_STATUS'}),
+        missingInfo: () => dispatch({type: 'ORDER_FAILED'})
     }
 }
 

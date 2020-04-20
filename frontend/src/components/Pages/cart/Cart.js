@@ -22,6 +22,7 @@ class Cart extends Component {
 
     render() {
         const {carts} = this.props;
+        console.log(carts)
         let cart = carts.map(item => {
             return {
                 ...item,
@@ -43,7 +44,7 @@ class Cart extends Component {
                         <div id='lb-product'>Product</div>
                         <div id='lb-quantity'>Quantity</div>
                         <div id='lb-price'>Price</div>
-                    </div> 
+                    </div>
                     {
                         this.props.quantity !== 0 ? cart.map((cartItem, index) => 
                         {

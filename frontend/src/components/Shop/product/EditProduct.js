@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { editProductById } from '../../../actions/productAction'
+import PopupNotify from '../../common/PopUpNotify'
 import { MAX_QUANTITY , MAX_DISCOUNT, EMPTY_VALUE, MAX_PRICE, WRONG_PHONE_FORMAT, checkPhoneFormat } from '../../../helpers/checkFormat'
 
 class EditProduct extends Component {
@@ -177,8 +178,19 @@ class EditProduct extends Component {
                 checkValidEditPrice,
                 checkValidEditQuantity 
             } = this.state
+        const {status_edit} = this.props
         return (
             <div>
+                {
+                    status_edit === 'status_success' ? (
+                        <PopupNotify
+                            message="Updated"
+                            status={status_edit}
+                        />
+                    ) : (
+                        <div></div>
+                    )
+                }
                 <div className='order-list-pannel-container'>
                     <div className='edit-product-header-txt'>Edit Product</div>
                 </div>
@@ -271,4 +283,10 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(EditProduct)
+const mapStateToProps = (state) => {
+    return {
+        status_edit: state.productReducer.status_edit
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditProduct)
