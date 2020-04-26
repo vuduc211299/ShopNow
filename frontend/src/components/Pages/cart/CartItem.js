@@ -14,19 +14,7 @@ class CartItem extends Component {
             selectValue: cartItem.quantityInCart
         }
     }
-
-    // handleChange = (e) => {
-    //     const {cartItem} = this.props;
-    //     let ptt = new RegExp('^[0-9]*$');
-    //     if(ptt.test(e.target.value)){
-    //         if(parseInt(e.target.value) > 0){
-    //             this.props.changeQuantityInCart(cartItem.product_id._id, parseInt(e.target.value));
-    //         }
-    //         this.setState({
-    //             selectValue: e.target.value
-    //         })
-    //     }
-    // }
+    
     handleClickDeleteBtn = () => {
         const {cartItem} = this.props;
         this.props.deleteCartItem(cartItem)

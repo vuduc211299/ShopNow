@@ -2,6 +2,8 @@ const express = require('express')
 const auth = require('../middleware/auth')
 const Shop = require('../model/shop')
 const Order = require('../model/order')
+const Pusher = require('pusher')
+require('dotenv').config()
 const orderRouter = new express.Router()
 
 
@@ -34,6 +36,14 @@ orderRouter.post('/order/create', auth, async (req, res)=>{
             ...req.body
         })
         await order.save()
+        let pusher = new Pusher({
+            appId: process.env.PUSHER_APP_ID,
+            key: process.env.PUSHER_APP_KEY,
+            secret: process.env.PUSHER_APP_SECRET,
+            cluster: process.env.PUSHER_APP_CLUSTER
+        })
+
+        pusher.trigger('notifications', 'order_created', order, req.headers['x-socket-id'])
         res.status(201).send(order)
     } catch (error) {
         res.send(error)

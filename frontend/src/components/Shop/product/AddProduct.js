@@ -379,7 +379,6 @@ class AddProduct extends Component {
                             </div>
                         </div>
                         <div className='btn-function'>
-                            <button className='btn-a btn-cancel mr-4'>Cancel</button>
                             <button onClick={this.handleSave} disabled={this.state.disableBtn} className='btn-a btn-confirm'>Save and Publish</button>
                         </div>
                     </div>

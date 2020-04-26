@@ -57,7 +57,6 @@ class Login extends Component {
     }
 
     responseGoogle = (res) => {
-        console.log(res)
         const email = res.profileObj.email;
         const name = res.profileObj.name;
         this.props.loginWithGoogle(email, name)

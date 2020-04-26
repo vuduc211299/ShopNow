@@ -79,7 +79,6 @@ class Product extends Component {
     }
 
     navigateToCheckout = () => {
-        this.handleAddToCart()
         history.push('/checkout')
     }
 

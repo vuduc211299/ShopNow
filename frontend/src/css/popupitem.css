@@ -6,6 +6,10 @@
     font-size: 14px;
     color: #000;
     flex: 1;
+    height: 20px;
+    width: 20px;
+    word-wrap: break-word;
+    overflow: hidden;
 }
 .pop-up-img {
     flex: 2;
