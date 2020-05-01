@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-require('./db/mongoose')
+const databaseConnection = require('./db/connect').databaseConnection
 
 const userRouter = require('./route/user')
 const productRouter = require('./route/product')
@@ -21,6 +21,8 @@ app.use(productRouter)
 app.use(categoryRouter)
 app.use(shopRouter)
 app.use(orderRouter)
+
+databaseConnection()
 
 app.listen(port, () => {
     console.log('Server is up on port ' + port)

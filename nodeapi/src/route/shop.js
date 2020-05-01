@@ -6,7 +6,6 @@ const shopRouter = new express.Router()
 shopRouter.post('/shop/register', auth, async (req, res) => {
     try {
         const updates = Object.keys(req.body)
-        console.log(req.user._id)
         const shop = await Shop.findOne({owner_id: req.user._id})
         if(shop) {
             updates.forEach((update) => shop[update] = req.body[update])
